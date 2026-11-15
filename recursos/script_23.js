@@ -1,0 +1,1 @@
+window.V37_CONFIG={url:"https://vygajqgxkvfhwsegbnls.supabase.co",publicKey:"sb_publishable_jv7NkPdrGza49czAew2v8g_6SenEOla"};

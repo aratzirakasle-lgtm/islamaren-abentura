@@ -1,0 +1,159 @@
+
+/* V25.1 — REFINAMIENTO ARTÍSTICO. Únicamente marcos y letras del reto 8.2.
+   Sin modificaciones de geometría, imágenes, contenido ni lógica de juego. */
+#ag24-root[data-ir25="on"]{--ir-gold:#f8c553;--ir-deep:#7d3c12;--ir-ink:#301611;--ir-cream:#fff1cb;}
+#ag24-root[data-ir25="on"] .ag24-top{
+  background:linear-gradient(180deg,#075caa 0%,#042a6c 19%,#031a49 55%,#0b4a9a 100%);
+  box-shadow:inset 0 2px 0 #ffdb65,inset 0 -2px 0 #ab671c,0 5px 14px #051027a1;
+  border-bottom-color:#ffd160;
+}
+#ag24-root[data-ir25="on"] .ag24-title{
+  position:relative; border:3px double #ffd36a; border-radius:24px 14px 24px 14px;
+  background:radial-gradient(ellipse at 50% -25%,#166bc0 0%,#062c73 57%,#041b4a 100%);
+  box-shadow:inset 0 0 0 2px #132a5b,inset 0 0 0 4px #ca9137,inset 0 0 16px #001534,0 3px 9px #07091680;
+  padding:4px 15px; font-family:Georgia,'Palatino Linotype','Book Antiqua',serif;
+  font-size:clamp(24px,2.6vw,40px);font-weight:900;letter-spacing:-.65px;
+  -webkit-text-stroke:.28px #fff1cd;
+  text-shadow:1px 1px 0 #3c150e,2px 3px 0 #180f2f,0 0 5px #18183b;
+}
+#ag24-root[data-ir25="on"] .ag24-title::before,
+#ag24-root[data-ir25="on"] .ag24-title::after{
+  content:'✥';position:absolute;top:50%;transform:translateY(-50%);color:#ffe087;
+  font:900 20px Georgia,serif;text-shadow:0 0 5px #f0ba41,0 2px #5e270b;pointer-events:none;
+}
+#ag24-root[data-ir25="on"] .ag24-title::before{left:4px}
+#ag24-root[data-ir25="on"] .ag24-title::after{right:4px}
+#ag24-root[data-ir25="on"] .ag24-title small{
+  font-family:Georgia,'Palatino Linotype',serif;letter-spacing:.02em;
+  color:#ffe0a0;font-size:clamp(10px,.88vw,15px);text-shadow:0 1px #140a21;
+}
+#ag24-root[data-ir25="on"] .ag24-chip{
+  border:3px double #ffd267; background:linear-gradient(#0e3e83,#051b43 55%,#08316b);
+  box-shadow:inset 0 0 0 2px #9f6d28,inset 0 0 12px #6dc7fa6b,0 3px 8px #0009;
+  font-family:Georgia,'Palatino Linotype',serif;font-weight:900;text-shadow:1px 2px #1a1322;
+}
+#ag24-root[data-ir25="on"] .ir25-sidebar{
+  background:radial-gradient(ellipse at 50% 20%,#fff8df 0%,#f8dfaf 58%,#e5b46e 100%);
+  border:7px double #f9d77c;
+  box-shadow:inset 0 0 0 2px #98611b,inset 0 0 0 5px #ffeeb8,inset 0 0 29px #ac712d67,0 7px 14px #18122c93;
+}
+#ag24-root[data-ir25="on"] .ir25-sidebar-title{
+  border:5px double #ffe49a;border-radius:48% 48% 12% 12%/25% 25% 10% 10%;
+  background:linear-gradient(160deg,#0b64b4,#072d70 48%,#041b50 92%);
+  box-shadow:inset 0 0 0 3px #a16d1f,inset 0 0 13px #51a9de70,0 4px 8px #4b291b85;
+  font-family:Georgia,'Palatino Linotype',serif;
+  letter-spacing:-.5px;text-shadow:1px 1px #24102e,2px 3px #100a28,0 0 5px #f4d376;
+}
+#ag24-root[data-ir25="on"] .ir25-sidebar-sub{
+  border:3px double #b87a25;
+  background:linear-gradient(174deg,#fff7d9,#f5d49c 60%,#e7b66d);
+  box-shadow:inset 0 0 0 2px #fff7dd,0 2px 6px #57391475;
+  color:#681c1b;font-family:Georgia,'Palatino Linotype',serif;
+  text-shadow:0 1px #fff7e5;
+}
+#ag24-root[data-ir25="on"] .ir25-sidebar-instruct{
+  font-family:Georgia,'Palatino Linotype',serif;color:#291711;
+  font-weight:900;line-height:1.2;font-size:clamp(13px,1.2vw,19.5px);
+  text-shadow:0 1px 0 #fff9df;
+}
+#ag24-root[data-ir25="on"] .ir25-sidebar-progress{
+  border:6px double #ffe09a;
+  background:radial-gradient(ellipse at 40% 25%,#1b79cc,#063e92 45%,#07183d 100%);
+  box-shadow:inset 0 0 0 3px #b5812f,inset 0 0 10px #65c7f0,0 3px 9px #0008;
+  font-family:Georgia,'Palatino Linotype',serif;color:#ffedb2;
+  text-shadow:0 2px #1b1024;
+}
+/* Pergaminos superiores: doble relieve, flancos ornamentales y letra más cercana a la referencia */
+#ag24-root[data-ir25="on"] .ir25-function{
+  border:5px double #ffc969;
+  border-radius:25px 15px 24px 15px;
+  background:radial-gradient(ellipse at 50% 5%,#fff9e9 0%,#ffedc5 55%,#ebba75 100%);
+  box-shadow:inset 0 0 0 2px #a96b20,inset 0 0 0 5px #fff4cf,inset 0 -6px 9px #bb7e3445,0 4px 9px #2c1718a9;
+  font-family:Georgia,'Palatino Linotype','Book Antiqua',serif;
+  color:var(--ir-ink);font-size:clamp(16px,1.44vw,24px);font-weight:900;
+  letter-spacing:-.6px;line-height:1.06;
+  -webkit-text-stroke:.22px #2c1110;
+  text-shadow:0 1px 0 #fff7de,0 2px 2px #c99c63a6;
+}
+#ag24-root[data-ir25="on"] .ir25-function::before,
+#ag24-root[data-ir25="on"] .ir25-function::after{
+  position:absolute;top:50%;transform:translateY(-50%);content:'❖';pointer-events:none;
+  color:#a76822;font:800 13px Georgia,serif;text-shadow:0 1px #fff9d9;opacity:.8;
+}
+#ag24-root[data-ir25="on"] .ir25-function::before{left:5px}
+#ag24-root[data-ir25="on"] .ir25-function::after{right:5px}
+#ag24-root[data-ir25="on"] .ir25-function>span:first-child{max-width:95%;padding:0 9px;position:relative;z-index:1}
+/* Arcos de las cuatro tarjetas: ribete de oro y mosaico sin modificar sus ilustraciones */
+#ag24-root[data-ir25="on"] .ir25-tech{
+  border:6px double #ffce59;
+  border-radius:44% 44% 14px 14px/18% 18% 14px 14px;
+  background:linear-gradient(160deg,#0d69b0,#043072 38%,#021b54);
+  box-shadow:inset 0 0 0 2px #163879,inset 0 0 0 5px #dba147,inset 0 0 15px #2fb4d877,0 5px 13px #080e27ac;
+}
+#ag24-root[data-ir25="on"] .ir25-tech::before{
+  content:'✥  ❖  ✥';top:4px;font:900 13px Georgia,serif;
+  color:#ffde78;text-shadow:0 1px 1px #5d2b12,0 0 5px #ffe56c;
+  opacity:1;
+}
+#ag24-root[data-ir25="on"] .ir25-tech-label{
+  border:3px double #c98c37;
+  border-radius:33% 33% 12px 12px/30% 30% 12px 12px;
+  background:linear-gradient(178deg,#fff9e5,#ffebbd 58%,#eebf77);
+  box-shadow:inset 0 0 0 2px #fff8df,inset 0 -3px 7px #bf87475c,0 2px 7px #021d57;
+  font-family:Georgia,'Palatino Linotype','Book Antiqua',serif;
+  font-weight:900;font-size:clamp(17px,1.6vw,26px);line-height:1.06;letter-spacing:-.55px;
+  color:#511e1c;text-shadow:0 1px #fff5dc;
+  -webkit-text-stroke:.15px #511e1c;
+}
+#ag24-root[data-ir25="on"] .ir25-art{
+  border-color:#d7a047;box-shadow:0 0 0 2px #052c70,inset 0 0 7px #5a240b;
+}
+#ag24-root[data-ir25="on"] .ir25-tech-hint{
+  font-family:Georgia,'Palatino Linotype',serif;font-weight:700;
+  color:#ffe2a4;text-shadow:0 1px 2px #00182a;
+}
+/* Placa ornamental del circuito y placas funcionales; el paisaje queda sin retocar. */
+#ag24-root[data-ir25="on"] .ir25-circuit{
+  border:6px double #ffd77a;
+  box-shadow:inset 0 0 0 2px #13336e,inset 0 0 0 5px #d39933,0 4px 12px #061b4fbd;
+}
+#ag24-root[data-ir25="on"] .ir25-circuit-title{
+  border:4px double #ffdf8e;
+  border-radius:9px 26px 9px 26px;
+  background:linear-gradient(170deg,#0a60af,#062f73 45%,#031945);
+  color:#ffedb5;text-shadow:1px 2px 1px #311c24,0 0 4px #0d1639;
+  font-family:Georgia,'Palatino Linotype',serif;font-size:clamp(13px,1.18vw,19px);
+  box-shadow:inset 0 0 0 2px #a57b2f,inset 0 0 11px #67c7ef75,0 3px 7px #07193b;
+}
+#ag24-root[data-ir25="on"] .ir25-piece{
+  border:4px double #edbd58;border-radius:17px 9px 17px 9px;
+  background:linear-gradient(#fff8df,#f8dba5 55%,#e8b96e);
+  box-shadow:inset 0 0 0 2px #fcf4d7,0 3px 7px #001e47;
+  font-family:Georgia,'Palatino Linotype',serif;font-weight:900;color:#422017;
+}
+#ag24-root[data-ir25="on"] .ag24-verify{
+  border:5px double #ffdf70;
+  border-radius:31px 20px 31px 20px;
+  background:linear-gradient(#1eed4b,#078e31 65%,#055b2b);
+  box-shadow:inset 0 0 0 2px #0b6e2f,inset 0 0 14px #c9ffb3,0 0 0 2px #a77a22,0 0 20px #ffdf5f;
+  font-family:Georgia,'Palatino Linotype',serif;
+  font-size:clamp(24px,1.85vw,31px);font-weight:900;
+  text-shadow:1px 2px #064821,0 0 3px #a8ffbe;
+}
+/* Mobile: preserve the V25 layout and guarantee the same legibility. */
+@media(max-width:650px){
+ #ag24-root[data-ir25="on"] .ag24-title{font-size:clamp(14px,3.65vw,20px);padding:3px 16px;border-width:2px;letter-spacing:-.2px}
+ #ag24-root[data-ir25="on"] .ag24-title::before,#ag24-root[data-ir25="on"] .ag24-title::after{font-size:10px}
+ #ag24-root[data-ir25="on"] .ir25-function{font-size:12px;border-width:3px;border-radius:13px 8px 13px 8px;letter-spacing:-.2px}
+ #ag24-root[data-ir25="on"] .ir25-function::before,#ag24-root[data-ir25="on"] .ir25-function::after{font-size:8px}
+ #ag24-root[data-ir25="on"] .ir25-function>span:first-child{padding:0 4px}
+ #ag24-root[data-ir25="on"] .ir25-tech{border-width:3px;border-radius:18px 18px 11px 11px}
+ #ag24-root[data-ir25="on"] .ir25-tech-label{font-size:13px;border-width:2px;letter-spacing:-.2px;border-radius:13px 13px 7px 7px}
+ #ag24-root[data-ir25="on"] .ir25-sidebar{border-width:4px}
+ #ag24-root[data-ir25="on"] .ir25-sidebar-title{border-width:3px}
+ #ag24-root[data-ir25="on"] .ir25-sidebar-instruct{font-size:11px}
+ #ag24-root[data-ir25="on"] .ir25-sidebar-sub{font-size:11px;border-width:2px}
+ #ag24-root[data-ir25="on"] .ir25-circuit-title{font-size:12px;border-width:2px}
+ #ag24-root[data-ir25="on"] .ir25-piece{font-size:12px;border-width:2px}
+ #ag24-root[data-ir25="on"] .ag24-verify{font-size:24px}
+}

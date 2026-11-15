@@ -1,0 +1,115 @@
+
+/* V36.7 | Ranking editorial / ornate Andalusian style. Scoped to modal only. */
+#info-modal .gr-ranking-modal{width:min(1100px,calc(100vw - 24px));max-height:min(96vh,980px);padding:0 0 13px;border:5px solid #e2b35d;border-radius:23px;background:#f9e4bc;box-shadow:0 16px 0 #5b391e,0 28px 100px #000c;overflow:hidden;text-align:left}
+#info-modal .gr-ranking-modal::before{content:"";position:absolute;inset:4px;pointer-events:none;border:1px solid #fff7de66;border-radius:14px;z-index:0}
+#info-modal .gr-ranking-modal #info-title{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#info-modal .gr-ranking-modal #info-content{max-height:min(calc(96vh - 74px),892px);overflow:auto;scrollbar-color:#bf8a41 #f9e6c7;overscroll-behavior:contain;padding:0;margin:0;text-align:left}
+#info-modal .gr-ranking-modal #info-content p{font-size:inherit}
+#info-modal .gr-ranking-modal .modal-close{z-index:4;position:absolute;right:12px;top:11px;width:38px;height:38px;border:2px solid #f5d580;color:#fff5d8;background:linear-gradient(145deg,#a75431,#4d291e);box-shadow:0 3px 5px #0015;border-radius:50%;font-size:24px;line-height:30px;text-align:center;cursor:pointer}
+#info-modal .gr-ranking-modal #info-ok{display:block;margin:10px auto 2px;min-width:128px;min-height:40px;padding:8px 30px;font-size:17px;position:relative}
+.gr-ranking-ui{color:#37230c;--gr-navy:#062a54;--gr-deep:#061b3e;--gr-royal:#125487;--gr-gold:#e8ba65;--gr-cream:#fff3d9;font-family:'DM Sans',Arial,sans-serif}
+.gr-ranking-ui *{box-sizing:border-box}
+.gr-ranking-ui button{font-family:inherit}
+.gr-ranking-ui button:focus-visible{outline:3px solid #19a4eb;outline-offset:3px}
+.gr-ranking-ui .gr-hero{position:relative;min-height:168px;background:radial-gradient(ellipse at 48% -50%,#458bc6b5 0,transparent 62%),repeating-linear-gradient(45deg,transparent 0 19px,#b585271a 20px 21px,transparent 22px 39px),linear-gradient(114deg,#041b39 0%,#104c7c 50%,#061c3d 100%);border-bottom:4px solid #d3a552;display:flex;align-items:center;justify-content:center;gap:20px;padding:22px 65px 20px 22px;overflow:hidden;isolation:isolate}
+.gr-ranking-ui .gr-hero::before{content:"";position:absolute;width:370px;height:370px;border:1px solid #e8b75b50;outline:1px solid #e8b75b35;outline-offset:14px;transform:rotate(45deg);left:-300px;top:-100px;border-radius:48px;pointer-events:none}
+.gr-ranking-ui .gr-hero::after{content:"";position:absolute;width:300px;height:300px;border:1px solid #e8b75b50;outline:1px solid #e8b75b35;outline-offset:12px;transform:rotate(45deg);right:-245px;top:-135px;border-radius:48px;pointer-events:none}
+.gr-ranking-ui .gr-hero-emblem{flex:none;width:97px;height:97px;border:3px double #ffdb86;border-radius:50%;background:radial-gradient(circle at 28% 22%,#4d8fc4,#0b3a6b 50%,#061633);box-shadow:0 0 0 5px #d7ab4642,0 10px 15px #0007,inset 0 0 21px #ffca7e70;display:grid;place-items:center;font-size:55px;filter:drop-shadow(0 3px 3px #060f2585)}
+.gr-ranking-ui .gr-hero-content{position:relative;text-align:center;min-width:0;z-index:1}
+.gr-ranking-ui .gr-hero-kicker{display:block;font-size:11px;letter-spacing:3px;color:#f2cc7c;font-weight:900;margin-bottom:3px}
+.gr-ranking-ui .gr-hero h3{color:#fff8d8;font:900 clamp(26px,3.6vw,43px)/1.1 Georgia,'Times New Roman',serif;text-shadow:0 3px 0 #562c16,0 6px 10px #0007;margin:6px 0}
+.gr-ranking-ui .gr-hero p{color:#ffe0a3;font:600 14px/1.35 Georgia,serif;margin:5px 0 0!important;letter-spacing:.4px}
+.gr-ranking-ui .gr-hero-spark{position:absolute;color:#f4c36b;font:54px Georgia;opacity:.7;z-index:1;top:52px}.gr-ranking-ui .gr-hero-spark-left{left:8%}.gr-ranking-ui .gr-hero-spark-right{right:8%}
+.gr-ranking-ui .gr-tabs{display:flex;flex-wrap:nowrap;gap:10px;margin:0;padding:14px 20px 12px;background:linear-gradient(180deg,#f1d6a3,#ffedca);border-bottom:1px solid #c9974a}
+.gr-ranking-ui .gr-tabs button{flex:1;min-width:0;min-height:48px;border:2px solid #bf9149;border-radius:12px;background:linear-gradient(#fff7e4,#f8dfab);color:#65451b;font:900 15px Georgia,serif;letter-spacing:.1px;box-shadow:0 3px 0 #9d7738;padding:10px 8px;transition:transform .15s,box-shadow .15s}
+.gr-ranking-ui .gr-tabs button span{opacity:.78;font-size:13px}
+.gr-ranking-ui .gr-tabs button.gr-selected{border-color:#f1d386;background:linear-gradient(145deg,#18669a,#082c58);color:#fff3d0;box-shadow:inset 0 0 0 1px #f3d891,0 4px 0 #6c4a21,0 2px 10px #0a3c7450}
+.gr-ranking-ui .gr-tabs button:hover{transform:translateY(-1px)}
+.gr-ranking-ui .gr-panel{background:radial-gradient(ellipse at top,#fff8e8 0,#fce8c8 58%,#f4d4a6 100%);padding:17px 20px 20px}
+.gr-ranking-ui .gr-score-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.gr-ranking-ui .gr-summary-item{min-width:0;display:flex;align-items:center;justify-content:center;gap:13px;padding:11px 8px;border:1px solid #cb9b50;border-radius:12px;background:linear-gradient(145deg,#fff8e8,#f5d89e);box-shadow:0 3px 0 #c99a5580,inset 0 1px 0 #fff9e8}
+.gr-ranking-ui .gr-summary-item .gr-summary-icon{width:35px;height:35px;flex:none;display:grid;place-items:center;border-radius:50%;background:#124678;color:#ffcd70;font-size:24px;line-height:1;border:2px solid #daae60}
+.gr-ranking-ui .gr-summary-item span:last-child{display:grid;gap:0;min-width:0}
+.gr-ranking-ui .gr-summary-item strong{font:900 24px/1.1 Georgia,serif;color:#113960;font-variant-numeric:tabular-nums}
+.gr-ranking-ui .gr-summary-item small{font-size:10px;letter-spacing:1px;color:#79522e;font-weight:900;white-space:nowrap}
+.gr-ranking-ui .gr-podium{position:relative;margin:0 0 17px;border:2px solid #d8a754;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#185c92 0,#0b3362 48%,#071d41 100%);box-shadow:0 4px 11px #59402144,inset 0 0 0 1px #fff2b940}
+.gr-ranking-ui .gr-podium::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(35deg,transparent 0 32px,#eabe6316 33px,#eabe6316 34px,transparent 35px 66px),radial-gradient(ellipse at 50% 0%,#e9ba5a40,transparent 55%);opacity:.8}
+.gr-ranking-ui .gr-podium-head{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:7px;padding:12px 19px 3px}
+.gr-ranking-ui .gr-podium-heading{color:#f2c777;font:900 12px Georgia,serif;letter-spacing:2px}.gr-ranking-ui .gr-podium-hint{color:#d0dbde;font-size:11px}
+.gr-ranking-ui .gr-podium-stage{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:14px;padding:12px 24px 0}
+.gr-ranking-ui .gr-podium-slot{min-width:0;display:flex;flex-direction:column;justify-content:flex-end}
+.gr-ranking-ui .gr-podium-person,.gr-ranking-ui .gr-podium-vacant{width:100%;min-height:173px;border:2px solid #b39ab0;border-radius:15px 15px 7px 7px;background:linear-gradient(155deg,#fffef8f2,#f4e5cef2);color:#32220e;box-shadow:0 9px 13px #020b244c;padding:6px 8px 9px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:2px;text-align:center;position:relative;cursor:pointer}
+.gr-ranking-ui .gr-podium-person:hover{transform:translateY(-3px);filter:brightness(1.03)}
+.gr-ranking-ui .gr-podium-rank-1 .gr-podium-person,.gr-ranking-ui .gr-podium-rank-1 .gr-podium-vacant{min-height:203px;border-color:#ffd77e;background:linear-gradient(140deg,#fff8db,#f4d790);box-shadow:0 0 25px #e8bd5d40,0 9px 13px #020b244c}
+.gr-ranking-ui .gr-podium-rank-3 .gr-podium-person,.gr-ranking-ui .gr-podium-rank-3 .gr-podium-vacant{border-color:#ce9772;background:linear-gradient(140deg,#fff4e7,#eac09c)}
+.gr-ranking-ui .gr-podium-medal{font-size:29px;line-height:1;filter:drop-shadow(0 3px 2px #0005)}
+.gr-ranking-ui .gr-podium-rank-1 .gr-podium-medal{font-size:36px}
+.gr-ranking-ui .gr-podium-avatar{width:39px;height:39px;flex:none;border:2px solid #e2b658;border-radius:50%;background:radial-gradient(circle at 35% 25%,#376b9a,#0d315c);color:#ffe7a3;font:900 15px Georgia,serif;display:grid;place-items:center;box-shadow:0 2px 6px #0024}
+.gr-ranking-ui .gr-podium-rank-1 .gr-podium-avatar{width:46px;height:46px;font-size:18px}
+.gr-ranking-ui .gr-podium-name{font:900 14px/1.2 Georgia,serif;max-width:100%;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.gr-ranking-ui .gr-podium-score{color:#103e68;font:900 22px/1.12 Georgia,serif;font-variant-numeric:tabular-nums;white-space:nowrap}.gr-ranking-ui .gr-podium-score small{font-size:11px;font-weight:700}
+.gr-ranking-ui .gr-podium-progress{width:min(100%,154px);height:7px;overflow:hidden;background:#d7c1a1;border-radius:50px;margin:5px 0 1px;box-shadow:inset 0 1px 2px #4e350438}.gr-ranking-ui .gr-podium-progress-fill{display:block;height:100%;border-radius:50px;background:linear-gradient(90deg,#0b8cb0,#11794a,#efc45a)}
+.gr-ranking-ui .gr-podium-completed{font-size:11px;font-weight:800;color:#77532a}
+.gr-ranking-ui .gr-podium-vacant{opacity:.5;cursor:default}.gr-ranking-ui .gr-vacant-icon{font-size:29px;color:#bda073}.gr-ranking-ui .gr-vacant-label{font:700 12px Georgia,serif}
+.gr-ranking-ui .gr-podium-plinth{height:37px;background:linear-gradient(90deg,#8d531f,#e5b75d 28%,#f7d888 53%,#a66a2b 100%);border-top:3px solid #ffebad;box-shadow:inset 0 -8px 9px #6c461858;display:grid;place-items:center;color:#64381a;font:900 22px Georgia,serif}
+.gr-ranking-ui .gr-podium-rank-1 .gr-podium-plinth{height:49px}.gr-ranking-ui .gr-podium-rank-3 .gr-podium-plinth{height:29px}
+.gr-ranking-ui .gr-section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:2px 0 9px;border-bottom:2px solid #c89b53;padding:0 1px 7px}
+.gr-ranking-ui .gr-section-overline{display:block;color:#93652f;font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:3px}
+.gr-ranking-ui .gr-section-heading h3{font:900 22px Georgia,serif;color:#193f64;margin:0}
+.gr-ranking-ui .gr-section-side{color:#926633;font:700 12px Georgia,serif;white-space:nowrap}
+.gr-ranking-ui .gr-table-wrap{background:transparent;border:0;overflow-x:auto;border-radius:0}
+.gr-ranking-ui .gr-table{min-width:0;width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0 6px;color:#30210d;font:700 14px 'DM Sans',Arial,sans-serif}
+.gr-ranking-ui .gr-table thead th{background:#103b68;color:#f6d99d;position:static;border:0;padding:9px 12px;font-size:11px;letter-spacing:.9px;text-transform:uppercase}
+.gr-ranking-ui .gr-table thead th:first-child{border-radius:9px 0 0 9px;width:54px}.gr-ranking-ui .gr-table thead th:nth-child(3){width:91px}.gr-ranking-ui .gr-table thead th:last-child{border-radius:0 9px 9px 0;width:125px;text-align:right}
+.gr-ranking-ui .gr-table tbody tr,.gr-ranking-ui .gr-table tbody tr:nth-child(2n),.gr-ranking-ui .gr-table tbody tr.gr-top{background:transparent}
+.gr-ranking-ui .gr-table tbody td{background:#fff9ed;border-top:1px solid #dcc38d;border-bottom:2px solid #d7b178;padding:6px 12px;vertical-align:middle;line-height:1.1}
+.gr-ranking-ui .gr-table tbody tr:nth-child(2n) td{background:#fff0d6}
+.gr-ranking-ui .gr-table tbody tr.gr-top td{background:#ffecc0}
+.gr-ranking-ui .gr-table tbody td:first-child{border-left:1px solid #dcc38d;border-radius:10px 0 0 10px}.gr-ranking-ui .gr-table tbody td:last-child{border-right:1px solid #dcc38d;border-radius:0 10px 10px 0}
+.gr-ranking-ui .gr-table td.gr-place{width:54px;text-align:center;font-size:20px}.gr-ranking-ui .gr-row-medal{display:inline-block}
+.gr-ranking-ui .gr-player-button{display:flex;align-items:center;gap:10px;background:transparent;cursor:pointer;color:#35210b;border:0;padding:2px;width:100%;font-family:inherit;text-align:left}
+.gr-ranking-ui .gr-player-button:hover .gr-row-person strong{color:#095f9d;text-decoration:underline}
+.gr-ranking-ui .gr-row-avatar{flex:none;width:35px;height:35px;border:2px solid #ddb26a;background:linear-gradient(#195385,#092a51);color:#ffe6a3;display:grid;place-items:center;border-radius:50%;font:900 13px Georgia,serif}
+.gr-ranking-ui .gr-row-person{flex:1;min-width:0;display:grid;gap:5px}
+.gr-ranking-ui .gr-row-person strong{font:900 14px/1.1 Georgia,serif;overflow-wrap:anywhere}
+.gr-ranking-ui .gr-row-track{height:5px;width:100%;max-width:180px;background:#e2cca8;overflow:hidden;border-radius:6px}
+.gr-ranking-ui .gr-row-track i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#2e8bb2,#e6b554)}
+.gr-ranking-ui .gr-detail-indicator{display:block;font:800 19px Georgia,serif;color:#b2853f;margin:0}
+.gr-ranking-ui .gr-completed{text-align:center;font:900 17px Georgia,serif;color:#173c69}.gr-ranking-ui .gr-completed small{font:600 12px Arial,sans-serif;color:#886746}
+.gr-ranking-ui .gr-points{font:900 18px Georgia,serif;color:#164675;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gr-ranking-ui .gr-show-all{background:linear-gradient(#fff6df,#f7d5a0);border:2px solid #b68034;color:#56330c;box-shadow:0 3px 0 #9d6e2b;cursor:pointer;padding:10px 18px;font:800 14px Georgia,serif;border-radius:12px;margin:11px auto 0;display:block}
+.gr-ranking-ui .gr-empty{text-align:center;padding:26px 15px 31px;border:2px dashed #d7a861;border-radius:13px;background:#fff6e6;display:grid;justify-items:center;gap:7px;color:#76512c}
+.gr-ranking-ui .gr-empty-symbol{font-size:47px}.gr-ranking-ui .gr-empty strong{font:900 20px Georgia,serif;color:#18436b}.gr-ranking-ui .gr-empty p{max-width:410px;font-size:13px!important;font-weight:500;margin:2px 0}
+.gr-ranking-ui .gr-selected-player{background:linear-gradient(#fff5d9,#ffe6b5);border:3px double #bd8d41;border-radius:15px;padding:15px;margin:0 0 18px;color:#3d2a0e;scroll-margin-top:12px}
+.gr-ranking-ui .gr-detail-head{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:11px}
+.gr-ranking-ui .gr-detail-kicker{color:#916529;letter-spacing:1.7px;font:900 10px Arial,sans-serif}
+.gr-ranking-ui .gr-detail-head h3{font:900 24px Georgia,serif;color:#1a4c7d;margin:1px 0 2px}
+.gr-ranking-ui .gr-detail-head p{font-size:12px!important;color:#694d2b;font-weight:700;margin:0!important}
+.gr-ranking-ui .gr-detail-head button{flex:none;background:#103e70;color:#ffefd1;border:2px solid #d5ae5b;border-radius:9px;padding:8px 11px;cursor:pointer;min-height:38px}
+.gr-ranking-ui .gr-detail-games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gr-ranking-ui .gr-detail-game{padding:10px;background:#fffbf3;border:1px solid #dec692;border-radius:10px;min-width:0}
+.gr-ranking-ui .gr-detail-game.gr-detail-pending{opacity:.57}
+.gr-ranking-ui .gr-detail-game-top{display:flex;align-items:center;gap:7px;margin-bottom:8px;min-width:0}
+.gr-ranking-ui .gr-detail-number{flex:none;width:24px;height:24px;border:1px solid #d9b05e;border-radius:50%;display:grid;place-items:center;background:#114778;color:#ffe0a4;font:900 12px Georgia,serif}
+.gr-ranking-ui .gr-detail-game-name{flex:1;min-width:0;font:800 12px/1.2 Georgia,serif;overflow-wrap:anywhere}
+.gr-ranking-ui .gr-detail-game-top strong{flex:none;font:900 16px Georgia,serif;color:#174a7c;white-space:nowrap}.gr-ranking-ui .gr-detail-game-top strong small{font:400 10px Arial,sans-serif;color:#987a4e}
+.gr-ranking-ui .gr-detail-track{height:8px;border-radius:20px;background:#ead7b6;box-shadow:inset 0 1px 3px #6d491f33;overflow:hidden}
+.gr-ranking-ui .gr-detail-track>span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#1e84b2,#2caa80,#e7b34a)}
+.gr-ranking-ui .gr-game-view{min-height:250px}.gr-ranking-ui .gr-games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gr-ranking-ui .gr-game-ranks{border:2px solid #cfa04e;border-radius:12px;overflow:hidden;background:#fff6e6;padding:0;box-shadow:0 3px 0 #d0aa6b}
+.gr-ranking-ui .gr-game-title{display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,#0a315b,#175580);padding:10px;color:#ffe3aa;min-height:55px}
+.gr-ranking-ui .gr-game-number{flex:none;width:32px;height:32px;border:2px solid #e7b55b;border-radius:50%;background:#082243;display:grid;place-items:center;font:900 17px Georgia,serif}
+.gr-ranking-ui .gr-game-title h4{flex:1;font:900 15px/1.2 Georgia,serif;color:#fff4d6;overflow-wrap:anywhere;margin:0}
+.gr-ranking-ui .gr-game-trophy{font-size:21px}
+.gr-ranking-ui .gr-game-ranks ol{margin:0;padding:8px 11px;list-style:none}
+.gr-ranking-ui .gr-game-ranks li{display:flex;align-items:center;gap:8px;border-bottom:1px solid #e8d2aa;padding:7px 2px;font:700 12px Arial,sans-serif}
+.gr-ranking-ui .gr-game-ranks li:last-child{border-bottom:none}
+.gr-ranking-ui .gr-game-item-rank{flex:none;width:28px;font-size:16px;text-align:center;color:#685039}.gr-ranking-ui .gr-game-item-name{flex:1;min-width:0;overflow-wrap:anywhere}
+.gr-ranking-ui .gr-game-ranks li strong{flex:none;margin:0;font:900 15px Georgia,serif;color:#164777;white-space:nowrap}
+.gr-ranking-ui .gr-no-records{font-size:12px!important;text-align:center;color:#987447;margin:15px!important}
+.gr-ranking-ui .gr-local-note{display:flex;align-items:start;gap:12px;background:#f7e1b8;border-top:2px solid #d6a254;border-bottom:0;margin:0!important;padding:12px 20px;color:#614624;font:500 11px/1.4 Arial,sans-serif}
+.gr-ranking-ui .gr-local-note-icon{flex:none;display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#104b7f;color:#fbe0aa;font-size:17px}
+.gr-ranking-ui .gr-local-note p{font:500 11px/1.4 Arial,sans-serif;margin:0!important;color:#614624}
+@media(max-width:700px){#info-modal .gr-ranking-modal{width:calc(100vw - 12px);max-height:96dvh;border-width:3px;border-radius:15px}#info-modal .gr-ranking-modal #info-content{max-height:calc(96dvh - 57px)}.gr-ranking-ui .gr-hero{min-height:123px;gap:11px;padding:15px 42px 15px 13px}.gr-ranking-ui .gr-hero-emblem{width:58px;height:58px;font-size:33px;border-width:2px}.gr-ranking-ui .gr-hero h3{font-size:clamp(22px,5.4vw,30px)}.gr-ranking-ui .gr-hero-kicker{font-size:9px;letter-spacing:1px}.gr-ranking-ui .gr-hero p{font-size:11px}.gr-ranking-ui .gr-hero-spark{display:none}.gr-ranking-ui .gr-tabs{gap:6px;padding:10px}.gr-ranking-ui .gr-tabs button{min-height:46px;font-size:12px;padding:8px 4px}.gr-ranking-ui .gr-tabs button span{display:none}.gr-ranking-ui .gr-panel{padding:11px 9px}.gr-ranking-ui .gr-score-summary{gap:5px;margin-bottom:11px}.gr-ranking-ui .gr-summary-item{gap:5px;min-height:51px;padding:6px 3px;border-radius:8px}.gr-ranking-ui .gr-summary-item .gr-summary-icon{width:24px;height:24px;font-size:16px}.gr-ranking-ui .gr-summary-item strong{font-size:16px}.gr-ranking-ui .gr-summary-item small{font-size:8px;letter-spacing:0}.gr-ranking-ui .gr-podium-head{padding:11px 9px 0;justify-content:center}.gr-ranking-ui .gr-podium-hint{font-size:9px;text-align:center}.gr-ranking-ui .gr-podium-heading{font-size:10px}.gr-ranking-ui .gr-podium-stage{gap:5px;padding:8px 7px 0}.gr-ranking-ui .gr-podium-person,.gr-ranking-ui .gr-podium-vacant{padding:6px 3px;min-height:159px}.gr-ranking-ui .gr-podium-rank-1 .gr-podium-person,.gr-ranking-ui .gr-podium-rank-1 .gr-podium-vacant{min-height:184px}.gr-ranking-ui .gr-podium-medal{font-size:24px}.gr-ranking-ui .gr-podium-rank-1 .gr-podium-medal{font-size:27px}.gr-ranking-ui .gr-podium-avatar{width:30px;height:30px;font-size:11px}.gr-ranking-ui .gr-podium-rank-1 .gr-podium-avatar{width:35px;height:35px;font-size:13px}.gr-ranking-ui .gr-podium-name{font-size:11px}.gr-ranking-ui .gr-podium-score{font-size:17px}.gr-ranking-ui .gr-podium-score small{font-size:9px}.gr-ranking-ui .gr-podium-completed{font-size:10px}.gr-ranking-ui .gr-podium-plinth{height:28px;font-size:18px}.gr-ranking-ui .gr-podium-rank-1 .gr-podium-plinth{height:37px}.gr-ranking-ui .gr-podium-rank-3 .gr-podium-plinth{height:23px}.gr-ranking-ui .gr-section-heading h3{font-size:18px}.gr-ranking-ui .gr-section-side{font-size:10px}.gr-ranking-ui .gr-table{font-size:11px;border-spacing:0 5px;table-layout:fixed}.gr-ranking-ui .gr-table thead th{font-size:9px;padding:7px 4px}.gr-ranking-ui .gr-table thead th:first-child{width:29px}.gr-ranking-ui .gr-table thead th:nth-child(3){width:48px}.gr-ranking-ui .gr-table thead th:last-child{width:72px}.gr-ranking-ui .gr-table tbody td{padding:6px 4px}.gr-ranking-ui .gr-table td.gr-place{width:29px;font-size:15px}.gr-ranking-ui .gr-player-button{gap:5px}.gr-ranking-ui .gr-row-avatar{width:25px;height:25px;font-size:9px;border-width:1px}.gr-ranking-ui .gr-row-person strong{font-size:11px}.gr-ranking-ui .gr-row-track{height:4px}.gr-ranking-ui .gr-detail-indicator{display:none}.gr-ranking-ui .gr-completed{font-size:13px}.gr-ranking-ui .gr-completed small{font-size:9px}.gr-ranking-ui .gr-points{font-size:13px}.gr-ranking-ui .gr-detail-head h3{font-size:20px}.gr-ranking-ui .gr-detail-games{grid-template-columns:1fr;gap:6px}.gr-ranking-ui .gr-games-grid{grid-template-columns:1fr;gap:9px}.gr-ranking-ui .gr-local-note{padding:10px;gap:7px}.gr-ranking-ui .gr-local-note p{font-size:10px}.gr-ranking-ui .gr-local-note-icon{width:22px;height:22px}}
+@media(max-width:365px){.gr-ranking-ui .gr-hero h3{font-size:21px}.gr-ranking-ui .gr-score-summary{gap:3px}.gr-ranking-ui .gr-summary-item .gr-summary-icon{display:none}.gr-ranking-ui .gr-summary-item strong{font-size:16px}.gr-ranking-ui .gr-podium-stage{gap:4px;padding:7px 5px 0}}
+@media(prefers-reduced-motion:reduce){.gr-ranking-ui *{transition:none!important;animation:none!important}}

@@ -1,0 +1,15 @@
+
+
+/* V34 — Gallery: individually isolated transparent 3D miniatures, lit as collectible architectural objects */
+#od-v33 .od-tray{align-items:center;padding-top:8px;padding-bottom:10px;}
+#od-v33 .od-piece{height:clamp(102px,14vh,150px);background:radial-gradient(ellipse at 50% 63%,rgba(45,128,164,.53) 0%,rgba(12,59,105,.85) 59%,rgba(5,30,62,.93) 100%);border:2px solid #ecc269;border-radius:15px;box-shadow:inset 0 0 0 2px #f8e6b280, inset 0 15px 24px rgba(105,176,208,.12),0 5px 9px #0009;transition:filter .2s,transform .2s,background .2s;overflow:visible;}
+#od-v33 .od-piece:before{content:'';position:absolute;width:72%;height:18px;bottom:7px;left:14%;background:radial-gradient(ellipse,rgba(0,8,25,.7),rgba(0,8,25,0) 72%);pointer-events:none;}
+#od-v33 .od-piece img{position:relative;z-index:1;width:99%;height:90%;object-fit:contain;filter:drop-shadow(0 8px 4px rgba(0,0,0,.60)) drop-shadow(0 1px 1px rgba(248,209,126,.28));transition:transform .18s ease,filter .18s ease;transform:scale(1.0) translateY(-1px);}
+#od-v33 .od-piece:hover img,#od-v33 .od-piece.od-picked img{transform:scale(1.08) translateY(-4px);filter:drop-shadow(0 11px 5px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(255,226,152,.5));}
+#od-v33 .od-piece.od-picked{background:radial-gradient(ellipse at 50% 65%,#346c74dd,#0d4b57f2);}
+#od-v33 .od-piece.od-picked:before{background:radial-gradient(ellipse,#12342baf,transparent 72%);}
+#od-v33 .od-piece .od-piece-number{z-index:4;top:3px;left:5px}
+#od-v33 .od-drag-image{filter:drop-shadow(0 13px 9px #0009) drop-shadow(0 0 6px #efc5768c)}
+@media(max-width:740px){#od-v33 .od-piece{height:113px;flex:0 0 124px;min-width:124px}#od-v33 .od-tray{padding-top:5px}}
+@media(prefers-reduced-motion:reduce){#od-v33 .od-piece img{transition:none}}
+

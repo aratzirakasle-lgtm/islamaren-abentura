@@ -1,0 +1,78 @@
+/* ISLAMAREN ABENTURA V24 — Juego 8: cuatro retos; el primero, Laborantzaren aniztasuna */
+#ag24-root,#ag24-root *{box-sizing:border-box}
+#ag24-root{position:fixed;inset:0;z-index:110500;overflow:auto;background:radial-gradient(ellipse at top,#258fd4,#03255d 70%);font-family:Georgia,'Times New Roman',serif;color:#172451}
+#ag24-root[hidden]{display:none!important}
+#ag24-root button{font:inherit;touch-action:manipulation;cursor:pointer}
+#ag24-root button:focus-visible,#ag24-root input:focus-visible{outline:4px solid #f4ff6f;outline-offset:3px}
+#ag24-root .ag24-world{position:relative;width:min(100%,1740px);min-height:100%;height:100dvh;max-height:1100px;margin:auto;display:grid;grid-template-rows:94px 77px minmax(320px,1fr) 137px 58px;border:6px ridge #eeb84d;box-shadow:inset 0 0 0 3px #143f93,0 0 34px #061531;overflow:hidden;background:linear-gradient(135deg,#062f79,#0b5dab)}
+#ag24-root .ag24-top{position:relative;display:grid;grid-template-columns:64px 132px minmax(280px,1fr) 140px 165px 50px;gap:9px;align-items:center;padding:5px 11px;background:radial-gradient(ellipse at 40% 20%,#0e67c9,#062b78 57%,#021a44);border-bottom:6px double #ffca55;color:#fff1ca;box-shadow:0 4px 12px #000a;z-index:3}
+#ag24-root .ag24-logo,#ag24-root .ag24-sound{border:4px ridge #ffd774;background:linear-gradient(#117cdb,#073775);color:#fff7cf;border-radius:20px;box-shadow:0 3px 7px #0009;font-size:32px;height:59px}
+#ag24-root .ag24-logo{font-size:39px}#ag24-root .ag24-sound{font-size:27px}
+#ag24-root .ag24-lives{white-space:nowrap;font-size:31px;letter-spacing:-4px;text-shadow:0 2px 2px #39040b,0 0 6px #ff6b56}
+#ag24-root .ag24-title{min-width:0;text-align:center;color:#fff4c7;font-weight:900;font-size:clamp(23px,2.7vw,45px);line-height:1.04;text-shadow:2px 3px #2e0f2f,-1px -1px #000,0 0 8px #ffc342}
+#ag24-root .ag24-title small{display:block;font-size:clamp(11px,.95vw,16px);font-family:Arial,sans-serif;letter-spacing:.06em;color:#e9f5ff;margin-bottom:3px}
+#ag24-root .ag24-chip{border:3px ridge #d9a24d;border-radius:29px;padding:9px 6px;background:linear-gradient(#07183a,#123e7d);box-shadow:inset 0 1px 5px #2aa5e4,0 3px 7px #000b;text-align:center;font-size:clamp(15px,1.45vw,22px);font-weight:bold;white-space:nowrap;color:#fff2c6}
+#ag24-root .ag24-rule{border-bottom:4px double #ffc965;background:linear-gradient(160deg,#fad899,#fff1d1 38%,#dfb66f);padding:8px 14px;color:#162953;text-align:center;font:bold clamp(14px,1.5vw,22px)/1.21 Georgia,serif;box-shadow:inset 0 2px 14px #f5be4e7f;z-index:2;display:flex;align-items:center;justify-content:center;gap:15px}
+#ag24-root .ag24-rule .ag24-info{display:grid;place-items:center;min-width:37px;height:37px;border-radius:50%;background:linear-gradient(#278fe8,#084a99);border:3px ridge #f7bf44;color:white;font-size:23px}
+#ag24-root .ag24-scene{position:relative;overflow:hidden;background-image:var(--ag24-scene);background-position:50% 50%;background-size:100% 100%;background-repeat:no-repeat;isolation:isolate}
+#ag24-root .ag24-scene::after{content:"";position:absolute;inset:0;box-shadow:inset 0 8px 14px #122e3660,inset 0 -9px 14px #0c397264;pointer-events:none;z-index:0}
+#ag24-root .ag24-target{position:absolute;z-index:3;transform:translate(-50%,-50%);width:9%;min-width:88px;max-width:175px;height:54px;max-height:13%;border:3px dashed #194b9b;border-radius:12px;background:linear-gradient(145deg,#fffde0,#fee9b9);box-shadow:0 0 0 3px #fff2d5,0 2px 10px #0007;display:flex;align-items:center;justify-content:center;padding:3px 5px;font-size:clamp(11px,1.1vw,18px);line-height:1.07;font-weight:900;text-align:center;color:#0a327c;text-shadow:0 1px white;transition:box-shadow .18s,border .18s,background .18s}
+#ag24-root .ag24-target .ag24-mark{font-size:32px;line-height:1}
+#ag24-root .ag24-target.has-card{border-style:solid;background:linear-gradient(#fff9d9,#f2ce7b)}
+#ag24-root .ag24-target.selected-target,#ag24-root .ag24-target.drag-over{border-color:#16a9f4;box-shadow:0 0 0 4px #fff5ad,0 0 25px #37d6ff;transform:translate(-50%,-50%) scale(1.04)}
+#ag24-root .ag24-target.solved{background:linear-gradient(#f4ffdd,#aceda9);border:3px solid #1eaa43;box-shadow:0 0 4px 3px #d6ff5e,0 0 20px #58ff74;color:#0b491e;animation:ag24-glow .55s ease-out}
+#ag24-root .ag24-target.bad{border-color:#f22935;animation:ag24-shake .35s ease-out}
+#ag24-root .ag24-scene .ag24-target[disabled]{cursor:default}
+#ag24-root .ag24-tray{position:relative;display:flex;align-items:stretch;gap:7px;padding:16px 12px;background:linear-gradient(145deg,#063473,#125cb5 45%,#042363);border-top:6px double #ffcd57;border-bottom:4px ridge #ffbd45;box-shadow:inset 0 0 20px #000a}
+#ag24-root .ag24-cards{display:flex;flex:1 1 auto;gap:5px;align-items:stretch;min-width:0}
+#ag24-root .ag24-card{flex:1 1 0;min-width:0;display:grid;place-items:center;text-align:center;padding:5px 3px;border:4px ridge #e6ac44;border-radius:15px;background:linear-gradient(160deg,#fff7db,#f5d59e);color:#132b59;font:900 clamp(11px,1.10vw,18px)/1.06 Georgia,serif;box-shadow:0 3px 0 #85551c,inset 0 0 0 2px #fffefa,0 5px 10px #0008;overflow-wrap:anywhere;transition:transform .12s,box-shadow .12s}
+#ag24-root .ag24-card:hover{transform:translateY(-2px)}
+#ag24-root .ag24-card.is-selected{transform:translateY(-9px) scale(1.04);border-color:#fff073;background:linear-gradient(#fff8dc,#f9e286);box-shadow:0 0 0 3px #63d7ff,0 0 17px #ffec53;z-index:2}
+#ag24-root .ag24-card.is-placed{background:linear-gradient(#dfeaff,#b3cbdb);color:#39536d}
+#ag24-root .ag24-card.is-solved{background:linear-gradient(#e6ffe5,#b9ebb6);color:#23663a;border-color:#3bc455;cursor:default}
+#ag24-root .ag24-verify{flex:0 0 173px;border:5px ridge #f7c350;border-radius:29px;background:linear-gradient(160deg,#19f653,#078d32 75%,#075c2d);color:#fff;font:900 clamp(19px,1.7vw,26px)/1 Georgia,serif;box-shadow:inset 0 0 12px #c0ff9b,0 0 0 2px #184e28,0 6px 12px #000a;text-shadow:0 2px 3px #054421}
+#ag24-root .ag24-verify:active{transform:scale(.98)}#ag24-root .ag24-verify:disabled{opacity:.6;cursor:not-allowed}
+#ag24-root .ag24-nav{display:grid;grid-template-columns:minmax(210px,1fr) auto minmax(210px,1fr);align-items:center;gap:12px;padding:4px 20px;background:linear-gradient(#042258,#0b58a8);color:#fff3d8;font-size:17px;font-weight:900}
+#ag24-root .ag24-phase-chip{border:2px solid #fac251;border-radius:24px;padding:7px 14px;justify-self:start;background:#051f54;text-align:center}
+#ag24-root .ag24-dots{display:flex;gap:13px;align-items:center}
+#ag24-root .ag24-dot{border:3px ridge #ffc655;border-radius:100%;background:#103978;color:white;width:31px;height:31px;display:grid;place-items:center;font:900 16px Arial}
+#ag24-root .ag24-dot.active{background:#f5c63e;color:#092b6b;box-shadow:0 0 14px #fce459}
+#ag24-root .ag24-dot.done{background:#1bb84a;color:#fff}
+#ag24-root .ag24-help-note{justify-self:end;font-size:14px;color:#f3dfa7;text-align:right}
+#ag24-root .ag24-feedback{position:absolute;z-index:10;left:24%;right:24%;bottom:215px;min-height:40px;background:#07346ff0;border:3px ridge #ffd76b;border-radius:17px;box-shadow:0 0 18px #06102ea8;color:white;text-align:center;padding:9px;font:bold 18px Georgia,serif;pointer-events:none;opacity:0;transition:opacity .16s}
+#ag24-root .ag24-feedback.show{opacity:1}#ag24-root .ag24-feedback.bad{background:#83232ce9}#ag24-root .ag24-feedback.good{background:#116432e9}
+#ag24-root .ag24-modalwrap{position:absolute;inset:0;display:grid;place-items:center;z-index:25;background:#020f2dbb;backdrop-filter:blur(5px);padding:20px}
+#ag24-root .ag24-modalwrap[hidden]{display:none}
+#ag24-root .ag24-modal{width:min(600px,96%);background:linear-gradient(165deg,#ffedc0,#f2c680);border:10px ridge #f5be52;border-radius:28px;box-shadow:0 0 0 5px #173d88,0 18px 70px #000d;text-align:center;padding:26px;color:#102b5c}
+#ag24-root .ag24-modal h2{font-size:clamp(25px,3vw,41px);line-height:1.06;margin:3px 0 18px;color:#6f1e54;text-shadow:0 1px white}
+#ag24-root .ag24-modal p{font-size:18px;line-height:1.32;margin:9px 0 16px}
+#ag24-root .ag24-modal input{width:100%;max-width:350px;border:3px solid #b98121;border-radius:12px;background:white;color:#122f5b;font:bold 19px Arial;padding:13px}
+#ag24-root .ag24-modal-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:18px}
+#ag24-root .ag24-primary,#ag24-root .ag24-secondary{border:4px ridge #f5c65a;padding:12px 21px;border-radius:22px;color:#fff;font:900 19px Georgia,serif;box-shadow:0 4px 8px #0006;text-shadow:0 2px 2px #13244d}
+#ag24-root .ag24-primary{background:linear-gradient(#27d95c,#096e34)}#ag24-root .ag24-secondary{background:linear-gradient(#2c81df,#073679)}
+#ag24-root .ag24-error{min-height:22px;color:#af1b25;font:bold 15px Arial}
+#ag24-root .ag24-rank{padding:12px;border-top:2px solid #d8a349;text-align:left;font:16px Georgia,serif;max-height:180px;overflow:auto}
+#ag24-root .ag24-ranking-row{display:grid;grid-template-columns:34px 1fr 90px;border-bottom:1px solid #caa26c;padding:5px 2px}
+#ag24-root .ag24-sec-grid{position:absolute;inset:9% 9% 9%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;align-items:stretch;z-index:4}
+#ag24-root .ag24-scene[data-phase='3'] .ag24-sec-grid,#ag24-root .ag24-scene[data-phase='4'] .ag24-sec-grid{grid-template-columns:repeat(3,minmax(0,1fr));inset:11% 13% 13%}
+#ag24-root .ag24-sec-slot{position:relative;display:flex;flex-direction:column;min-width:0;justify-content:space-between;align-items:center;padding:8px;border:5px ridge #e8b74f;border-radius:20px;background:linear-gradient(#ffe5b92b,#11385abe);box-shadow:0 8px 18px #0008;overflow:hidden;color:white}
+#ag24-root .ag24-sec-slot img{height:calc(100% - 70px);width:100%;object-fit:contain;filter:drop-shadow(0 3px 7px #000a);pointer-events:none}
+#ag24-root .ag24-sec-slot .ag24-target{position:relative;left:auto!important;top:auto!important;transform:none;width:98%;height:60px;min-width:0;max-height:none;flex:none}
+#ag24-root .ag24-sec-slot .ag24-target.selected-target{transform:scale(1.03)}
+#ag24-root .ag24-card .ag24-correctmark{font-size:21px;display:block;line-height:1}
+#ag24-root .ag24-touchghost{position:fixed;z-index:110700;pointer-events:none;padding:10px 15px;border:4px ridge #f5ca43;border-radius:10px;background:#ffe3a1e8;font:bold 17px Georgia,serif;color:#0a3266;box-shadow:0 10px 25px #0009}
+@keyframes ag24-glow{0%{filter:brightness(1.6)}60%{filter:brightness(1.2)}100%{filter:brightness(1)}}
+@keyframes ag24-shake{0%,100%{margin-left:0}25%{margin-left:8px}75%{margin-left:-8px}}
+@media(max-width:1100px){#ag24-root .ag24-world{min-height:100dvh;height:auto;max-height:none;grid-template-rows:auto auto minmax(380px,auto) auto auto;overflow:visible}#ag24-root .ag24-top{grid-template-columns:58px 1fr auto auto;grid-template-rows:auto auto;min-height:120px;gap:4px}#ag24-root .ag24-logo{grid-column:1;grid-row:1/3;height:85px}#ag24-root .ag24-title{grid-column:2/4;grid-row:1}#ag24-root .ag24-lives{grid-column:2;grid-row:2;justify-self:center}#ag24-root .ag24-chip{font-size:17px;grid-row:2;grid-column:3}#ag24-root .ag24-chip.ag24-score{grid-row:2;grid-column:4}#ag24-root .ag24-sound{grid-column:4;grid-row:1;height:52px}#ag24-root .ag24-rule{min-height:74px}#ag24-root .ag24-scene{aspect-ratio:1672/505;min-height:355px;background-size:100% 100%}#ag24-root .ag24-tray{min-height:120px;flex-direction:column}#ag24-root .ag24-cards{flex-wrap:wrap;justify-content:center}#ag24-root .ag24-card{min-width:calc(20% - 7px);max-width:calc(20% - 4px);min-height:47px;font-size:clamp(11px,1.7vw,16px)}#ag24-root .ag24-verify{flex:0 0 56px}#ag24-root .ag24-nav{min-height:62px;grid-template-columns:1fr auto 1fr}#ag24-root .ag24-sec-slot .ag24-target{height:50px}}
+@media(max-width:600px){#ag24-root .ag24-world{grid-template-rows:auto auto auto auto auto}#ag24-root .ag24-top{padding:6px;grid-template-columns:44px 1fr auto auto}#ag24-root .ag24-title{font-size:20px}#ag24-root .ag24-title small{font-size:10px}#ag24-root .ag24-logo{height:74px;font-size:25px}#ag24-root .ag24-sound{font-size:20px;height:41px}#ag24-root .ag24-lives{font-size:24px}#ag24-root .ag24-chip{font-size:12px;padding:7px 4px}#ag24-root .ag24-rule{font-size:14px;min-height:80px;padding:9px 6px}#ag24-root .ag24-rule .ag24-info{min-width:27px;height:27px;font-size:15px}#ag24-root .ag24-scene{min-height:340px;height:clamp(350px,90vw,460px);aspect-ratio:auto;background-size:auto 100%;background-position:center}#ag24-root .ag24-scene[data-phase='1']{background-size:100% 100%}#ag24-root .ag24-target{width:19%;min-width:45px;height:39px;border-width:2px;font-size:9.5px;border-radius:9px;overflow-wrap:anywhere;padding:2px}#ag24-root .ag24-target .ag24-mark{font-size:22px}#ag24-root .ag24-tray{padding:10px 7px;gap:11px}#ag24-root .ag24-cards{gap:5px}#ag24-root .ag24-card{min-width:calc(33.333% - 6px);max-width:calc(33.333% - 3px);min-height:48px;padding:7px 3px;font-size:13px}#ag24-root .ag24-verify{font-size:19px}#ag24-root .ag24-nav{padding:5px;gap:4px;grid-template-columns:1fr auto}#ag24-root .ag24-phase-chip{font-size:12px;padding:7px}#ag24-root .ag24-dots{gap:6px}#ag24-root .ag24-dot{width:24px;height:24px;font-size:12px}#ag24-root .ag24-help-note{display:none}#ag24-root .ag24-sec-grid,#ag24-root .ag24-scene[data-phase='3'] .ag24-sec-grid,#ag24-root .ag24-scene[data-phase='4'] .ag24-sec-grid{inset:5%;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#ag24-root .ag24-sec-slot{padding:5px;border-width:3px}#ag24-root .ag24-sec-slot img{height:calc(100% - 52px)}#ag24-root .ag24-sec-slot .ag24-target{height:45px;font-size:12px}#ag24-root .ag24-feedback{left:5%;right:5%;bottom:160px;font-size:14px}#ag24-root .ag24-modal{padding:15px 12px;border-width:5px}#ag24-root .ag24-modal p{font-size:15px}}
+@media(prefers-reduced-motion:reduce){#ag24-root *{animation:none!important;transition:none!important}}
+
+/* Mobile landscape panel: a horizontally scrollable, correctly proportioned illustrated garden. */
+@media(max-width:600px){
+ #ag24-root .ag24-scene[data-phase='1']{height:430px;min-height:430px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;background-image:none!important;background-color:#173f67;}
+ #ag24-root .ag24-scene[data-phase='1'] #ag24-targets{position:relative;width:1280px;height:430px;background-image:var(--ag24-scene);background-position:center;background-size:100% 100%;background-repeat:no-repeat;}
+ #ag24-root .ag24-scene[data-phase='1'] .ag24-target{width:8.9%;min-width:90px;height:47px;max-height:none;font-size:13px;}
+ #ag24-root .ag24-scene[data-phase='1'] .ag24-target .ag24-mark{font-size:25px}
+ #ag24-root .ag24-rule{position:relative;}
+ #ag24-root .ag24-rule:after{content:'Irristatu irudia alboetara →';position:absolute;bottom:1px;right:4px;font:700 10px Arial,sans-serif;color:#275a8c;opacity:.9}
+}

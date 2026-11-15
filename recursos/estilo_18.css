@@ -1,0 +1,126 @@
+
+/* V25 scope: affects Game 8's second challenge only. All other screens keep V24 CSS. */
+#ag24-root[data-ir25="on"] .ag24-world{grid-template-rows:80px 0 minmax(0,1fr) 82px 44px}
+#ag24-root[data-ir25="on"] .ag24-top{grid-template-columns:58px 120px minmax(350px,1fr) 145px 145px 48px;gap:6px}
+#ag24-root[data-ir25="on"] .ag24-rule{display:block;height:0;min-height:0;overflow:hidden;padding:0;border:0;opacity:0;pointer-events:none}
+#ag24-root[data-ir25="on"] .ag24-title{font-size:clamp(21px,2.5vw,40px)}
+#ag24-root[data-ir25="on"] .ag24-scene{min-height:0;background-position:center -85px;background-size:100% 125%}
+#ag24-root[data-ir25="on"] .ag24-tray{align-items:center;justify-content:center;padding:9px 18px}
+#ag24-root[data-ir25="on"] .ag24-verify{flex-basis:380px;min-height:60px;font-size:29px;box-shadow:inset 0 0 13px #b7ffbc,0 0 22px #ffc949,0 4px 12px #0008}
+#ag24-root[data-ir25="on"] .ag24-verify:disabled{opacity:.76}
+#ag24-root[data-ir25="on"] .ag24-nav{min-height:42px}
+#ag24-root[data-ir25="on"] .ag24-feedback{bottom:132px;left:28%;right:12%;font-size:16px}
+#ag24-root .ir25-stage{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:minmax(185px,18%) minmax(0,1fr);gap:7px;isolation:isolate;background:linear-gradient(#0651a125,#17384928)}
+#ag24-root .ir25-sidebar{background:linear-gradient(90deg,#f2d598fa,#fff0d7ed 50%,#eab96df0);border:7px ridge #efb541;border-top:0;border-radius:0 0 28px 18px;box-shadow:0 6px 17px #0008;position:relative;z-index:3;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;min-width:0}
+#ag24-root .ir25-sidebar-title{width:95%;background:linear-gradient(#0f5daa,#021a50);color:#fff6cc;border:5px ridge #eaba4e;border-radius:45% 45% 14% 14%;box-shadow:0 3px 8px #5e3617;padding:15px 4px;font-size:clamp(18px,2vw,34px);font-weight:900;text-shadow:1px 2px #281021}
+#ag24-root .ir25-sidebar-sub{background:linear-gradient(#fff2c6,#ddac5a);border:3px solid #b47120;border-radius:14px;color:#63201e;font-size:clamp(15px,1.25vw,23px);font-weight:900;padding:5px}
+#ag24-root .ir25-sidebar-icon{font-size:49px;color:#8c5619;line-height:1.05;filter:drop-shadow(0 1px 1px #9e6d43)}
+#ag24-root .ir25-sidebar-instruct{font-weight:900;font-size:clamp(12px,1.15vw,19px);line-height:1.18;color:#1a2643;max-width:235px}
+#ag24-root .ir25-sidebar-progress{margin-top:auto;margin-bottom:10px;border:6px ridge #e7b54f;border-radius:100px;background:radial-gradient(#1766c4,#05245c);color:#fff4bd;padding:16px 18px;box-shadow:inset 0 0 10px #69d0ff,0 3px 8px #0009;font-size:clamp(18px,1.75vw,29px);font-weight:900}
+#ag24-root .ir25-main{min-width:0;min-height:0;position:relative;display:grid;grid-template-rows:minmax(0,1fr) 27%;gap:7px;padding:8px 11px 8px 0}
+#ag24-root .ir25-board{position:relative;min-height:0;display:grid;grid-template-rows:100px minmax(0,1fr);gap:40px}
+#ag24-root .ir25-functions,#ag24-root .ir25-techcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;z-index:2;min-height:0}
+#ag24-root .ir25-functions{align-items:start;position:relative}
+#ag24-root .ir25-function{display:grid;place-items:center;position:relative;min-height:76px;height:95%;border:5px ridge #f0c25f;border-radius:20px 20px 13px 13px;background:linear-gradient(150deg,#fff7d9,#e6b77a);box-shadow:inset 0 0 0 2px #fef9d9,0 5px 8px #3c1c18b8;color:#381d20;text-align:center;font:bold clamp(14px,1.38vw,23px)/1.06 Georgia,serif;padding:5px 7px;white-space:normal}
+#ag24-root .ir25-function .ir25-pin{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:22px;height:22px;background:#ffd961;border:4px ridge #fff0ac;border-radius:50%;box-shadow:0 0 8px #fcf0a0;pointer-events:none}
+#ag24-root .ir25-function.selected,#ag24-root .ir25-function:hover{border-color:#b2faff;box-shadow:0 0 14px 3px #7bdcff,inset 0 0 0 3px #fff5d3}
+#ag24-root .ir25-function.correct{border-color:#8df065;background:linear-gradient(#d6ffc6,#f0f1b7)}
+#ag24-root .ir25-function.wrong{animation:ag24-shake .3s;border-color:#fd7772}
+#ag24-root .ir25-techcards{align-items:stretch}
+#ag24-root .ir25-tech{position:relative;min-height:0;border:6px ridge #ffcd5b;border-radius:30% 30% 15px 15px;background:linear-gradient(#0b5baa,#06265c);color:#fff6cc;box-shadow:inset 0 0 0 3px #087bc2,0 6px 9px #001b36a9;display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 5px 8px;transition:filter .18s,transform .18s;overflow:hidden}
+#ag24-root .ir25-tech::before{content:'✦ ❖ ✦';color:#ffe06b;font-size:11px;position:absolute;top:0;left:10%;right:10%;text-align:center;pointer-events:none;opacity:.8}
+#ag24-root .ir25-tech:hover{filter:brightness(1.13);transform:translateY(-2px)}
+#ag24-root .ir25-tech.selected{box-shadow:0 0 17px 4px #a8f3ff,inset 0 0 0 3px #54cbff;transform:translateY(-3px)}
+#ag24-root .ir25-tech.correct{border-color:#74ef87;box-shadow:0 0 14px #3dff7c,inset 0 0 0 2px #caffc6}
+#ag24-root .ir25-tech.wrong{border-color:#e94b55;animation:ag24-shake .28s}
+#ag24-root .ir25-tech-label{position:relative;flex:0 0 auto;width:100%;text-align:center;background:linear-gradient(#fff8df,#efc583);border:3px ridge #ffe69d;border-radius:14px;color:#562321;font:bold clamp(15px,1.45vw,23px)/1.06 Georgia,serif;min-height:43px;display:grid;place-items:center;padding:4px 3px;box-shadow:0 2px 6px #071b4d}
+#ag24-root .ir25-art{min-height:0;width:100%;height:100%;object-fit:cover;object-position:center center;border:3px solid #c88a34;border-radius:10px;box-shadow:0 0 0 2px #032860;pointer-events:none}
+#ag24-root .ir25-tech-hint{font:900 clamp(11px,.88vw,15px)/1.15 Georgia,serif;color:#fff5c8;background:#06316bcb;display:block;width:96%;text-align:center;min-height:17px;border-radius:5px;overflow-wrap:anywhere}
+#ag24-root .ir25-tech .ir25-pin{width:20px;height:20px;position:absolute;top:-5px;border-radius:50%;border:4px solid #fff9c7;background:#ffd845;box-shadow:0 0 10px #fff176;z-index:3}
+#ag24-root .ir25-wires{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible}
+#ag24-root .ir25-wires path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+#ag24-root .ir25-wire-halo{stroke:#ffeb6a;stroke-width:11;opacity:.45;filter:blur(3px)}
+#ag24-root .ir25-wire-core{stroke:#ffef61;stroke-width:4;filter:drop-shadow(0 0 3px #ffe55a)}
+#ag24-root .ir25-wires .good .ir25-wire-halo{stroke:#45fa82}
+#ag24-root .ir25-wires .good .ir25-wire-core{stroke:#31f563}
+#ag24-root .ir25-circuit{position:relative;min-height:0;border:6px ridge #ffcb51;border-radius:17px;background-position:center;background-size:100% 100%;box-shadow:inset 0 0 0 3px #114d88,0 4px 12px #08235a;overflow:hidden}
+#ag24-root .ir25-circuit-title{position:absolute;top:0;left:0;z-index:2;background:linear-gradient(#083577,#052359);border:3px ridge #ffd15a;border-radius:8px;color:#ffe9a9;padding:3px 12px;font:bold clamp(12px,1.1vw,18px)/1.1 Georgia,serif;text-shadow:1px 1px #382722;box-shadow:0 3px 7px #07193b}
+#ag24-root .ir25-circuit-btn{position:absolute;z-index:5;top:56%;transform:translate(-50%,-50%);width:6.5%;min-width:48px;height:54px;border:4px ridge #ffe47a;border-radius:15px;background:linear-gradient(#155aaa,#052962);box-shadow:0 0 13px #fff5a5;color:#fffbe2;font:bold 22px Georgia;display:grid;place-items:center}
+#ag24-root .ir25-circuit-btn.selected{box-shadow:0 0 0 4px #88eaff,0 0 15px #ffef7d;background:#127ec5}
+#ag24-root .ir25-circuit-btn.placed{background:linear-gradient(#fbe9a6,#dfad62);color:#1b3a70;font-size:12px;line-height:1.04;width:14%;padding:3px;text-align:center}
+#ag24-root .ir25-circuit-btn.correct{background:linear-gradient(#51ec7d,#087e40);color:#fff;text-shadow:0 1px #065b21;border-color:#bafca1;box-shadow:0 0 19px #73ff8c;font-size:19px}
+#ag24-root .ir25-circuit .ir25-flow{position:absolute;pointer-events:none;inset:42% 5% 15%;border-bottom:8px dashed #39cdff;opacity:0;filter:drop-shadow(0 0 7px #39f8ff);border-radius:60%;background:linear-gradient(transparent 65%,#25ddff32);z-index:1}
+#ag24-root .ir25-circuit.active-ubideak .ir25-flow{opacity:.93;animation:ir25-flow 1.5s linear infinite}
+#ag24-root .ir25-wheel-spin{position:absolute;pointer-events:none;z-index:2;left:10.1%;top:39%;width:42px;height:42px;display:none;border:5px solid #ffe084;border-radius:50%;box-shadow:0 0 10px #ffd35b;background:repeating-conic-gradient(from 0deg,#b8782e 0 6deg,transparent 6deg 45deg)}
+#ag24-root .ir25-circuit.active-noriak .ir25-wheel-spin{display:block;animation:ir25-wheel 2.8s linear infinite}
+#ag24-root .ir25-ripple{position:absolute;pointer-events:none;z-index:2;left:57%;top:30%;width:90px;height:30px;display:none;border:3px solid #b8fcff;border-radius:50%;box-shadow:0 0 15px #61dfff}
+#ag24-root .ir25-circuit.active-putzuak .ir25-ripple{display:block;animation:ir25-ripple 1.7s ease-out infinite}
+#ag24-root .ir25-terrace-glow{position:absolute;pointer-events:none;z-index:2;right:0;top:12%;width:23%;height:82%;opacity:0;background:linear-gradient(100deg,transparent,#8cff6680);filter:blur(11px)}
+#ag24-root .ir25-circuit.active-terrazak .ir25-terrace-glow{opacity:.8;animation:ir25-terrace 2.5s ease-in-out infinite alternate}
+#ag24-root .ir25-pieces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:1100px;width:100%}
+#ag24-root .ir25-piece{color:#122a5c;border:4px ridge #f4c762;border-radius:15px;background:linear-gradient(#fff3cd,#edc181);font:bold 17px Georgia,serif;padding:10px 3px;min-width:0;box-shadow:0 3px 7px #001e47}
+#ag24-root .ir25-piece.selected{background:#ffe266;box-shadow:0 0 16px #f3f370;border-color:#92dbff}
+#ag24-root .ir25-piece.correct{background:linear-gradient(#b4ffc5,#84d69c);border-color:#75e188}
+#ag24-root .ir25-summary{color:#fff1ca;font-weight:900;font-size:16px;text-align:center;width:100%}
+@keyframes ir25-wheel{to{transform:rotate(360deg)}}
+@keyframes ir25-flow{to{border-bottom-color:#dffbff;background-position:70px 0}}
+@keyframes ir25-ripple{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.65);opacity:0}}
+@keyframes ir25-terrace{to{opacity:.2}}
+@media(max-width:1100px){#ag24-root[data-ir25="on"] .ag24-world{height:auto;max-height:none;min-height:100dvh;grid-template-rows:auto 0 auto auto auto;overflow:visible}
+#ag24-root[data-ir25="on"] .ag24-scene{height:740px;min-height:740px;aspect-ratio:auto;background-size:cover}
+#ag24-root[data-ir25="on"] .ag24-tray{flex-direction:row;min-height:90px}
+#ag24-root .ir25-main{grid-template-rows:minmax(0,1fr) 28%}
+#ag24-root .ir25-stage{grid-template-columns:205px minmax(0,1fr)}
+#ag24-root .ir25-tech-label{font-size:15px}#ag24-root .ir25-function{font-size:15px}#ag24-root .ir25-sidebar-instruct{font-size:15px}}
+@media(max-width:650px){#ag24-root[data-ir25="on"] .ag24-scene{height:auto;min-height:0;background-size:auto 100%}
+#ag24-root .ir25-stage{position:relative;display:flex;flex-direction:column;gap:5px}
+#ag24-root .ir25-sidebar{border-radius:6px;padding:7px 10px;flex-direction:row;justify-content:space-between;gap:6px;min-height:83px;align-items:center}
+#ag24-root .ir25-sidebar-title{width:auto;min-width:75px;font-size:16px;padding:8px 6px;border-width:3px;border-radius:13px}
+#ag24-root .ir25-sidebar-sub{font-size:11px;max-width:85px;border-width:2px}
+#ag24-root .ir25-sidebar-icon{display:none}
+#ag24-root .ir25-sidebar-instruct{font-size:11px;flex:1;line-height:1.07}
+#ag24-root .ir25-sidebar-progress{margin:0;font-size:12px;padding:8px 5px;border-width:3px}
+#ag24-root .ir25-main{display:flex;flex-direction:column;height:auto;min-height:0;padding:8px;gap:12px}
+#ag24-root .ir25-board{height:520px;min-height:520px;grid-template-rows:132px 1fr;gap:6px}
+#ag24-root .ir25-functions,#ag24-root .ir25-techcards{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+#ag24-root .ir25-function{min-height:58px;font-size:12px;padding:3px;border-width:3px;height:auto}
+#ag24-root .ir25-function .ir25-pin{width:13px;height:13px;bottom:-6px;border-width:2px}
+#ag24-root .ir25-tech{border-width:3px;border-radius:14px;padding:2px;min-height:0}
+#ag24-root .ir25-tech-label{min-height:31px;font-size:13px;border-width:2px}
+#ag24-root .ir25-art{border-width:2px;object-fit:cover}
+#ag24-root .ir25-tech-hint{font-size:10px}
+#ag24-root .ir25-tech .ir25-pin{height:12px;width:12px}
+#ag24-root .ir25-wires{display:none}
+#ag24-root .ir25-circuit{height:180px;min-height:180px;background-size:auto 100%}
+#ag24-root .ir25-circuit-btn{width:12%;font-size:14px;min-width:35px;height:40px;border-width:2px}
+#ag24-root .ir25-circuit-btn.placed{width:22%;font-size:10px}
+#ag24-root .ir25-circuit-btn.correct{font-size:14px}
+#ag24-root .ir25-circuit-title{font-size:12px}
+#ag24-root .ir25-piece{font-size:12px;padding:6px 2px;border-width:2px}
+#ag24-root[data-ir25="on"] .ag24-tray{padding:8px 4px;flex-direction:column;min-height:115px;gap:4px}
+#ag24-root[data-ir25="on"] .ag24-verify{flex:0 0 55px;width:100%;font-size:24px}
+#ag24-root .ir25-sidebar-progress{white-space:nowrap}
+#ag24-root .ir25-summary{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){#ag24-root .ir25-wheel-spin,#ag24-root .ir25-flow,#ag24-root .ir25-ripple,#ag24-root .ir25-terrace-glow{animation:none!important}}
+
+
+#ag24-root .ir25-circuit-wait{position:absolute;z-index:4;top:56%;transform:translate(-50%,-50%);left:20%;display:grid;place-items:center;width:65px;height:52px;border:4px ridge #ffe37c;border-radius:13px;background:linear-gradient(#0d5ca5,#06265e);color:#fff2c8;font-size:26px;font-weight:900;box-shadow:0 0 10px #ffed8e}
+#ag24-root .ir25-circuit-title{min-width:315px;min-height:60px;padding:8px 13px;display:flex;align-items:center;box-shadow:0 0 0 3px #0b3974,0 3px 7px #07193b}
+@media(max-width:650px){#ag24-root .ir25-board{grid-template-rows:132px minmax(0,1fr);gap:6px}#ag24-root .ir25-circuit-wait{width:30px;height:34px;font-size:16px;border-width:2px}#ag24-root .ir25-circuit-title{min-width:0;max-width:94%;min-height:26px}}
+
+/* Never let long ornamental title text force a wider implicit grid track on phones. */
+@media(max-width:650px){
+#ag24-root[data-ir25="on"] .ag24-world{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr)}
+#ag24-root[data-ir25="on"] .ag24-top,#ag24-root[data-ir25="on"] .ag24-scene,#ag24-root[data-ir25="on"] .ag24-tray,#ag24-root[data-ir25="on"] .ag24-nav{min-width:0!important;width:100%!important;max-width:100%!important}
+#ag24-root .ir25-stage,#ag24-root .ir25-main,#ag24-root .ir25-board,#ag24-root .ir25-functions,#ag24-root .ir25-techcards,#ag24-root .ir25-circuit{min-width:0!important;width:100%!important;max-width:100%!important}
+#ag24-root .ir25-function,#ag24-root .ir25-tech{min-width:0!important;overflow-wrap:anywhere}
+#ag24-root[data-ir25="on"] .ag24-top{grid-template-columns:43px minmax(0,1fr) 76px 65px;grid-template-rows:45px 38px}
+#ag24-root[data-ir25="on"] .ag24-title{grid-column:2/4;grid-row:1;font-size:clamp(14px,3.6vw,20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ag24-root[data-ir25="on"] .ag24-title small{font-size:9px}
+#ag24-root[data-ir25="on"] .ag24-chip{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#ag24-root[data-ir25="on"] .ag24-chip.ag24-score{grid-column:4;grid-row:2}
+#ag24-root[data-ir25="on"] .ag24-sound{grid-column:4;grid-row:1}
+#ag24-root[data-ir25="on"] .ag24-lives{grid-row:2;grid-column:2;justify-self:start}
+#ag24-root[data-ir25="on"] .ag24-world{overflow:visible}
+}
