@@ -1,0 +1,4 @@
+
+/* V35 · Small-screen discovery cues, without altering existing artwork */
+.od-v35-swipe-tip{display:none;text-align:center;margin:3px auto 6px;font:600 12px/1.2 Arial,sans-serif;color:#70471d;background:rgba(255,240,202,.87);border-radius:16px;width:max-content;max-width:90%;padding:5px 12px}
+@media(max-width:680px){.od-v35-swipe-tip{display:block}}

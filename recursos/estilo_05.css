@@ -1,0 +1,107 @@
+
+/* Joko 3: dedicated, real HTML/CSS UI. All typography and controls are DOM, not baked in the images. */
+#p10-root,#p10-root *{box-sizing:border-box}
+#p10-root{position:fixed;inset:0;z-index:350000;background:#04172b;overflow:auto;color:#fff8df;font-family:Georgia,'Times New Roman',serif;isolation:isolate}
+#p10-root[hidden],#p10-root [hidden]{display:none!important}
+#p10-root button,#p10-root input{font:inherit}
+#p10-root button{cursor:pointer}
+#p10-root button:focus-visible{outline:4px solid #fff1a0;outline-offset:4px}
+#p10-root .p10-shell{min-height:100vh;max-width:1880px;margin:auto;display:grid;grid-template-rows:78px minmax(0,1fr) 82px;background:#0a2b5c}
+#p10-root .p10-hud{z-index:9;display:flex;align-items:center;gap:clamp(5px,.7vw,12px);padding:7px clamp(9px,1.2vw,20px);border-bottom:5px ridge #f3bf4b;background:linear-gradient(120deg,#03214c,#07427a 46%,#061c3c);box-shadow:0 8px 15px #0007;white-space:nowrap}
+#p10-root .p10-royal{border:3px solid #e5ad32;background:linear-gradient(180deg,#1267a7,#072a5c 70%,#071a44);box-shadow:inset 0 0 0 2px #83bce9,0 3px 0 #763c0b,0 5px 11px #0007;color:#fff5c9;text-shadow:0 2px 1px #000}
+#p10-root .p10-home,#p10-root .p10-audio{width:62px;height:57px;border-radius:16px;font-size:31px;flex:none;display:grid;place-items:center}
+#p10-root .p10-title{flex:1;min-width:0;text-align:center;border-radius:19px;padding:7px 14px;font-size:clamp(23px,2.7vw,42px);font-weight:900;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis}
+#p10-root .p10-hearts{font-size:clamp(19px,2.4vw,33px);white-space:nowrap;filter:drop-shadow(1px 3px 1px #000)}
+#p10-root .p10-hud-pill{border:2px solid #e8b44e;border-radius:18px;background:linear-gradient(#061629,#05162e);padding:9px 17px;color:#fff9e5;font-size:clamp(17px,1.4vw,24px);font-weight:900;white-space:nowrap;box-shadow:0 4px 11px #0007}
+#p10-root .p10-main{min-height:0;position:relative;display:grid;grid-template-columns:clamp(215px,15.1vw,248px) minmax(0,1fr) clamp(200px,14vw,225px);gap:13px;padding:10px 13px 12px;overflow:hidden;background:linear-gradient(90deg,#071f3d2b,#08365e00 22%,#08365e00 80%,#071c3d40),var(--p10-panorama) center 45%/cover no-repeat}
+#p10-root .p10-main:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(circle at 50% 10%,#fff8bf,transparent 43%);z-index:0}
+#p10-root .p10-side,#p10-root .p10-center{z-index:1;min-width:0}
+#p10-root .p10-parchment{border:5px ridge #dca33c;border-radius:20px;background:radial-gradient(ellipse at 28% 12%,#fff6db,#fae4af 60%,#cda868);color:#38220e;box-shadow:inset 0 0 0 3px #fff1c6,inset 0 0 0 7px #cda053,0 9px 19px #001b34a8}
+#p10-root .p10-left{align-self:start;display:flex;flex-direction:column;align-items:center;padding:17px 13px 16px;max-height:100%;overflow:auto;gap:8px;text-align:center}
+#p10-root .p10-medal{margin:1px -7px 7px;padding:7px 24px;background:linear-gradient(#711b70,#451056);color:#fff5e2;font-size:30px;line-height:1.05;font-weight:900;text-shadow:0 2px 2px #1a0822;border:4px ridge #f3bf49;border-radius:50px 50px 24px 24px;box-shadow:0 5px 3px #0004}
+#p10-root .p10-left h2{font-size:clamp(25px,2.25vw,34px);line-height:1.06;margin:0 0 5px;font-weight:900;color:#2c1710;letter-spacing:-.04em}
+#p10-root .p10-icon{width:116px;height:100px;object-fit:cover;object-position:center;border:4px ridge #dda12e;border-radius:48% 48% 12px 12px;background:#0d3977}
+#p10-root .p10-left p{font-size:clamp(18px,1.55vw,24px);font-weight:800;line-height:1.08;margin:6px 0 10px}
+#p10-root .p10-progress{padding:5px 22px;min-width:120px;background:linear-gradient(#772178,#3c0d52);border:4px ridge #e8b84c;border-radius:30px;color:#fff;font-size:30px;font-weight:900;text-shadow:0 2px #24112d}
+#p10-root .p10-tip{margin-top:auto;background:linear-gradient(#fff4d9,#f5d695);border:2px solid #dda845;border-radius:12px;box-shadow:inset 0 0 0 2px #fff1cb;padding:10px 9px;text-align:left;width:100%}
+#p10-root .p10-tip strong{font-size:23px;display:block;margin-bottom:4px}
+#p10-root .p10-tip span{font-size:17px;font-weight:700;line-height:1.2;display:block}
+#p10-root .p10-tip small{font-size:12px;color:#6a4818;display:block;margin-top:9px}
+#p10-root .p10-right{align-self:start;padding:0 8px 12px;max-height:95%;overflow:hidden}
+#p10-root .p10-rank-head{margin:0 -7px 8px;border-radius:13px;background:linear-gradient(#5c270d,#2b120a);color:#fff2d3;padding:9px 7px;font-size:clamp(23px,2vw,30px);font-weight:900;border:3px ridge #e4b246;text-align:center;text-shadow:0 2px 2px #000;white-space:nowrap}
+#p10-root .p10-rank-row{display:grid;grid-template-columns:26px minmax(0,1fr) 59px;align-items:center;gap:3px;min-height:29px;border-bottom:1px solid #cba665;color:#311b0a;font-size:clamp(13px,1.1vw,18px);font-weight:bold}
+#p10-root .p10-rank-row span:nth-child(2){text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+#p10-root .p10-rank-row span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+#p10-root .p10-empty{font-size:17px;font-weight:800;text-align:center;margin:30px 0}
+#p10-root .p10-rank-local{font-size:12px;color:#8a6531;text-align:center;padding:9px 3px}
+#p10-root .p10-center{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-height:0;position:relative;padding:0 clamp(1px,.6vw,10px)}
+#p10-root .p10-sky-title{align-self:center;max-width:98%;padding:8px 22px;border:3px ridge #e1aa4b;border-radius:18px;color:#3a240d;font-size:clamp(17px,1.5vw,24px);font-weight:900;background:linear-gradient(#fff3d6ef,#f4d79ae6);text-align:center;box-shadow:0 6px 18px #04112a80;text-shadow:0 1px #fff;z-index:1}
+#p10-root .p10-grid{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(6px,.68vw,12px);align-items:end;min-height:0;margin-top:auto}
+#p10-root .p10-pillar{position:relative;display:flex;flex-direction:column;min-width:0;height:clamp(300px,41.6vh,405px);padding:9px 7px 8px;border:5px ridge #f1c34f;border-radius:50% 50% 22px 22px / 19% 19% 22px 22px;background:linear-gradient(135deg,#fddf75,#b57222 13%,#164e97 18%,#073c7d 70%,#ffe59d 88%,#995310);box-shadow:0 0 0 3px #0e3c86,0 0 0 5px #eaae32,0 7px 14px #0009,inset 0 0 0 2px #fada7c;transition:transform .18s,filter .18s,box-shadow .18s;overflow:hidden;color:#291707;isolation:isolate}
+#p10-root .p10-pillar:before{content:'';position:absolute;inset:4px;border:2px solid #daba73;border-radius:50% 50% 17px 17px / 18% 18% 17px 17px;pointer-events:none;z-index:3}
+#p10-root .p10-art{width:100%;height:calc(100% - 83px);object-fit:cover;object-position:center;display:block;border-radius:50% 50% 9px 9px / 15% 15% 9px 9px;background:#082c4a;box-shadow:0 0 0 2px #f4d078}
+#p10-root .p10-label{position:relative;z-index:4;flex:1;min-height:65px;display:grid;place-items:center;align-self:stretch;margin-top:6px;background:linear-gradient(#fff9dc,#f4dba1 72%,#d8ad58);border-radius:14px;border:3px ridge #e2a33c;color:#2c170c;text-shadow:0 1px #fff;font-size:clamp(20px,2vw,30px);font-weight:900;box-shadow:inset 0 0 6px #b98433}
+#p10-root .p10-pillar:hover:not(:disabled){transform:translateY(-8px) scale(1.025);filter:brightness(1.1);box-shadow:0 0 0 3px #115ab1,0 0 0 7px #ffdc55,0 0 35px #ffda65cc,0 12px 20px #000a}
+#p10-root .p10-pillar.correct{filter:saturate(.95) brightness(1);border-color:#7de9a2;box-shadow:0 0 0 3px #156c45,0 0 24px #50ffa1}
+#p10-root .p10-pillar.correct:after{content:'✓';position:absolute;top:35px;right:12px;width:44px;height:44px;border-radius:50%;background:#087343;color:white;display:grid;place-items:center;font-size:35px;box-shadow:0 3px 7px #0009;z-index:8}
+#p10-root .p10-pillar.wrong{animation:p10-wrong .3s ease;background:#a22e20;box-shadow:0 0 0 4px #ff492c,0 0 26px #ff3823}
+#p10-root .p10-pillar:disabled{cursor:default}
+@keyframes p10-wrong{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+#p10-root .p10-question{height:clamp(108px,14vh,150px);display:grid;grid-template-columns:72px minmax(0,1fr) 72px;gap:4px;align-items:center;padding:8px;border:6px ridge #eabc60;border-radius:45px;background:linear-gradient(90deg,#e1af4c,#fff4d7 7%,#fff2d3 87%,#dca64c);box-shadow:0 0 0 3px #0d4f9c,0 0 0 6px #e5ae36,0 11px 22px #0009,inset 0 0 0 3px #fdf1d6;color:#182344;flex:none;margin:5px 1.5% 7px}
+#p10-root .p10-question p{font-size:clamp(22px,2.3vw,37px);font-weight:900;line-height:1.12;margin:0;text-align:center;color:#14244d;text-shadow:0 1px white}
+#p10-root .p10-question button{width:60px;height:60px;display:grid;place-items:center;color:white;text-shadow:0 2px #210722;font-size:40px;border:4px ridge #eab640;border-radius:50%;background:linear-gradient(#a339aa,#480d58);box-shadow:0 0 0 2px #381042,0 5px 9px #0007}
+#p10-root .p10-question button:hover{filter:brightness(1.24);transform:scale(1.04)}
+#p10-root .p10-feedback{font-size:clamp(16px,1.3vw,22px);font-weight:900;text-align:center;min-height:25px;background:#04152daa;border:1px solid #d19f44;border-radius:12px;padding:4px 9px;color:#fef3ce}
+#p10-root .p10-feedback.good{background:#0f672f;border-color:#7bec8b}
+#p10-root .p10-feedback.bad{background:#7a1c20;border-color:#ff8585}
+#p10-root .p10-footer{display:flex;justify-content:center;align-items:center;gap:clamp(3px,.7vw,11px);min-height:0;padding:7px 10px;background:repeating-linear-gradient(45deg,#e6af32 0 3px,#164b94 3px 9px,#0b2d6b 9px 14px,#e6ac32 14px 16px);border-top:5px ridge #e0ad3a;box-shadow:0 -6px 10px #0005;overflow:hidden}
+#p10-root .p10-nav{border:3px ridge #f4bb4e;border-radius:100px;padding:10px 20px;background:linear-gradient(#741e7d,#420a53);color:white;font-weight:900;font-size:20px;text-shadow:0 2px #321049;white-space:nowrap;box-shadow:0 4px 6px #0007}
+#p10-root .p10-index{display:flex;gap:3px;align-items:center;justify-content:center}
+#p10-root .p10-index button{min-width:39px;height:39px;padding:0 4px;border-radius:50%;border:3px ridge #dfab3c;background:linear-gradient(#1163aa,#092a5f);color:white;font-size:22px;font-weight:900;box-shadow:0 2px #0009}
+#p10-root .p10-index button.active{background:linear-gradient(#a94bb1,#551369);box-shadow:0 0 0 3px #f8de77,0 0 17px #faee77}
+#p10-root .p10-overlay{position:absolute;inset:0;background:#071c3fd1;display:grid;place-items:center;z-index:15;padding:15px;backdrop-filter:blur(5px)}
+#p10-root .p10-dialog{width:min(510px,94vw);padding:25px 28px;display:grid;gap:15px;text-align:center}
+#p10-root .p10-dialog h2{font-size:35px;margin:0;color:#37210f}
+#p10-root .p10-dialog p{font-size:20px;font-weight:bold;margin:0}
+#p10-root .p10-dialog input{font-size:22px;padding:12px 17px;border-radius:14px;border:3px solid #b58a41;min-width:0;width:100%;background:white;color:#21212a;text-align:center}
+#p10-root .p10-primary{padding:12px 22px;background:linear-gradient(#42c637,#08702c);border:4px ridge #ffcf55;border-radius:40px;box-shadow:0 5px 12px #0008;color:#fff;font-size:24px;font-weight:900;text-shadow:0 2px #06401b}
+#p10-root .p10-secondary{padding:8px 15px;color:#4d260e;background:#f4deab;border:2px ridge #b88a3d;border-radius:30px}
+#p10-root .p10-invalid{color:#9c1821;font-weight:900;font-size:16px}
+@media(min-width:1850px){#p10-root .p10-main{background-position:center 35%}#p10-root .p10-pillar{height:420px}}
+@media(max-width:1190px) and (min-width:771px){#p10-root .p10-main{grid-template-columns:185px minmax(0,1fr) 170px;gap:8px;padding:8px}#p10-root .p10-left{padding:9px 6px}#p10-root .p10-medal{font-size:23px}#p10-root .p10-pillar{height:min(42vh,340px);padding:5px 4px}#p10-root .p10-label{min-height:47px;font-size:17px}#p10-root .p10-question{grid-template-columns:49px 1fr 49px}#p10-root .p10-question button{width:45px;height:45px;font-size:30px}#p10-root .p10-rank-row{grid-template-columns:23px minmax(0,1fr) 49px}#p10-root .p10-nav{font-size:16px;padding:7px 12px}#p10-root .p10-index button{min-width:28px;width:28px;height:28px;font-size:15px}}
+@media(max-width:770px){
+#p10-root .p10-shell{display:flex;flex-direction:column;min-height:100svh}
+#p10-root .p10-hud{position:sticky;top:0;padding:6px;flex-wrap:wrap;gap:6px;justify-content:center;z-index:20}
+#p10-root .p10-title{font-size:22px;order:-1;flex-basis:100%;padding:8px}
+#p10-root .p10-home,#p10-root .p10-audio{width:42px;height:42px;font-size:22px;border-radius:12px}
+#p10-root .p10-hearts{font-size:20px}
+#p10-root .p10-hud-pill{font-size:15px;padding:6px 9px}
+#p10-root .p10-main{display:flex;flex-direction:column;overflow:visible;gap:9px;padding:10px;background-position:center center}
+#p10-root .p10-left{order:0;padding:11px;display:grid;grid-template-columns:auto 1fr auto;gap:7px;max-height:none;text-align:left;align-items:center}
+#p10-root .p10-medal{font-size:16px;padding:8px;margin:0;white-space:nowrap}
+#p10-root .p10-left h2{font-size:21px;margin:0}
+#p10-root .p10-icon,#p10-root .p10-left p,#p10-root .p10-tip{display:none}
+#p10-root .p10-progress{font-size:20px;min-width:0;padding:4px 12px}
+#p10-root .p10-center{order:1;display:flex;gap:9px;min-height:0}
+#p10-root .p10-sky-title{font-size:15px;padding:8px 10px}
+#p10-root .p10-grid{display:flex;gap:12px;overflow-x:auto;overflow-y:visible;padding:8px 7px 14px;scroll-snap-type:x mandatory;scroll-padding:8px}
+#p10-root .p10-pillar{flex:0 0 150px;height:287px;scroll-snap-align:center;padding:5px 4px}
+#p10-root .p10-label{min-height:56px;font-size:20px}
+#p10-root .p10-question{height:120px;grid-template-columns:40px 1fr 40px;margin:5px 3px 5px;padding:5px;gap:3px;border-width:4px}
+#p10-root .p10-question p{font-size:20px}
+#p10-root .p10-question button{width:36px;height:36px;font-size:24px;border-width:2px}
+#p10-root .p10-right{order:2;align-self:stretch;max-height:none;padding:5px 12px}
+#p10-root .p10-rank-row{grid-template-columns:32px 1fr 65px;font-size:16px}
+#p10-root .p10-footer{position:sticky;bottom:0;flex-wrap:wrap;gap:4px;padding:7px 3px;z-index:10}
+#p10-root .p10-nav{font-size:13px;padding:7px 9px}
+#p10-root .p10-index{gap:2px}
+#p10-root .p10-index button{min-width:24px;width:24px;height:24px;font-size:12px;border-width:2px}
+}
+@media(prefers-reduced-motion:reduce){#p10-root .p10-pillar,#p10-root .p10-question button{transition:none!important;animation:none!important}}
+
+/* V11: greater source image resolution and rich color, loaded within the actual game. */
+#p10-root .p10-art{image-rendering:auto;filter:saturate(1.1) contrast(1.04);object-position:center center}
+#p10-root .p10-pillar:hover:not(:disabled) .p10-art{filter:saturate(1.24) contrast(1.06)}
+#p10-root .p10-main:after{opacity:.09}
+#p10-root .p10-pillar{box-shadow:0 0 0 3px #0d3d88,0 0 0 5px #ffd45b,0 10px 19px #0008,inset 0 0 0 2px #ffe69b}
+#p10-root .p10-label{background:linear-gradient(180deg,#fff9de,#f8da8b 85%,#d49a35)}

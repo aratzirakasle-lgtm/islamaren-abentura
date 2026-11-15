@@ -1,0 +1,131 @@
+
+/* ISLAMAREN ABENTURA V27 — artisanal courtyard. Encapsulated in the third challenge only. */
+#ag24-root[data-ar27="on"] .ag24-world{grid-template-rows:90px minmax(0,1fr) 51px}
+#ag24-root[data-ar27="on"] .ag24-rule,#ag24-root[data-ar27="on"] .ag24-tray{display:none!important}
+#ag24-root[data-ar27="on"] .ag24-scene{min-height:0;height:100%;overflow:hidden;background:linear-gradient(115deg,#d9ac6e,#efddaa 25%,#f7c37c);isolation:isolate}
+#ag24-root[data-ar27="on"] #ag24-targets{width:100%;height:100%;position:relative}
+#ag24-root[data-ar27="on"] .ag24-nav{background:linear-gradient(160deg,#082a69,#0b559f);border-top:4px double #faca51;position:relative;z-index:3}
+#ag24-root[data-ar27="on"] .ag24-feedback{bottom:105px;z-index:18;left:30%;right:12%;font-size:16px}
+#ag24-root .ar27-stage{position:relative;display:grid;grid-template-columns:238px minmax(0,1fr);gap:11px;width:100%;height:100%;padding:7px 9px 8px;overflow:hidden;background:linear-gradient(90deg,#48250f44,#0000 15%),var(--ar27-patio) center/cover no-repeat}
+#ag24-root .ar27-side{position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;padding:19px 13px;background:radial-gradient(ellipse at 40% 22%,#fff7d9,#e9bc7b 75%,#b7793a);border:7px ridge #f5c24c;border-radius:90px 90px 25px 25px/70px 70px 20px 20px;box-shadow:inset 0 0 0 3px #093f97,0 7px 13px #0009;color:#502a14;text-align:center;z-index:1}
+#ag24-root .ar27-side::before{content:'✵';font-size:39px;line-height:1;color:#edb644;text-shadow:0 1px 1px #795017;margin:2px 0 7px}
+#ag24-root .ar27-side-title{width:100%;border:5px ridge #f4c04d;border-radius:22px;background:linear-gradient(#0d64b1,#031e55);padding:11px 5px;color:#fff6dc;text-shadow:1px 3px #201020;font:bold clamp(21px,2vw,29px)/1 Georgia,serif;box-shadow:inset 0 0 0 2px #276dd0,0 4px 8px #71411e}
+#ag24-root .ar27-side-sub{border:4px ridge #dba348;border-radius:13px;background:#fff4d6;color:#7a2234;font:bold clamp(13px,1.2vw,19px)/1.13 Georgia,serif;margin:13px 0 15px;padding:8px 9px}
+#ag24-root .ar27-side-instruction{font:bold clamp(15px,1.3vw,19px)/1.28 Georgia,serif;margin:8px 0 auto;max-width:94%;color:#352111}
+#ag24-root .ar27-side-flower{font-size:30px;color:#9c6024;margin-bottom:15px}
+#ag24-root .ar27-progress{width:112px;height:105px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(ellipse,#145db5,#041b50);border:8px ridge #fac653;border-radius:50%;box-shadow:0 6px 13px #0009,0 0 0 2px #fff1ab;color:#ffefbc;font:bold 37px Georgia,serif;text-shadow:0 2px 3px #130a34}
+#ag24-root .ar27-progress small{font-size:11px;line-height:1.05;margin-top:3px;color:#fff8dc}
+#ag24-root .ar27-right{position:relative;display:grid;grid-template-rows:minmax(215px,1.35fr) minmax(205px,1.02fr) 63px;gap:8px;min-width:0;min-height:0}
+#ag24-root .ar27-workshops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;min-width:0;min-height:0}
+#ag24-root .ar27-workshop{position:relative;min-width:0;min-height:0;overflow:hidden;display:grid;grid-template-rows:56px minmax(0,1fr);border:6px ridge #fcd25d;border-radius:80px 80px 23px 23px/58px 58px 19px 19px;background:#113e79;box-shadow:0 8px 12px #04163ba8, inset 0 0 0 3px #0b4d97;transition:box-shadow .17s,filter .17s,transform .17s}
+#ag24-root .ar27-workshop::before{content:'✦';pointer-events:none;position:absolute;left:50%;top:2px;transform:translateX(-50%);color:#ffd967;text-shadow:0 0 8px #ffe081;font-size:16px;z-index:2}
+#ag24-root .ar27-workshop.active{filter:brightness(1.05);box-shadow:0 0 0 3px #fff5a4,0 0 23px #ffff70,0 7px 15px #0009;transform:translateY(-2px)}
+#ag24-root .ar27-workshop.done{border-color:#86e68a;box-shadow:0 0 0 3px #70df81,0 0 17px #4eff70,0 8px 13px #0008}
+#ag24-root .ar27-workshop-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:17px 11px 5px;border-radius:44px 44px 15px 15px;background:linear-gradient(145deg,#fff7d9,#edc083 90%);border-bottom:5px double #d69b3f;text-align:center;color:#5b2230;font:bold clamp(19px,2.05vw,30px)/1.02 Georgia,serif;text-shadow:0 1px #fff;box-shadow:0 2px 9px #000a}
+#ag24-root .ar27-workshop-img{width:100%;height:100%;object-fit:cover;object-position:center 39%;min-height:0;filter:saturate(1.15) contrast(1.035);pointer-events:none}
+#ag24-root .ar27-workshop[data-ar-ws="metalgintza"] .ar27-workshop-img{object-position:center 42%}
+#ag24-root .ar27-ws-button{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:62px;height:53px;border-radius:50%;border:5px ridge #ffe36e;background:linear-gradient(#1cfa60,#07842c 75%);color:#fffdf0;text-shadow:0 2px #133a15;font:bold 32px/1 Georgia,serif;box-shadow:0 0 0 3px #174571,0 0 14px #ffe655,0 6px 9px #000a;z-index:3;transition:transform .12s}
+#ag24-root .ar27-ws-button:hover{transform:translateX(-50%) scale(1.09)}
+#ag24-root .ar27-ws-button:disabled{opacity:1;background:linear-gradient(#7cf095,#268f47);cursor:default}
+#ag24-root .ar27-workbench{min-height:0;min-width:0;display:flex;flex-direction:column;background:linear-gradient(155deg,#f8dda5ec,#ffe8bcee 35%,#d49861ee);border:7px ridge #fed166;border-radius:20px;box-shadow:0 0 0 3px #12529c,0 7px 13px #0009,inset 0 0 0 3px #fff9d7;position:relative;overflow:hidden}
+#ag24-root .ar27-workbench::after{content:'◆';position:absolute;bottom:-12px;right:15px;color:#bc7e37;font-size:80px;opacity:.14;pointer-events:none}
+#ag24-root .ar27-workbench-head{flex:none;min-height:42px;padding:5px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(105deg,#043473,#1769ae 70%,#063677);border-bottom:5px ridge #e5b046;color:#fff4c6;font:bold clamp(16px,1.4vw,23px) Georgia,serif;text-shadow:0 2px #201333}
+#ag24-root .ar27-workbench-head small{font:700 clamp(11px,1.0vw,15px) Arial,sans-serif;color:#fff6dd}
+#ag24-root .ar27-workbench-body{padding:9px 12px;flex:1 1 auto;min-height:0;overflow:auto;position:relative;z-index:1}
+#ag24-root .ar27-empty{height:100%;min-height:110px;display:grid;place-items:center;gap:6px;color:#4f2e2e;text-align:center;font:bold clamp(17px,1.6vw,24px) Georgia,serif}
+#ag24-root .ar27-empty .ar27-palm{font-size:48px;color:#b68222;line-height:1}
+#ag24-root .ar27-twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:100%;min-height:0}
+#ag24-root .ar27-product-target{position:relative;min-width:0;min-height:100px;display:grid;grid-template-columns:124px minmax(0,1fr);align-items:center;gap:10px;padding:8px;border:4px ridge #e9b54d;border-radius:15px;background:linear-gradient(#fff4d5,#edbf84);box-shadow:0 4px 9px #0005;color:#173a6d}
+#ag24-root .ar27-product-target:disabled{cursor:default;background:linear-gradient(#e5ffe5,#c8dfb5);border-color:#36b85d}
+#ag24-root .ar27-product-target.selected{box-shadow:0 0 0 4px #7cddff,0 0 16px #54d2ff}
+#ag24-root .ar27-product-target img{width:124px;height:92px;object-fit:cover;border:3px ridge #f6d06b;border-radius:10px}
+#ag24-root .ar27-target-answer{font:bold clamp(13px,1.2vw,19px)/1.15 Georgia,serif;color:#142f63;text-align:center;overflow-wrap:anywhere}
+#ag24-root .ar27-text-cards{display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:9px}
+#ag24-root .ar27-text-card{border:4px ridge #f1c45b;background:linear-gradient(#fff5db,#edca91);border-radius:15px;color:#0e3375;padding:10px 13px;max-width:48%;min-height:49px;font:bold clamp(13px,1.15vw,18px) Georgia,serif;box-shadow:0 4px 7px #0005}
+#ag24-root .ar27-text-card.selected{border-color:#8ccfff;box-shadow:0 0 0 3px #3dbfff,0 0 17px #2fbbff;transform:translateY(-2px)}
+#ag24-root .ar27-text-card.done{background:#c7ebc3;border-color:#20b359}
+#ag24-root .ar27-pieces{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;min-width:0;height:100%;align-content:start}
+#ag24-root .ar27-piece{position:relative;min-width:0;min-height:106px;display:flex;flex-direction:column;gap:3px;align-items:stretch;padding:4px;border:4px ridge #ebbb63;border-radius:13px;background:#fce5bf;box-shadow:0 3px 8px #0006;transition:box-shadow .12s,transform .12s}
+#ag24-root .ar27-piece:hover{transform:translateY(-1px)}
+#ag24-root .ar27-piece img{width:100%;height:91px;object-fit:cover;border-radius:8px}
+#ag24-root .ar27-piece-index{position:absolute;left:6px;top:5px;border:2px solid #fad86c;border-radius:50%;background:#093f84;color:#fff5c5;padding:2px 6px;font:bold 14px Arial;box-shadow:0 2px 5px #0008}
+#ag24-root .ar27-piece.selected{border-color:#50c4ff;box-shadow:0 0 0 3px #38afff,0 0 12px #2fd4ff}
+#ag24-root .ar27-piece.done{border-color:#24c35d;box-shadow:0 0 0 3px #84e879;filter:saturate(1.2)}
+#ag24-root .ar27-piece-check{position:absolute;right:6px;top:6px;background:#08702e;border:2px ridge #fae366;border-radius:99px;color:white;font:bold 19px Arial;padding:0px 5px}
+#ag24-root .ar27-class-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;height:100%;min-width:0}
+#ag24-root .ar27-class-card{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;border:4px ridge #ecc06f;border-radius:12px;background:#fff2cf;padding:5px;box-shadow:0 3px 8px #0005;overflow:hidden}
+#ag24-root .ar27-class-card.done{border-color:#29b85b;background:#e2ffda}
+#ag24-root .ar27-class-card>img{height:77px;max-height:45%;width:100%;object-fit:cover;border-radius:8px}
+#ag24-root .ar27-class-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;width:100%;margin:auto 0 0}
+#ag24-root .ar27-class-choice{min-width:0;border:3px ridge #d3a448;border-radius:10px;background:linear-gradient(#fff3cf,#dfbc86);color:#153365;font:bold clamp(10px,.93vw,15px) Georgia,serif;padding:6px 2px}
+#ag24-root .ar27-class-choice.picked{background:linear-gradient(#51d9ff,#178ec8);border-color:#fff8b9;color:white;box-shadow:0 0 10px #43bbff}
+#ag24-root .ar27-class-card.done .ar27-class-choice.picked{background:linear-gradient(#32c765,#18833f)}
+#ag24-root .ar27-actions{display:flex;gap:12px;align-items:center;justify-content:center;min-width:0}
+#ag24-root .ar27-verify,#ag24-root .ar27-next{width:min(430px,74%);height:56px;flex:none;border:6px ridge #f7c653;border-radius:34px;background:linear-gradient(155deg,#2afc4e,#0b9b32 70%,#006b2c);color:#fffbdc;font:900 clamp(24px,2.4vw,37px)/1 Georgia,serif;text-shadow:0 3px 3px #074319;box-shadow:0 0 0 2px #0b529d,0 0 21px #f3ef67,0 7px 12px #0009}
+#ag24-root .ar27-verify:hover,#ag24-root .ar27-next:hover{filter:brightness(1.12)}
+#ag24-root .ar27-done-message{color:#fffbea;text-align:center;font:bold clamp(17px,1.9vw,25px) Georgia,serif;text-shadow:0 2px 2px #15224f;background:#08427cb8;border:3px ridge #f5cc64;border-radius:17px;padding:7px 14px}
+#ag24-root .ar27-note{font:700 13px Arial,sans-serif;color:#6f431f;white-space:normal}
+#ag24-root .ar27-product-target:focus-visible,#ag24-root .ar27-workshop button:focus-visible,#ag24-root .ar27-text-card:focus-visible{outline:4px solid #55d5ff;outline-offset:3px}
+@media(max-width:1180px){
+ #ag24-root[data-ar27="on"] .ag24-world{height:auto;min-height:100dvh;max-height:none;grid-template-rows:auto minmax(0,1fr) auto;overflow:visible}
+ #ag24-root[data-ar27="on"] .ag24-scene{height:auto;min-height:760px;overflow:visible;aspect-ratio:auto}
+ #ag24-root .ar27-stage{height:auto;min-height:760px;grid-template-columns:195px minmax(0,1fr)}
+ #ag24-root .ar27-side{border-radius:45px 45px 16px 16px}
+ #ag24-root .ar27-right{grid-template-rows:340px minmax(260px,auto) 65px}
+ #ag24-root .ar27-workshop{grid-template-rows:55px minmax(0,1fr)}
+ #ag24-root .ar27-workshop-top{font-size:clamp(17px,2.0vw,25px)}
+ #ag24-root .ar27-piece img{height:74px}
+ #ag24-root .ar27-class-card>img{height:84px}
+}
+@media(max-width:740px){
+ #ag24-root[data-ar27="on"] .ag24-world{display:grid;grid-template-rows:auto auto auto}
+ #ag24-root[data-ar27="on"] .ag24-scene{height:auto;min-height:0;width:100%;background-size:cover}
+ #ag24-root .ar27-stage{grid-template-columns:1fr;padding:6px;min-height:0;overflow:visible;gap:8px}
+ #ag24-root .ar27-side{border-radius:16px;min-height:103px;padding:8px;display:grid;grid-template-columns:1fr 70px;grid-template-rows:auto auto;align-items:center;gap:5px;text-align:left;border-width:4px}
+ #ag24-root .ar27-side::before,#ag24-root .ar27-side-flower,#ag24-root .ar27-side-sub{display:none}
+ #ag24-root .ar27-side-title{font-size:18px;padding:7px}
+ #ag24-root .ar27-side-instruction{grid-column:1;grid-row:2;font-size:12px;margin:1px;max-width:100%}
+ #ag24-root .ar27-progress{grid-column:2;grid-row:1/3;width:70px;height:70px;font-size:24px;border-width:5px}
+ #ag24-root .ar27-progress small{font-size:8px}
+ #ag24-root .ar27-right{grid-template-rows:auto auto auto;gap:9px}
+ #ag24-root .ar27-workshops{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #ag24-root .ar27-workshop{height:198px;border-width:4px;grid-template-rows:39px minmax(0,1fr);border-radius:24px 24px 12px 12px}
+ #ag24-root .ar27-workshop:last-child{grid-column:span 2;height:164px}
+ #ag24-root .ar27-workshop-top{font-size:19px;padding:9px 3px 4px;border-radius:16px}
+ #ag24-root .ar27-ws-button{width:46px;height:42px;font-size:24px;border-width:3px;bottom:4px}
+ #ag24-root .ar27-workbench{height:auto;min-height:345px;border-width:5px}
+ #ag24-root .ar27-workbench-head{flex-wrap:wrap;min-height:51px;padding:7px;font-size:16px}
+ #ag24-root .ar27-workbench-head small{font-size:11px}
+ #ag24-root .ar27-workbench-body{padding:8px;overflow:visible}
+ #ag24-root .ar27-twocol{grid-template-columns:repeat(2,minmax(0,1fr));height:auto}
+ #ag24-root .ar27-product-target{display:flex;flex-direction:column;justify-content:center;min-height:168px;gap:5px;padding:5px}
+ #ag24-root .ar27-product-target img{height:95px;width:100%;object-fit:cover}
+ #ag24-root .ar27-target-answer{font-size:12px}
+ #ag24-root .ar27-text-card{max-width:none;flex:1 1 43%;font-size:12px;min-height:43px;padding:6px}
+ #ag24-root .ar27-pieces{grid-template-columns:repeat(2,minmax(0,1fr));height:auto}
+ #ag24-root .ar27-piece img{height:110px}
+ #ag24-root .ar27-class-grid{grid-template-columns:repeat(2,minmax(0,1fr));height:auto}
+ #ag24-root .ar27-class-card>img{height:110px;max-height:none}
+ #ag24-root .ar27-class-choice{font-size:12px}
+ #ag24-root .ar27-verify,#ag24-root .ar27-next{height:57px;width:94%;font-size:26px}
+ #ag24-root .ar27-actions{min-height:65px}
+ #ag24-root[data-ar27="on"] .ag24-nav{font-size:12px;padding:8px 5px}
+ #ag24-root[data-ar27="on"] .ag24-feedback{position:fixed;left:6%;right:6%;bottom:7%;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){#ag24-root .ar27-workshop,#ag24-root .ar27-ws-button{transition:none!important;animation:none!important}}
+
+/* 27.1: better workbench density and textile placement */
+#ag24-root .ar27-workbench-body:has(.ar27-twocol){display:flex;flex-direction:column}
+#ag24-root .ar27-twocol{height:63%;flex:1 1 62%;min-height:0}
+#ag24-root .ar27-product-target{min-height:0}
+#ag24-root .ar27-text-cards{flex:0 0 auto;margin-top:7px}
+#ag24-root .ar27-pieces{align-items:center}
+#ag24-root .ar27-piece img{height:146px}
+@media(max-width:1180px){#ag24-root .ar27-piece img{height:120px}}
+@media(max-width:740px){#ag24-root .ar27-twocol{height:auto;min-height:170px}#ag24-root .ar27-piece img{height:110px}}
+/* Final art-to-control balance: products remain visually prominent at desktop size. */
+#ag24-root .ar27-product-target{grid-template-columns:minmax(120px,41%) minmax(0,1fr)}
+#ag24-root .ar27-product-target img{width:100%;height:128px}
+#ag24-root .ar27-class-card>img{height:122px;max-height:none}
+@media(max-width:740px){#ag24-root .ar27-product-target{display:flex;flex-direction:column}#ag24-root .ar27-product-target img{height:102px}#ag24-root .ar27-class-card>img{height:110px}}
+
