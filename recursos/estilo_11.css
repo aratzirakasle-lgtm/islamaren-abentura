@@ -1,0 +1,170 @@
+
+/* V36.7 · Sistema visual común de navegación y acciones.
+   Solo modifica la presentación de los controles; no altera posiciones,
+   tableros, marcadores, reglas de juego ni ilustraciones. */
+:root {
+  --ia37-royal:#073a81;
+  --ia37-deep:#062451;
+  --ia37-gold:#efbc58;
+  --ia37-cream:#fff4ce;
+  --ia37-green:#12823b;
+  --ia37-green-dark:#075a29;
+  --ia37-shadow:0 3px 0 #784711,0 6px 12px #06182a88,inset 0 2px 7px #fff9d950;
+}
+/* Inicio / sonido: un único medallón azul y dorado en los diez juegos. */
+#arabia-v8 .v8-home,#arabia-v8 .v8-sound,
+#tl9-root .tl9-square.tl9-royal,#tl9-root .tl9-sound,
+#p10-root .p10-home,#p10-root .p10-audio,
+#hd12-root .hd-home,#hd12-root .hd-sound,
+#cv14-root .cv14-home,#cv14-root .cv14-sound,
+#social-v17-root .s17-home,#social-v17-root .s17-sound,
+#city20-root .c20-top-button,
+#ag24-root .ag24-logo,#ag24-root .ag24-sound,
+#art30-root .a30-ornbtn,
+#od-v33 #od-home,#od-v33 #od-sound {
+  width:54px!important;height:54px!important;min-width:54px!important;
+  min-height:54px!important;max-width:54px!important;max-height:54px!important;
+  flex:0 0 54px!important;padding:0!important;
+  border:3px solid var(--ia37-gold)!important;border-radius:50%!important;
+  background:radial-gradient(circle at 35% 20%,#298de0 0%,#105eaa 39%,#082957 92%)!important;
+  box-shadow:inset 0 0 0 2px #b4dcf4a1,inset 0 -3px 8px #001b3e,0 3px 0 #704013,0 6px 14px #00152f9b!important;
+  color:#fff6dc!important;text-shadow:0 2px 2px #04172b!important;
+  font:800 26px/1 Georgia,'Trebuchet MS',serif!important;
+  display:grid!important;place-items:center!important;
+  transition:filter .16s ease,box-shadow .16s ease,transform .16s ease!important;
+  -webkit-tap-highlight-color:transparent;
+}
+/* Verde: comenzar, responder, comprobar, continuar. */
+#arabia-v8 .v8-primary,
+#tl9-root #tl9-verify,#tl9-root .tl9-modal button:not(.secondary),
+#p10-root .p10-primary,
+#hd12-root .hd-primary,
+#cv14-root .cv14-verify,#cv14-root .cv14-primary,
+#social-v17-root .s17-act,#social-v17-root #s17-start,
+#city20-root .c20-verify,#city20-root #c20-start,
+#ag24-root .ag24-verify,#ag24-root .ag24-primary,
+#art30-root .a30-maincta,
+#od-v33 .od-action.od-green,#od-v33 .od-primary,#od-v33 .od-dialog button.od-primary {
+  background:linear-gradient(180deg,#28c85a 0%,#0d953e 36%,#075d2c 100%)!important;
+  color:#fff9dd!important;border:3px solid #f2c364!important;
+  border-radius:17px!important;
+  box-shadow:inset 0 0 0 2px #cbf4ab91,inset 0 2px 7px #dfffad77,0 4px 0 #735017,0 7px 15px #051e2480!important;
+  text-shadow:0 2px 2px #064322!important;
+  font-family:Georgia,'Trebuchet MS',serif!important;
+  font-size:clamp(16px,1.65vw,25px)!important;
+  font-weight:800!important;
+  transition:filter .16s ease,box-shadow .16s ease,transform .16s ease!important;
+}
+/* Azul: volver, navegar, deshacer, consultar. */
+#arabia-v8 .v8-secondary,
+#tl9-root .tl9-navbtn,#tl9-root #tl9-removecard,#tl9-root .tl9-modal button.secondary,
+#p10-root .p10-secondary,#p10-root .p10-nav,
+#hd12-root .hd-secondary,#hd12-root .hd-nav,#hd12-root .hd-zoom,
+#cv14-root .cv14-secondary,#cv14-root .cv14-nav-btn,#cv14-root .cv14-clear,
+#social-v17-root .s17-navbtn,
+#city20-root .c20-nav,#city20-root .c20-help,#city20-root #c20-back,
+#ag24-root .ag24-secondary,
+#art30-root .a30-quietcta,#art30-root .a30-footer-nav button,
+#od-v33 .od-action:not(.od-green):not(.od-warm),#od-v33 #od-intro-home,#od-v33 #od-result-home {
+  background:linear-gradient(180deg,#288fce 0%,#0c5da5 36%,#07336e 100%)!important;
+  color:#fff5db!important;border:3px solid #eabb60!important;
+  border-radius:15px!important;
+  box-shadow:inset 0 0 0 2px #c7e5ef69,0 3px 0 #704118,0 6px 13px #07172d8a!important;
+  text-shadow:0 2px 2px #071a34!important;
+  font-family:Georgia,'Trebuchet MS',serif!important;
+  font-weight:750!important;
+  transition:filter .16s ease,box-shadow .16s ease,transform .16s ease!important;
+}
+/* Dorado: pistas y acciones auxiliares especiales. */
+#od-v33 .od-action.od-warm {
+  background:linear-gradient(#ffe4a0,#e8a94c 53%,#a96124)!important;
+  color:#4a220b!important;border:3px solid #fce7a1!important;
+  border-radius:15px!important;
+  box-shadow:inset 0 0 0 2px #fff4c6a0,0 3px 0 #765022,0 5px 12px #111a2790!important;
+  text-shadow:0 1px 0 #fff1c4!important;
+}
+/* Tamaños táctiles, contraste de estados, foco y respuesta perceptible. */
+:is(#arabia-v8,#tl9-root,#p10-root,#hd12-root,#cv14-root,#social-v17-root,#city20-root,#ag24-root,#art30-root,#od-v33)
+:is(button,[role="button"]):focus-visible {
+  outline:3px solid #fff39b!important;outline-offset:3px!important;
+  box-shadow:0 0 0 6px #08569dc0,0 4px 15px #0008!important;
+}
+:is(#arabia-v8,#tl9-root,#p10-root,#hd12-root,#cv14-root,#social-v17-root,#city20-root,#ag24-root,#art30-root,#od-v33)
+:is(button,[role="button"]):disabled {
+  cursor:not-allowed!important;opacity:.56!important;filter:grayscale(.35)!important;
+}
+@media(hover:hover){
+  #arabia-v8 .v8-home:hover,#arabia-v8 .v8-sound:hover,
+  #tl9-root .tl9-square.tl9-royal:hover,#tl9-root .tl9-sound:hover,
+  #p10-root .p10-home:hover,#p10-root .p10-audio:hover,
+  #hd12-root .hd-home:hover,#hd12-root .hd-sound:hover,
+  #cv14-root .cv14-home:hover,#cv14-root .cv14-sound:hover,
+  #social-v17-root .s17-home:hover,#social-v17-root .s17-sound:hover,
+  #city20-root .c20-top-button:hover,
+  #ag24-root .ag24-logo:hover,#ag24-root .ag24-sound:hover,
+  #art30-root .a30-ornbtn:hover,
+  #od-v33 #od-home:hover,#od-v33 #od-sound:hover {
+    filter:brightness(1.17)!important;transform:translateY(-1px)!important;
+  }
+}
+/* Los botones superiores no deben eclipsar título ni indicadores en pantallas pequeñas. */
+@media(max-width:680px){
+  #arabia-v8 .v8-home,#arabia-v8 .v8-sound,
+  #tl9-root .tl9-square.tl9-royal,#tl9-root .tl9-sound,
+  #p10-root .p10-home,#p10-root .p10-audio,
+  #hd12-root .hd-home,#hd12-root .hd-sound,
+  #cv14-root .cv14-home,#cv14-root .cv14-sound,
+  #social-v17-root .s17-home,#social-v17-root .s17-sound,
+  #city20-root .c20-top-button,
+  #ag24-root .ag24-logo,#ag24-root .ag24-sound,
+  #art30-root .a30-ornbtn,
+  #od-v33 #od-home,#od-v33 #od-sound {
+    width:46px!important;height:46px!important;min-width:46px!important;
+    min-height:46px!important;max-width:46px!important;max-height:46px!important;
+    flex-basis:46px!important;font-size:22px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #arabia-v8 button,#tl9-root button,#p10-root button,#hd12-root button,
+  #cv14-root button,#social-v17-root button,#city20-root button,
+  #ag24-root button,#art30-root button,#od-v33 button{transition:none!important}
+}
+/* Papiro y marco comunes para los diálogos de entrada, sin sustituir sus ilustraciones. */
+#arabia-v8 .v8-intro-card,
+#tl9-root .tl9-modal,
+#p10-root .p10-dialog,
+#hd12-root .hd-modal-card,
+#cv14-root .cv14-modal,
+#social-v17-root .s17-modal,
+#city20-root .c20-modal,
+#ag24-root .ag24-modal,
+#art30-root .a30-dialog,
+#od-v33 .od-dialog {
+  border-color:#eac06b!important;
+  border-radius:23px!important;
+  box-shadow:0 0 0 3px #104481,0 12px 34px #001630b0,inset 0 2px 8px #fff6d977!important;
+}
+/* El diálogo del juego 6 heredaba 598 px de anchura en móviles de 390 px:
+   impide que el nombre y el botón Jugar desaparezcan por el borde derecho. */
+#social-v17-root .s17-modal {
+  width:min(650px,calc(100vw - 26px))!important;
+  max-width:calc(100vw - 26px)!important;
+  min-width:0!important;
+}
+@media(max-width:680px){
+  #social-v17-root .s17-modal {padding:17px 15px!important;max-height:calc(100dvh - 20px);overflow-y:auto;}
+  #cv14-root .cv14-modal {max-width:calc(100vw - 24px)!important;box-sizing:border-box!important;}
+  #city20-root .c20-modal {max-width:calc(100vw - 24px)!important;box-sizing:border-box!important;}
+}
+/* Acceso de regreso en el diálogo inicial del juego 6; antes quedaba bloqueado
+   tras la capa modal y no podía pulsarse el icono de la cabecera. */
+#social-v17-root #s17-intro-back {
+  display:inline-block;min-height:44px;margin:10px 0 0 9px;
+  padding:8px 16px;vertical-align:middle;font-size:16px;
+  background:linear-gradient(#258ed2,#06417c)!important;
+  border:3px solid #eabb60!important;border-radius:15px!important;
+  color:#fff5db!important;text-shadow:0 2px 2px #092143!important;
+  box-shadow:inset 0 0 0 2px #dbeafa6e,0 3px 0 #704118,0 6px 13px #07172d8a!important;
+  font-family:Georgia,'Trebuchet MS',serif;font-weight:800;
+}
+

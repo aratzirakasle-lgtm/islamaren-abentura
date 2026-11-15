@@ -1,0 +1,44 @@
+
+/* V26: only visual assets and LIVE arrows in Game 8, challenge 2. */
+#ag24-root[data-ir25="on"] .ir25-art{
+  image-rendering:auto;filter:saturate(1.06) contrast(1.035);
+}
+#ag24-root[data-ir25="on"] .ir25-circuit{
+  background-size:100% 100%;background-repeat:no-repeat;
+}
+#ag24-root[data-ir25="on"] .ir25-circuit-btn.ir26-circuit-arrow{
+  position:absolute;top:62.5%;left:50%;width:clamp(43px,4.1vw,64px);
+  min-width:0;height:clamp(43px,4.1vw,64px);transform:translate(-50%,-50%);
+  border-radius:50%;border:4px double #fff0a5;
+  background:radial-gradient(circle at 32% 22%,#3ceb9f 0%,#048e53 37%,#006939 72%,#034c2c 100%);
+  color:#fff;box-shadow:inset 0 0 0 2px #a86e19,inset 0 -6px 11px #00361a,
+    0 0 0 2px #a56e23,0 3px 12px #072b31b5;
+  font:bold clamp(25px,2vw,36px)/1 Georgia,serif;z-index:6;
+  display:flex;align-items:center;justify-content:center;
+  padding:0;cursor:pointer;transition:filter .16s,box-shadow .16s;
+}
+#ag24-root[data-ir25="on"] .ir26-arrow-symbol{filter:drop-shadow(0 2px 1px #044c2c);transform:translateX(1px)}
+#ag24-root[data-ir25="on"] .ir26-circuit-arrow.preview{opacity:1;cursor:default}
+#ag24-root[data-ir25="on"] .ir26-circuit-arrow:hover:not(:disabled),
+#ag24-root[data-ir25="on"] .ir26-circuit-arrow:focus-visible{
+ filter:brightness(1.24);box-shadow:inset 0 0 0 2px #a86e19,0 0 0 4px #d6f5ff,0 0 21px #83ffd0;
+}
+#ag24-root[data-ir25="on"] .ir26-circuit-arrow.placed:not(.correct){
+ background:radial-gradient(circle at 30% 25%,#61eab3,#079263 45%,#075d50 100%);color:white;
+ box-shadow:0 0 0 3px #6de1ff,0 0 12px #9af9ff;
+}
+#ag24-root[data-ir25="on"] .ir26-circuit-arrow.correct{
+ background:radial-gradient(circle at 30% 20%,#c1ff9f,#30b65a 47%,#0b6b2d 100%);
+ border-color:#f7eaa1;box-shadow:0 0 0 3px #7fffa4,0 0 22px #55ff80;
+}
+#ag24-root[data-ir25="on"] .ir26-arrow-label{
+ position:absolute;top:-27px;left:50%;transform:translateX(-50%);
+ background:#fff0bd;border:2px solid #c48a2a;border-radius:8px;
+ font:bold 11px Georgia,serif;color:#301c0a;white-space:nowrap;
+ padding:2px 5px;box-shadow:0 2px 6px #0009;pointer-events:none;
+}
+@media(max-width:650px){
+ #ag24-root[data-ir25="on"] .ir25-circuit{background-size:100% 100%}
+ #ag24-root[data-ir25="on"] .ir25-circuit-btn.ir26-circuit-arrow{width:36px;height:36px;font-size:21px;border-width:3px}
+ #ag24-root[data-ir25="on"] .ir26-arrow-label{font-size:9px;top:-25px;max-width:115px;text-overflow:ellipsis;overflow:hidden}
+}

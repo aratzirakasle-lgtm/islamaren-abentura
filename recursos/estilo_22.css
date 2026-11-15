@@ -1,0 +1,12 @@
+
+@media(max-width:650px){
+ #ag24-root[data-ir25="on"]{overflow-y:auto!important;overscroll-behavior:contain}
+ #ag24-root[data-ir25="on"] .ag24-world{
+   height:auto!important;max-height:none!important;min-height:100dvh!important;
+   grid-template-rows:auto 0 auto auto auto!important;overflow:visible!important;
+ }
+ #ag24-root[data-ir25="on"] .ag24-scene{
+   height:auto!important;min-height:0!important;overflow:visible!important;
+ }
+ #ag24-root[data-ir25="on"] .ir25-circuit{height:180px;min-height:180px}
+}
