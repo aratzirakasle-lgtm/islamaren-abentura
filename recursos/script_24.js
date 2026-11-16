@@ -99,6 +99,7 @@ function persistSession(s){const entries=readSessions();entries[s.code]=s;saveJS
 function clearSession(){
  const entries=readSessions();if(session)delete entries[session.code];saveJSON(SESSION_KEY,entries);
  session=null;roomSnapshot=null;retryQueue=[];activeGame='';
+ document.documentElement.classList.remove('v37-cloud-connected');
  configWarning();drawDock();drawJoin();
 }
 async function joinRoom(code,nickname,fromSaved=false){
@@ -183,26 +184,50 @@ async function fetchBoard(){if(!session||refreshBusy)return;
 function installRightRankStyle(){
   if(document.getElementById('v37-live-right-style'))return;
   const style=document.createElement('style');style.id='v37-live-right-style';
-  style.textContent='.v37-live-right{font-family:Trebuchet MS,Arial,sans-serif;min-width:0}.v37-right-heading{padding:8px 6px 6px;color:#176552;font-size:11px;font-weight:900;letter-spacing:.1px}.v37-right-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:7px;border-bottom:1px solid #b7ad8a66;padding:9px 5px;font-size:12px;color:#342a20}.v37-right-row.v37-mine{background:#e3f6e7}.v37-right-row .v37-rname{overflow-wrap:anywhere;min-width:0;font-weight:800}.v37-right-row .v37-rscore{font-variant-numeric:tabular-nums;font-weight:900;color:#315f44}.v37-right-row .v37-rpos{text-align:center}.v37-right-empty{padding:15px 7px;font-size:12px;line-height:1.5;color:#6c6051}.v37-right-hint{font-size:10px;color:#537965;padding:6px;line-height:1.4}';
+  style.textContent=
+    'html.v37-cloud-connected #aa-rank,html.v37-cloud-connected #v8-ranking,html.v37-cloud-connected #tl9-ranking,html.v37-cloud-connected #p10-ranking,html.v37-cloud-connected #hd-ranklist,html.v37-cloud-connected #cv14-rank-rows,html.v37-cloud-connected #s17-ranking,html.v37-cloud-connected #ranking-rows{display:none!important}'+
+    'html:not(.v37-cloud-connected) .v37-live-right-panel{display:none!important}'+
+    'html.v37-cloud-connected .v37-live-right-panel{display:block!important}'+
+    'html.v37-cloud-connected .v8-local-label,html.v37-cloud-connected .tl9-localnote,html.v37-cloud-connected .p10-rank-local,html.v37-cloud-connected .hd-rank-note,html.v37-cloud-connected .cv14-note,html.v37-cloud-connected #cv14-rank-note,html.v37-cloud-connected #rank-disclaimer,html.v37-cloud-connected .aa-footer>span{display:none!important}'+
+    '.v37-live-right-panel{font-family:Trebuchet MS,Arial,sans-serif;flex:1 1 auto;min-width:0;width:100%;max-height:380px;overflow-y:auto;overflow-x:hidden;box-sizing:border-box}'+
+    '.v37-right-heading{padding:8px 6px 6px;color:#176552;font-size:11px;font-weight:900;letter-spacing:.1px}'+
+    '.v37-right-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:7px;border-bottom:1px solid #b7ad8a66;padding:9px 5px;font-size:12px;color:#342a20}'+
+    '.v37-right-row.v37-mine{background:#e3f6e7}.v37-right-row .v37-rname{overflow-wrap:anywhere;min-width:0;font-weight:800}'+
+    '.v37-right-row .v37-rscore{font-variant-numeric:tabular-nums;font-weight:900;color:#315f44}.v37-right-row .v37-rpos{text-align:center}'+
+    '.v37-right-empty{padding:15px 7px;font-size:12px;line-height:1.5;color:#6c6051}'+
+    '.v37-right-hint{font-size:10px;color:#537965;padding:6px;line-height:1.4}';
   document.head.appendChild(style);
 }
 function renderRightRankings(){
-  if(!session||!roomSnapshot||!Array.isArray(roomSnapshot.students))return;
-  const panels=[['aa-rank','arabia','.aa-footer > span'],['v8-ranking','arabia','.v8-local-label'],['tl9-ranking','denbora','.tl9-localnote'],['p10-ranking','bost','.p10-rank-local'],['hd-ranklist','hedapena','.hd-rank-note'],['cv14-rank-rows','kalifaldi','.cv14-note'],['s17-ranking','gizartea',''],['ranking-rows',null,'#rank-disclaimer']];
-  for(const [id,fixedGame,noteSelector] of panels){
+  const connected=Boolean(session&&roomSnapshot&&Array.isArray(roomSnapshot.students));
+  document.documentElement.classList.toggle('v37-cloud-connected',connected);
+  if(!connected)return;
+  const panels=[['aa-rank','arabia'],['v8-ranking','arabia'],['tl9-ranking','denbora'],
+    ['p10-ranking','bost'],['hd-ranklist','hedapena'],['cv14-rank-rows','kalifaldi'],
+    ['s17-ranking','gizartea'],['ranking-rows',null]];
+  for(const [id,fixedGame] of panels){
     const el=document.getElementById(id);if(!el)continue;
     const game=fixedGame||activeGame;
     if(!GAME_SET.has(game))continue;
-    const rows=roomSnapshot.students.filter(s=>s&&s.scores&&Object.prototype.hasOwnProperty.call(s.scores,game)&&s.scores[game]!==null&&s.scores[game]!==undefined&&Number.isFinite(Number(s.scores[game])))
+    const rows=roomSnapshot.students.filter(s=>s&&s.scores&&
+      Object.prototype.hasOwnProperty.call(s.scores,game)&&
+      s.scores[game]!==null&&s.scores[game]!==undefined&&Number.isFinite(Number(s.scores[game])))
       .map(s=>({nickname:String(s.nickname||''),score:Number(s.scores[game])}))
       .sort((a,b)=>b.score-a.score||a.nickname.localeCompare(b.nickname,'eu')).slice(0,10);
     const heading='<div class="v37-right-heading">📡 '+E(session.room)+' · ZUZENEAN</div>';
-    const body=rows.length?rows.map((r,i)=>'<div class="v37-right-row '+(r.nickname===session.nickname?'v37-mine':'')+'"><span class="v37-rpos">'+(['🥇','🥈','🥉'][i]||(i+1)+'.')+'</span><span class="v37-rname">'+E(r.nickname)+'</span><span class="v37-rscore">'+format(r.score)+'</span></div>').join(''):'<div class="v37-right-empty">Oraindik ez dago amaitutako partidarik ikasgela honetan.</div>';
+    const body=rows.length?rows.map((r,i)=>'<div class="v37-right-row '+
+      (r.nickname===session.nickname?'v37-mine':'')+'"><span class="v37-rpos">'+
+      (['🥇','🥈','🥉'][i]||(i+1)+'.')+'</span><span class="v37-rname">'+
+      E(r.nickname)+'</span><span class="v37-rscore">'+format(r.score)+'</span></div>').join(''):
+      '<div class="v37-right-empty">Oraindik ez dago amaitutako partidarik ikasgela honetan.</div>';
     const html=heading+body+'<div class="v37-right-hint">Amaitutako jokoak bakarrik · Hodeian gordetako markak</div>';
-    if(el.innerHTML!==html){el.classList.add('v37-live-right');el.innerHTML=html;}
-    const note=noteSelector?document.querySelector(noteSelector):null;
-    if(note&&note.textContent!=='Ikasgelako sailkapen partekatua')note.textContent='Ikasgelako sailkapen partekatua';
-    if(id==='cv14-rank-rows'){const other=document.getElementById('cv14-rank-note');if(other)other.hidden=true;}
+    const hostId='v37-side-'+id;
+    let host=document.getElementById(hostId);
+    if(!host){host=document.createElement('div');host.id=hostId;host.className='v37-live-right-panel';}
+    if(host.parentElement!==el.parentElement||host.previousElementSibling!==el){
+      el.insertAdjacentElement('afterend',host);
+    }
+    if(host.innerHTML!==html)host.innerHTML=html;
   }
 }
 function visibleText(selector){const e=document.querySelector(selector);if(!e||e.closest('[hidden]')||e.getClientRects().length===0)return '';
