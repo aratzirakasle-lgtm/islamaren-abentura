@@ -145,26 +145,36 @@ function renderBoard(){
  if(!session){panel.innerHTML='<p>Sartu lehenik ikasgelaren kodearekin.</p>';return}
  if(!roomSnapshot){panel.innerHTML='<p>Elkarbanatutako puntuazioak kargatzen…</p>';return}
  const students=(roomSnapshot.students||[]).slice();
- const measure=s=>selectedGame?Number(s.scores?.[selectedGame]||0):Number(s.total||0);
+ const measure=student=>selectedGame?Number(student.scores?.[selectedGame]||0):Number(student.total||0);
  const maximum=selectedGame?1000:10000;
- students.sort((a,b)=>measure(b)-measure(a)||Number(b.completed)-Number(a.completed)||a.nickname.localeCompare(b.nickname,'eu'));
- const own=students.find(s=>String(s.nickname).toLocaleLowerCase('eu')===session.nickname.toLocaleLowerCase('eu'));
+ const isMine=student=>String(student.nickname||'').normalize('NFC').toLocaleLowerCase('eu')===session.nickname.normalize('NFC').toLocaleLowerCase('eu');
+ const eligible=students.filter(student=>selectedGame?
+   student.scores?.[selectedGame]!=null&&Number.isFinite(Number(student.scores[selectedGame])):
+   Number(student.completed||0)>0);
+ eligible.sort((a,b)=>measure(b)-measure(a)||Number(b.completed||0)-Number(a.completed||0)||String(a.nickname||'').localeCompare(String(b.nickname||''),'eu'));
+ const top10=eligible.slice(0,10);
+ const mine=students.find(isMine);
+ const myRank=eligible.findIndex(isMine);
  const medal=['🥇','🥈','🥉'];
- const podium=students.slice(0,3).map((s,i)=>`<div class="v37-podium-item p${i+1}"><span class="v37-medal">${medal[i]}</span><strong>${E(s.nickname)}</strong><b>${format(measure(s))} <small>/ ${format(maximum)}</small></b><small>${s.completed}/10 joko</small></div>`).join('');
- let rows=students.map((s,i)=>{
-  const live=s.activity&&s.activity.status==='playing'&&Date.now()-Date.parse(s.activity.updated_at)<46000;
-  return `<button type="button" class="v37-leader-row ${s.nickname===session.nickname?'mine':''}" data-v37-student="${E(s.id)}"><span>${i+1}.</span><strong>${E(s.nickname)}</strong><span>${s.completed}/10</span><b>${format(measure(s))}</b>${live?'<em>● Jokatzen</em>':''}</button>`;
- }).join('');
- const current=students.find(s=>s.id===selectedStudent)||own;
- const perGame=current?GAMES.map(([id,name],i)=>{
-  const score=current.scores?.[id];const pending=score==null;
-  const active=current.activity?.game===id&&current.activity?.status==='playing';
+ const podium=top10.slice(0,3).map((student,i)=>`<div class="v37-podium-item p${i+1}"><span class="v37-medal">${medal[i]}</span><strong>${E(student.nickname)}</strong><b>${format(measure(student))} <small>/ ${format(maximum)}</small></b><small>${Number(student.completed||0)}/10 joko</small></div>`).join('');
+ const rows=top10.map((student,i)=>`<div class="v37-leader-row ${isMine(student)?'mine':''}" role="listitem"><span>${i+1}.</span><strong>${E(student.nickname)}</strong><span>${Number(student.completed||0)}/10</span><b>${format(measure(student))}</b></div>`).join('');
+ const ownOutside=mine&&myRank>=10?
+   `<div class="v37-my-own-position"><strong>👤 ZURE POSTUA · TOP 10etik kanpo</strong><div class="v37-leader-row mine"><span>${myRank+1}.</span><strong>${E(mine.nickname)}</strong><span>${Number(mine.completed||0)}/10</span><b>${format(measure(mine))}</b></div></div>`:
+   mine&&myRank<0?'<p class="v37-my-own-position">👤 Oraindik ez duzu sailkapen honetako markarik.</p>':'';
+ const perGame=mine?GAMES.map(([id,name],i)=>{
+  const score=mine.scores?.[id],pending=score==null;
+  const active=mine.activity?.game===id&&mine.activity?.status==='playing';
   const v=pending?0:Number(score)||0;
-  return `<div class="v37-score-box"><span>${i+1}. ${E(name)}</span><strong>${pending?'—':format(v)}</strong><div class="v37-bar"><i style="width:${Math.min(100,Math.max(0,v/10))}%"></i></div>${active?'<small>Jokatzen · '+format(current.activity.partial||0)+' puntu behin-behineko</small>':''}</div>`;
+  return `<div class="v37-score-box"><span>${i+1}. ${E(name)}</span><strong>${pending?'—':format(v)}</strong><div class="v37-bar"><i style="width:${Math.min(100,Math.max(0,v/10))}%"></i></div>${active?'<small>Jokatzen · '+format(mine.activity.partial||0)+' puntu behin-behineko</small>':''}</div>`;
  }).join(''):'';
- panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>${students.length} jokalari · Eguneratze automatikoa</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${students.length?`<div class="v37-podium">${podium}</div><div class="v37-leaders">${rows}</div><div class="v37-student-detail"><h3>${E(current?.nickname||'')} · 10 jokoak</h3><div class="v37-score-grid">${perGame}</div></div>`:'<p class="v37-empty">Oraindik ez dago ikaslerik. Izan zaitez lehena!</p>'}`;
+ panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>🏆 TOP 10</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${top10.length?`<div class="v37-podium">${podium}</div><div class="v37-leaders" role="list">${rows}</div>`:'<p class="v37-empty">Oraindik ez dago amaitutako markarik.</p>'}${ownOutside}${mine?`<div class="v37-student-detail"><h3>👤 ZURE PUNTUAZIOAK · ${E(mine.nickname)}</h3><div class="v37-score-grid">${perGame}</div></div>`:'<p class="v37-empty">Zure puntuazioak kargatzen…</p>'}`;
  panel.querySelector('#v37-game-filter').onchange=e=>{selectedGame=e.target.value;renderBoard()};
- panel.querySelectorAll('[data-v37-student]').forEach(b=>b.onclick=()=>{selectedStudent=b.dataset.v37Student;renderBoard()});
+}
+function installStudentRankingPrivacyStyle(){
+ if(document.getElementById('v37-student-privacy-style'))return;
+ const style=document.createElement('style');style.id='v37-student-privacy-style';
+ style.textContent='.v37-my-own-position{margin:12px 0;padding:10px;border:2px solid #7cb9b5;border-radius:11px;background:#e9f6f5;color:#164d60;font-size:13px;line-height:1.4}.v37-my-own-position>.v37-leader-row{margin-top:7px}.v37-my-own-position>strong{display:block;margin-bottom:3px}';
+ document.head.appendChild(style);
 }
 async function fetchBoard(){if(!session||refreshBusy)return;
  refreshBusy=true;
@@ -296,7 +306,7 @@ function makeUI(){
  },true);
  configWarning();drawJoin();drawDock();
 }
-function init(){makeUI();installStorage();trackGameClicks();installRightRankStyle();setInterval(renderRightRankings,950);
+function init(){makeUI();installStorage();trackGameClicks();installRightRankStyle();installStudentRankingPrivacyStyle();setInterval(renderRightRankings,950);
  if(cfgOK){
   const sessions=readSessions(),qs=new URLSearchParams(location.search).get('klase');
   const found=qs?sessions[qs.toUpperCase()]:Object.values(sessions)[0];
