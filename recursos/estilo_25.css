@@ -98,3 +98,74 @@
  #ag24-root .mk28-pay-grid .mk28-object img{height:130px;max-height:130px}
 }
 @media(prefers-reduced-motion:reduce){#ag24-root .mk28-object,#ag24-root .mk28-text-card{transition:none}}
+
+
+/* V37.3 — Game 8 legibility: never crop the scene at laptop widths.
+   Only changes layout, not the game logic or saved records. */
+#ag24-root .ag24-world,
+#ag24-root .ag24-scene,
+#ag24-root .mk28-stage,
+#ag24-root .mk28-main,
+#ag24-root .mk28-workpane {min-width:0}
+
+/* Long Basque labels must wrap completely instead of being constrained to a one-line slot. */
+#ag24-root .mk28-object .mk28-assigned{
+  white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;
+  max-height:none;height:auto;min-height:31px;flex:0 0 auto;
+  padding:3px 5px;line-height:1.16;font-size:clamp(12px,1vw,16px)
+}
+#ag24-root .mk28-text-card,
+#ag24-root .mk28-side-step,
+#ag24-root .mk28-hero-caption,
+#ag24-root .ar27-text-card,
+#ag24-root .ar27-target-answer,
+#ag24-root .ir25-function,
+#ag24-root .ir25-tech-label{
+  white-space:normal;overflow-wrap:anywhere;text-overflow:clip;line-height:1.17
+}
+#ag24-root .mk28-work-title,
+#ag24-root .mk28-work-instruction,
+#ag24-root .mk28-side-instruction{overflow-wrap:anywhere;white-space:normal}
+
+@media (min-width:741px) and (max-width:1180px){
+  /* An inherited wide aspect ratio made the rightmost labels inaccessible. */
+  #ag24-root[data-ir25="on"] .ag24-scene,
+  #ag24-root[data-ar27="on"] .ag24-scene,
+  #ag24-root[data-mk28="on"] .ag24-scene{
+    aspect-ratio:auto!important;width:100%;max-width:100%;min-width:0
+  }
+  #ag24-root[data-mk28="on"] .ag24-world{
+    height:auto;min-height:100dvh;max-height:none;
+    grid-template-rows:auto auto auto;overflow:visible
+  }
+  #ag24-root[data-mk28="on"] .ag24-scene{
+    height:auto;min-height:760px;max-height:none;overflow:visible
+  }
+  #ag24-root[data-mk28="on"] #ag24-targets{height:auto;min-height:760px}
+  #ag24-root[data-mk28="on"] .mk28-stage{
+    width:100%;height:auto;min-height:760px;overflow:visible
+  }
+  #ag24-root[data-mk28="on"] .mk28-main{
+    min-height:0;grid-template-rows:110px auto 65px
+  }
+  #ag24-root[data-mk28="on"] .mk28-workpane{
+    height:auto;min-height:445px;overflow:visible
+  }
+  #ag24-root[data-mk28="on"] .mk28-work-body{overflow:visible}
+  #ag24-root[data-mk28="on"] .mk28-object{min-height:135px;height:auto}
+}
+@media (max-width:740px){
+  #ag24-root[data-ir25="on"] .ag24-scene,
+  #ag24-root[data-ar27="on"] .ag24-scene,
+  #ag24-root[data-mk28="on"] .ag24-scene{
+    aspect-ratio:auto!important;max-width:100%;min-width:0
+  }
+  #ag24-root[data-mk28="on"] .ag24-world{
+    height:auto;min-height:100dvh;max-height:none;
+    grid-template-rows:auto auto auto;overflow:visible
+  }
+  #ag24-root[data-mk28="on"] .ag24-scene,
+  #ag24-root[data-mk28="on"] #ag24-targets,
+  #ag24-root[data-mk28="on"] .mk28-stage{height:auto;max-height:none;overflow:visible}
+  #ag24-root[data-mk28="on"] .mk28-object .mk28-assigned{font-size:12px;min-height:28px}
+}
