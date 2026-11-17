@@ -138,12 +138,13 @@ function showTab(which){
  $$('v37-connect-tab').hidden=which!=='connect';$$('v37-rank-tab').hidden=which!=='ranking';
  $$('v37-tab-join').classList.toggle('active',which==='connect');$$('v37-tab-rank').classList.toggle('active',which==='ranking');
  rankVisible=which==='ranking';
- $('v37-overlay').classList.toggle('v37-fullscreen-ranking',rankVisible);
- if(rankVisible){$('v37-rank-tab').scrollTop=0;renderBoard();}
+ $$('v37-overlay').classList.toggle('v37-fullscreen-ranking',rankVisible);
+ if(rankVisible){$$('v37-rank-tab').scrollTop=0;renderBoard();}
 }
 function format(n){return Math.round(Number(n)||0).toLocaleString('es-ES')}
 function renderBoard(){
  const panel=$$('v37-board');if(!panel)return;
+ const personalOpen=panel.querySelector('details.v37-self-details')?.open===true;
  if(!session){panel.innerHTML='<p>Sartu lehenik ikasgelaren kodearekin.</p>';return}
  if(!roomSnapshot){panel.innerHTML='<p>Elkarbanatutako puntuazioak kargatzen…</p>';return}
  const students=(roomSnapshot.students||[]).slice();
@@ -169,7 +170,7 @@ function renderBoard(){
   const v=pending?0:Number(score)||0;
   return `<div class="v37-score-box"><span>${i+1}. ${E(name)}</span><strong>${pending?'—':format(v)}</strong><div class="v37-bar"><i style="width:${Math.min(100,Math.max(0,v/10))}%"></i></div>${active?'<small>Jokatzen · '+format(mine.activity.partial||0)+' puntu behin-behineko</small>':''}</div>`;
  }).join(''):'';
- panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>🏆 TOP 10</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${top10.length?`<div class="v37-leaders v37-leaders-full" role="list" aria-label="TOP 10">${rows}</div>`:'<p class="v37-empty">Oraindik ez dago amaitutako markarik.</p>'}${ownOutside}${mine?`<div class="v37-student-detail"><h3>👤 ZURE PUNTUAZIOAK · ${E(mine.nickname)}</h3><div class="v37-score-grid">${perGame}</div></div>`:'<p class="v37-empty">Zure puntuazioak kargatzen…</p>'}`;
+ panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>🏆 TOP 10</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${top10.length?`<div class="v37-leaders v37-leaders-full" role="list" aria-label="TOP 10">${rows}</div>`:'<p class="v37-empty">Oraindik ez dago amaitutako markarik.</p>'}${ownOutside}${mine?`<details class="v37-self-details" ${personalOpen?'open':''}><summary>👤 NIRE PUNTUAZIOAK · ${E(mine.nickname)} <span>Ikusi 10 jokoetako markak</span></summary><div class="v37-student-detail"><div class="v37-score-grid">${perGame}</div></div></details>`:'<p class="v37-empty">Zure puntuazioak kargatzen…</p>'}`;
  panel.querySelector('#v37-game-filter').onchange=e=>{selectedGame=e.target.value;renderBoard()};
 }
 function installStudentRankingPrivacyStyle(){
