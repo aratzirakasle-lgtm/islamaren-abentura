@@ -150,11 +150,12 @@ function renderBoard(){
  const isMine=student=>String(student.nickname||'').normalize('NFC').toLocaleLowerCase('eu')===session.nickname.normalize('NFC').toLocaleLowerCase('eu');
  const eligible=students.filter(student=>selectedGame?
    student.scores?.[selectedGame]!=null&&Number.isFinite(Number(student.scores[selectedGame])):
-   Number(student.completed||0)>0);
+   student.total!=null&&Number(student.completed||0)>0);
  eligible.sort((a,b)=>measure(b)-measure(a)||Number(b.completed||0)-Number(a.completed||0)||String(a.nickname||'').localeCompare(String(b.nickname||''),'eu'));
  const top10=eligible.slice(0,10);
  const mine=students.find(isMine);
- const myRank=eligible.findIndex(isMine);
+ const serverRank=Number(roomSnapshot?.own_ranks?.[selectedGame||'global']);
+ const myRank=Number.isInteger(serverRank)&&serverRank>0?serverRank-1:eligible.findIndex(isMine);
  const medal=['🥇','🥈','🥉'];
  const podium=top10.slice(0,3).map((student,i)=>`<div class="v37-podium-item p${i+1}"><span class="v37-medal">${medal[i]}</span><strong>${E(student.nickname)}</strong><b>${format(measure(student))} <small>/ ${format(maximum)}</small></b><small>${Number(student.completed||0)}/10 joko</small></div>`).join('');
  const rows=top10.map((student,i)=>`<div class="v37-leader-row ${isMine(student)?'mine':''}" role="listitem"><span>${i+1}.</span><strong>${E(student.nickname)}</strong><span>${Number(student.completed||0)}/10</span><b>${format(measure(student))}</b></div>`).join('');
@@ -179,7 +180,15 @@ function installStudentRankingPrivacyStyle(){
 async function fetchBoard(){if(!session||refreshBusy)return;
  refreshBusy=true;
  try{
-  roomSnapshot=await rpc('v37_student_board',{p_token:session.token});
+  // Transition-safe: once the Supabase restricted RPC is installed, no full
+  // classroom roster is downloaded by the student client. Old deployments
+  // keep working until the non-destructive SQL migration is applied.
+  try {
+   roomSnapshot=await rpc('v37_student_board_safe',{p_token:session.token});
+  }catch(error){
+   if(!/could not find the function|pgrst202/i.test(String(error?.message||'')))throw error;
+   roomSnapshot=await rpc('v37_student_board',{p_token:session.token});
+  }
   if(roomSnapshot?.room?.generation&&roomSnapshot.room.generation!==session.generation){
    session.generation=roomSnapshot.room.generation;persistSession(session);retryQueue=[];
    activeGame='';appStatus('Irakasleak ikasgela berrabiarazi du. Markak hutsetik.', 'warn');
