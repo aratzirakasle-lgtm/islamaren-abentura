@@ -12,7 +12,7 @@ const DB_KEY='islama-v4-puntuazioak', SESSION_KEY='v37-aula-saioak';
 const $$=id=>document.getElementById(id);
 const E=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 let session=null,roomSnapshot=null,activeGame='',seen={},selectedStudent='',selectedGame='',
- retryQueue=[],refreshBusy=false, lastProgress=0,rankVisible=false;
+ retryQueue=[],refreshBusy=false, lastProgress=0,rankVisible=false,confirmedCloudBest={};
 let storageReady=false, nativeGet, nativeSet;
 function appStatus(message,kind='info'){
  const e=$$('v37-status');if(e){e.textContent=message;e.dataset.kind=kind;}
@@ -61,6 +61,34 @@ function currentBest(game,nick){
  const entry=Object.values(bucket).find(e=>e&&String(e.name||e.nick||'').normalize('NFC').trim().toLocaleLowerCase('eu')===nick.toLocaleLowerCase('eu'));
  return typeof entry?.score==='number'?entry.score:null;
 }
+function restoreClassMarks(){
+ // Recover only this pupil's scores from THIS class's isolated storage.
+ // Never copy scores from the old unscoped browser data or another class.
+ if(!session||!roomSnapshot||!Array.isArray(roomSnapshot.students))return;
+ const name=session.nickname.normalize('NFC').trim().toLocaleLowerCase('eu');
+ const mine=roomSnapshot.students.find(s=>String(s.nickname||'').normalize('NFC').trim().toLocaleLowerCase('eu')===name);
+ if(!mine)return;
+ const local=scoreSnapshot();
+ let count=0;
+ for(const [game] of GAMES){
+  const records=local?.[game];
+  if(!records||typeof records!=='object')continue;
+  const record=Object.values(records).find(r=>r&&String(r.name||r.nick||'').normalize('NFC').trim().toLocaleLowerCase('eu')===name);
+  const score=Number(record?.score);
+  if(!record||!Number.isFinite(score)||score<0||score>1000)continue;
+  const cloud=mine.scores?.[game]==null?-1:Number(mine.scores[game]);
+  const known=Math.max(Number.isFinite(cloud)?cloud:-1,confirmedCloudBest[game]??-1);
+  if(score<=known||retryQueue.some(x=>x.p_game===game&&Number(x.p_score)>=score))continue;
+  retryQueue.push({p_game:game,p_score:Math.round(score),
+   p_attempt:crypto.randomUUID?.()||('v37-recover-'+Date.now()+'-'+Math.random().toString(36).slice(2))});
+  count++;
+ }
+ if(count){
+  saveJSON(queueKey(),retryQueue);
+  appStatus('Tokiko markak berreskuratzen: '+count+' joko · Hodeira bidaltzen…','info');
+  void flushScores();
+ }
+}
 function inspectScoreChange(before,after){
  if(!session)return;
  let oldData,newData;try{oldData=JSON.parse(before);newData=JSON.parse(after)}catch{return}
@@ -87,6 +115,7 @@ async function flushScores(){
   while(retryQueue.length&&session){
    let x=retryQueue[0];
    await rpc('v37_student_finish',{p_token:session.token,p_generation:session.generation,...x});
+   confirmedCloudBest[x.p_game]=Math.max(confirmedCloudBest[x.p_game]??-1,Number(x.p_score)||0);
    retryQueue.shift();saveJSON(queueKey(),retryQueue);
    appStatus('Marka hodeian gordeta ✓','success');
    void fetchBoard();
@@ -98,7 +127,7 @@ function readSessions(){return readJSON(SESSION_KEY,{})}
 function persistSession(s){const entries=readSessions();entries[s.code]=s;saveJSON(SESSION_KEY,entries)}
 function clearSession(){
  const entries=readSessions();if(session)delete entries[session.code];saveJSON(SESSION_KEY,entries);
- session=null;roomSnapshot=null;retryQueue=[];activeGame='';
+ session=null;roomSnapshot=null;retryQueue=[];activeGame='';confirmedCloudBest={};
  document.documentElement.classList.remove('v37-cloud-connected');
  configWarning();drawDock();drawJoin();
 }
@@ -113,7 +142,7 @@ async function joinRoom(code,nickname,fromSaved=false){
   appStatus('Ikasgelara konektatzen…');
   const response=await rpc('v37_student_join',{p_code:inputCode,p_nickname:name,p_resume_token:old?.token||null});
   session={code:inputCode,nickname:response.nickname,room:response.room,room_id:response.room_id,generation:response.generation||1,token:response.token};
-  persistSession(session);installStorage();
+  persistSession(session);installStorage();confirmedCloudBest={};
   retryQueue=readJSON(queueKey(),[]);
   if(!Array.isArray(retryQueue))retryQueue=[];
   appStatus('Konektatuta · '+session.room,'success');
@@ -199,6 +228,7 @@ async function fetchBoard(){if(!session||refreshBusy)return;
   renderRightRankings();
   const mine=(roomSnapshot?.students||[]).find(s=>s.nickname===session.nickname);
   if(mine){const t=$$('v37-total');if(t)t.textContent=format(mine.total)+' puntu';}
+  restoreClassMarks();
  }catch(err){appStatus('Sarea: '+(err.message||'ez dago konektatuta'),'warn')}
  finally{refreshBusy=false}
 }
@@ -269,6 +299,17 @@ async function reportProgress(force=false,status='playing'){
   p_partial:currentPartial(),p_status:status,p_generation:session.generation})}catch(err){ /* retry on next heartbeat */ }
 }
 function trackGameClicks(){
+ function lockNicknameForSave(event){
+  if(!session)return;
+  const target=event.target.closest('button');
+  if(!target)return;
+  const id=target.id;
+  const specific=(id==='cv14-start'?'cv14-nickname':id==='od-intro-play'?'od-nickname':null);
+  const art=target.dataset.a30==='start'?'a30-nick':null;
+  const nameInput=document.getElementById(specific||art||'');
+  if(nameInput&&nameInput.value!==session.nickname)nameInput.value=session.nickname;
+ }
+ document.addEventListener('click',lockNicknameForSave,true);
  function applyClassNickname(){
   if(!session)return;
   for(const e of document.querySelectorAll('input[type="text"],input:not([type])')){
