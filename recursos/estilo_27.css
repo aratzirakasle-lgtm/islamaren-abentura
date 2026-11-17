@@ -22,3 +22,45 @@
 @media(max-width:600px){#v37-cloud-dock{bottom:7px;right:7px}#v37-button{font-size:11px;min-height:40px;padding:6px 9px}#v37-total{display:none}.v37-modal{max-height:96vh;border-width:3px;border-radius:14px}.v37-modal-top{padding:13px 11px}.v37-tabs{padding:5px}.v37-join{grid-template-columns:1fr}#v37-connect-tab,#v37-rank-tab{padding:10px}.v37-podium{gap:4px}.v37-podium-item{min-height:100px;padding:7px 2px}.v37-podium-item.p1{min-height:115px}.v37-podium-item strong{font-size:11px}.v37-podium-item b{font-size:13px}.v37-leader-row{grid-template-columns:25px minmax(0,1fr) 43px 70px;padding:8px 5px;font-size:12px}.v37-score-grid{grid-template-columns:1fr}}
 
 .v37-filter-label{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0;color:#703b1a;font:900 13px Georgia}.v37-filter-label select{background:#fffdf4;border:2px solid #c6973d;color:#06336c;border-radius:9px;min-height:41px;padding:7px 10px;font:800 13px Georgia;max-width:100%}
+
+/* V37.4 · Legibilidad de juegos 4, 7 y 9. Solo presentación: sin reglas, puntos ni datos. */
+/* 4. Hedapena: leer fases, pies y explicaciones incluso en portátiles estrechos. */
+#hd12-root .hd-map-bottom-note,
+#hd12-root .hd-map-caption,
+#hd12-root .hd-rank-note{font-size:clamp(13px,1.1vw,16px);line-height:1.4;overflow-wrap:anywhere}
+#hd12-root .hd-phase-btn strong{font-size:clamp(14px,1.15vw,17px);line-height:1.25;white-space:normal;overflow-wrap:anywhere}
+#hd12-root .hd-phase-btn small{font-size:clamp(13px,1vw,16px);line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+#hd12-root .hd-map-badge{white-space:normal;max-width:min(90%,520px);text-overflow:clip;text-align:center;overflow-wrap:anywhere}
+@media(max-width:750px){
+ #hd12-root .hd-app{max-height:none}
+ #hd12-root .hd-tip,#hd12-root .hd-instruction,#hd12-root .hd-source{display:block;grid-column:1/-1;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+ #hd12-root .hd-phase-btn{height:auto;min-height:88px;padding:7px 4px;gap:4px}
+ #hd12-root .hd-phase-btn strong{font-size:13px}
+ #hd12-root .hd-phase-btn small{font-size:12px}
+ #hd12-root .hd-map-bottom-note{font-size:12px;line-height:1.3}
+ #hd12-root .hd-map-badge{font-size:13px;max-width:87%;white-space:normal;overflow:visible;text-overflow:clip}
+}
+/* 7. Hiria: mayor claridad en las etiquetas y descripciones del panel de parejas. */
+#city20-root .c20-marker.c20-placed .c20-marker-text{font-size:20px;line-height:1.16;overflow-wrap:anywhere}
+#city20-root .c21-name-label,#city20-root .c21-desc-text{overflow-wrap:anywhere;hyphens:auto;line-height:1.24}
+@media(max-width:900px){
+ #city20-root .c20-mobile-guide{font-size:14px;line-height:1.4;white-space:normal}
+ #city20-root .c21-desc-text{font-size:clamp(13px,3.2vw,16px);line-height:1.24;letter-spacing:0}
+ #city20-root .c21-name-label{font-size:clamp(14px,3.5vw,18px);line-height:1.17}
+ #city20-root .c21-item{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+ #city20-root .c20-nav{font-size:13px;line-height:1.18;white-space:normal}
+}
+/* 9. Arte: títulos enteros y progreso legible sin estrechar la galería. */
+#art30-root .a30-top-title strong{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.13}
+#art30-root .a30-phase small{font-size:13px;line-height:1.27;overflow-wrap:anywhere}
+#art30-root .a30-progress-medal span{font-size:13px;line-height:1.2}
+#art30-root .a30-choice,#art30-root .a30-question-text{white-space:normal;overflow-wrap:anywhere;line-height:1.26}
+@media(max-width:650px){
+ #art30-root .a30-top{height:auto;grid-template-rows:minmax(55px,auto) 42px}
+ #art30-root .a30-top-title{min-height:55px;height:auto}
+ #art30-root .a30-top-title strong{font-size:clamp(17px,4.3vw,24px)}
+ #art30-root .a30-phase{min-height:48px;height:auto;align-items:center}
+ #art30-root .a30-phase small{font-size:12px}
+ #art30-root .a30-progress-medal span{font-size:11px}
+ #art30-root .a30-footer{font-size:13px;line-height:1.35}
+}
