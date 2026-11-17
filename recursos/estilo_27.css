@@ -33,7 +33,8 @@
 #hd12-root .hd-map-badge{white-space:normal;max-width:min(90%,520px);text-overflow:clip;text-align:center;overflow-wrap:anywhere}
 @media(max-width:750px){
  #hd12-root .hd-app{max-height:none}
- #hd12-root .hd-tip,#hd12-root .hd-instruction,#hd12-root .hd-source{display:block;grid-column:1/-1;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+ #hd12-root .hd-instruction{display:block;grid-column:1/-1;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+ #hd12-root .hd-tip,#hd12-root .hd-source{display:none}
  #hd12-root .hd-phase-btn{height:auto;min-height:88px;padding:7px 4px;gap:4px}
  #hd12-root .hd-phase-btn strong{font-size:13px}
  #hd12-root .hd-phase-btn small{font-size:12px}
