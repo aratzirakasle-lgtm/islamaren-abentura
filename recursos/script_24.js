@@ -137,7 +137,9 @@ function closeModal(){$$('v37-overlay').hidden=true;rankVisible=false}
 function showTab(which){
  $$('v37-connect-tab').hidden=which!=='connect';$$('v37-rank-tab').hidden=which!=='ranking';
  $$('v37-tab-join').classList.toggle('active',which==='connect');$$('v37-tab-rank').classList.toggle('active',which==='ranking');
- rankVisible=which==='ranking';if(rankVisible)renderBoard();
+ rankVisible=which==='ranking';
+ $('v37-overlay').classList.toggle('v37-fullscreen-ranking',rankVisible);
+ if(rankVisible){$('v37-rank-tab').scrollTop=0;renderBoard();}
 }
 function format(n){return Math.round(Number(n)||0).toLocaleString('es-ES')}
 function renderBoard(){
@@ -157,8 +159,7 @@ function renderBoard(){
  const serverRank=Number(roomSnapshot?.own_ranks?.[selectedGame||'global']);
  const myRank=Number.isInteger(serverRank)&&serverRank>0?serverRank-1:eligible.findIndex(isMine);
  const medal=['🥇','🥈','🥉'];
- const podium=top10.slice(0,3).map((student,i)=>`<div class="v37-podium-item p${i+1}"><span class="v37-medal">${medal[i]}</span><strong>${E(student.nickname)}</strong><b>${format(measure(student))} <small>/ ${format(maximum)}</small></b><small>${Number(student.completed||0)}/10 joko</small></div>`).join('');
- const rows=top10.map((student,i)=>`<div class="v37-leader-row ${isMine(student)?'mine':''}" role="listitem"><span>${i+1}.</span><strong>${E(student.nickname)}</strong><span>${Number(student.completed||0)}/10</span><b>${format(measure(student))}</b></div>`).join('');
+ const rows=top10.map((student,i)=>`<div class="v37-leader-row ${isMine(student)?'mine':''}" role="listitem"><span class="v37-place">${medal[i]||(i+1)+'.'}</span><strong>${E(student.nickname)}</strong><span>${Number(student.completed||0)}/10</span><b>${format(measure(student))}</b></div>`).join('');
  const ownOutside=mine&&myRank>=10?
    `<div class="v37-my-own-position"><strong>👤 ZURE POSTUA · TOP 10etik kanpo</strong><div class="v37-leader-row mine"><span>${myRank+1}.</span><strong>${E(mine.nickname)}</strong><span>${Number(mine.completed||0)}/10</span><b>${format(measure(mine))}</b></div></div>`:
    mine&&myRank<0?'<p class="v37-my-own-position">👤 Oraindik ez duzu sailkapen honetako markarik.</p>':'';
@@ -168,7 +169,7 @@ function renderBoard(){
   const v=pending?0:Number(score)||0;
   return `<div class="v37-score-box"><span>${i+1}. ${E(name)}</span><strong>${pending?'—':format(v)}</strong><div class="v37-bar"><i style="width:${Math.min(100,Math.max(0,v/10))}%"></i></div>${active?'<small>Jokatzen · '+format(mine.activity.partial||0)+' puntu behin-behineko</small>':''}</div>`;
  }).join(''):'';
- panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>🏆 TOP 10</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${top10.length?`<div class="v37-podium">${podium}</div><div class="v37-leaders" role="list">${rows}</div>`:'<p class="v37-empty">Oraindik ez dago amaitutako markarik.</p>'}${ownOutside}${mine?`<div class="v37-student-detail"><h3>👤 ZURE PUNTUAZIOAK · ${E(mine.nickname)}</h3><div class="v37-score-grid">${perGame}</div></div>`:'<p class="v37-empty">Zure puntuazioak kargatzen…</p>'}`;
+ panel.innerHTML=`<div class="v37-board-head"><strong>${E(roomSnapshot.room.title)}</strong><span>🏆 TOP 10</span></div><label class="v37-filter-label">Sailkapena <select id="v37-game-filter"><option value="">Orokorra · 10 jokoak</option>${GAMES.map(([id,n])=>`<option value="${id}" ${selectedGame===id?'selected':''}>${E(n)}</option>`).join('')}</select></label>${top10.length?`<div class="v37-leaders v37-leaders-full" role="list" aria-label="TOP 10">${rows}</div>`:'<p class="v37-empty">Oraindik ez dago amaitutako markarik.</p>'}${ownOutside}${mine?`<div class="v37-student-detail"><h3>👤 ZURE PUNTUAZIOAK · ${E(mine.nickname)}</h3><div class="v37-score-grid">${perGame}</div></div>`:'<p class="v37-empty">Zure puntuazioak kargatzen…</p>'}`;
  panel.querySelector('#v37-game-filter').onchange=e=>{selectedGame=e.target.value;renderBoard()};
 }
 function installStudentRankingPrivacyStyle(){
