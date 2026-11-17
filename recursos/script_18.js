@@ -196,7 +196,7 @@ function arClick(e){if(!s||s.phase!==3)return false;
  if(check){arVerify();return true;}
  return true;
 }
-function arVerify(){if(!s||s.phase!==3||!s.playing||s.finished)return;const a=arState();if(a.busy||performance.now()-a.lastCheckAt<650)return;const active=a.active;let incomplete=false;if(active==='ehungintza')incomplete=['ehunak','alfonbrak'].some(id=>!a.textile.locked.has(id)&&!a.textile.placements[id]);else if(active==='zeramika')incomplete=a.ceramic.selected.size<3;else if(active==='metalgintza')incomplete=AR_METAL_ITEMS.some(item=>!a.metal.locked.has(item.id)&&!a.metal.placements[item.id]);if(incomplete){notify('Osatu jarduera egiaztatu aurretik. Ez duzu bizitzarik galdu.');return;}a.lastCheckAt=performance.now();a.busy=true;
+function arVerify(){if(!s||s.phase!==3||!s.playing||s.finished)return;const a=arState();if(a.busy)return;const active=a.active;if(!active){notify('Aukeratu osatu gabe dagoen tailer bat.');return;}let incomplete=false;if(active==='ehungintza')incomplete=['ehunak','alfonbrak'].some(id=>!a.textile.locked.has(id)&&!a.textile.placements[id]);else if(active==='zeramika')incomplete=a.ceramic.selected.size<3;else if(active==='metalgintza')incomplete=AR_METAL_ITEMS.some(item=>!a.metal.locked.has(item.id)&&!a.metal.placements[item.id]);if(incomplete){notify('Osatu jarduera egiaztatu aurretik. Ez duzu bizitzarik galdu.');return;}a.lastCheckAt=performance.now();a.busy=true;
  let good=0,bad=0,completed=false;
  if(active==='ehungintza'){
   const t=a.textile;for(const id of ['ehunak','alfonbrak']){if(t.locked.has(id))continue;if(t.placements[id]===id){t.locked.add(id);good++;}else{bad++;delete t.placements[id];}}
