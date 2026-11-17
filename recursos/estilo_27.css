@@ -75,3 +75,14 @@
  #ag24-root[data-ar27="on"] .ar27-right{min-height:700px;grid-template-rows:minmax(260px,1fr) minmax(300px,1fr) 65px}
  #ag24-root[data-ar27="on"] .ar27-workbench-body{overscroll-behavior:contain}
 }
+
+/* V37.7: Talleres del juego 8, reto 3. Avisos fuera del botón Egiaztatu. */
+#ag24-root[data-ar27="on"] .ag24-feedback{
+ position:fixed;top:clamp(105px,13vh,135px);bottom:auto;left:50%;right:auto;
+ transform:translateX(-50%);width:min(630px,92vw);max-width:92vw;
+ padding:9px 12px;line-height:1.3;font-size:clamp(13px,1.3vw,16px);
+ z-index:30;pointer-events:none;
+}
+@media(max-width:740px){
+ #ag24-root[data-ar27="on"] .ag24-feedback{top:112px;bottom:auto;left:50%;right:auto;font-size:13px}
+}
