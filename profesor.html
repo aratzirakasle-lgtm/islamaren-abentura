@@ -58,6 +58,7 @@ async function signin(email,password){
  const data=await jsonApi(base+'/auth/v1/token?grant_type=password',{email,password});
  auth=data;sessionStorage.setItem('v37_teacher_auth',JSON.stringify(data));
  await loadRooms();$('login-panel').classList.add('hidden');$('app-panel').classList.remove('hidden');$('teacher-account').textContent=email;
+ await selectInitialRoom();
  msg('Irakaslearen saioa hasita.');
 }
 function signout(){auth=null;room=null;data=null;sessionStorage.removeItem('v37_teacher_auth');$('login-panel').classList.remove('hidden');$('app-panel').classList.add('hidden');msg('Saioa itxita.')}
@@ -84,9 +85,14 @@ function drawRoomHeader(){
  $('student-link').textContent=studentLink();$('student-link').href=studentLink();
  $('current-room').classList.remove('hidden');
 }
-async function chooseRoom(id){room=rooms.find(r=>r.id===id);data=null;if(!room)return;drawRoomHeader();
+async function chooseRoom(id){room=rooms.find(r=>r.id===id);data=null;if(!room)return;try{sessionStorage.setItem('v37_teacher_room',room.id)}catch{}drawRoomHeader();
  $('room-list').querySelectorAll('[data-room]').forEach(e=>e.classList.toggle('current',e.dataset.room===room.id));
  await refreshBoard();
+}
+async function selectInitialRoom(){
+ if(!Array.isArray(rooms)||!rooms.length)return;
+ let prior='';try{prior=sessionStorage.getItem('v37_teacher_room')||''}catch{}
+ await chooseRoom(rooms.some(r=>r.id===prior)?prior:rooms[0].id);
 }
 async function createRoom(){const title=$('new-room-title').value.trim();
  if(title.length<2)return msg('Idatzi ikasgelaren izena.',true);
@@ -159,7 +165,7 @@ function init(){
  $('copy-link').onclick=()=>navigator.clipboard?.writeText(studentLink()).then(()=>msg('Esteka kopiatuta')).catch(()=>msg('Kopiatu esteka eskuz.',true));
  $('detail-close').onclick=()=>{$('details').classList.add('hidden');$('details').dataset.student=''};
  try{auth=JSON.parse(sessionStorage.getItem('v37_teacher_auth'))}catch{}
- if(auth){loadRooms().then(()=>{$('login-panel').classList.add('hidden');$('app-panel').classList.remove('hidden');msg('Irakaslearen saioa berreskuratuta.')}).catch(()=>signout())}
+ if(auth){loadRooms().then(async()=>{$('login-panel').classList.add('hidden');$('app-panel').classList.remove('hidden');await selectInitialRoom();msg('Irakaslearen saioa berreskuratuta.')}).catch(()=>signout())}
  setInterval(()=>{if(room&&auth)void refreshBoard()},3500);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
