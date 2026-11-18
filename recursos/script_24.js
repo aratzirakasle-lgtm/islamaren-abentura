@@ -152,7 +152,7 @@ async function joinRoom(code,nickname,fromSaved=false){
  }catch(err){if(fromSaved){clearSession();return}appStatus(err.message||'Konexio-errorea','warn')}
 }
 function drawDock(){const e=$$('v37-button');if(!e)return;e.textContent=session?'🏆 Zuzenean · '+session.nickname:'🏆 Ikasgela';
- const name=$('v37-room-name');if(name)name.textContent=session?session.room:'Aula conectada';const myBtn=$('v37-my-button');if(myBtn)myBtn.hidden=!session;}
+ const name=$$('v37-room-name');if(name)name.textContent=session?session.room:'Aula conectada';const myBtn=$$('v37-my-button');if(myBtn)myBtn.hidden=!session;}
 function drawJoin(){const e=$$('v37-login');if(!e)return;
  if(session){e.innerHTML=`<div class="v37-connected"><strong>✓ ${E(session.nickname)}</strong><span>${E(session.room)} · Kodea ${E(session.code)}</span><button id="v37-exit" type="button" class="v37-btn small">Saioa aldatu</button></div>`;
   e.querySelector('#v37-exit').onclick=()=>{if(confirm('Aldatu gelako saioa?'))clearSession()};
@@ -163,10 +163,10 @@ function drawJoin(){const e=$$('v37-login');if(!e)return;
  }
 }
 function openModal(){const e=$$('v37-overlay');e.hidden=false;showTab(session?'ranking':'connect');if(session)fetchBoard()}
-function closeModal(){$('v37-overlay').hidden=true;rankVisible=false}
+function closeModal(){$$('v37-overlay').hidden=true;rankVisible=false}
 function openOwnMarks(){
  openModal();if(!session)return;
- const expand=()=>{const d=$('v37-board')?.querySelector('details.v37-self-details');if(d){d.open=true;d.scrollIntoView({block:'nearest',behavior:'instant'});}};
+ const expand=()=>{const d=$$('v37-board')?.querySelector('details.v37-self-details');if(d){d.open=true;d.scrollIntoView({block:'nearest',behavior:'instant'});}};
  expand();void fetchBoard().then(expand);
 }
 function showTab(which){
@@ -236,7 +236,7 @@ async function fetchBoard(){if(!session||refreshBusy)return;
   const mine=(roomSnapshot?.students||[]).find(s=>s.nickname===session.nickname);
   if(mine){const t=$$('v37-total');if(t)t.textContent=format(mine.total)+' puntu';}
   restoreClassMarks();
- }catch(err){lastBoardError=String(err?.message||'Konexiorik ez');appStatus('Sarea: '+lastBoardError,'warn');if(rankVisible&&!roomSnapshot){const board=$('v37-board');if(board)board.innerHTML='<p class="v37-empty">Ezin izan dira puntuazioak kargatu. Egiaztatu konexioa eta saiatu berriro.</p>';}}
+ }catch(err){lastBoardError=String(err?.message||'Konexiorik ez');appStatus('Sarea: '+lastBoardError,'warn');if(rankVisible&&!roomSnapshot){const board=$$('v37-board');if(board)board.innerHTML='<p class="v37-empty">Ezin izan dira puntuazioak kargatu. Egiaztatu konexioa eta saiatu berriro.</p>';}}
  finally{refreshBusy=false}
 }
 function installRightRankStyle(){
@@ -355,7 +355,7 @@ function makeUI(){
  <div class="v37-tabs"><button id="v37-tab-join">Ikasgelako saioa</button><button id="v37-tab-rank">Zuzeneko sailkapena</button></div>
  <div id="v37-status" role="status"></div><section id="v37-connect-tab"><div id="v37-login"></div></section><section id="v37-rank-tab"><div id="v37-board"></div></section>
  <p class="v37-footer">Jokoko errekorrak automatikoki gordetzen dira konektatuta zaudenean. Internetik gabe, tokiko markak erabiliko dira.</p></div></div>`);
- $('v37-button').onclick=openModal;$('v37-my-button').onclick=openOwnMarks;$('v37-close').onclick=closeModal;
+ $$('v37-button').onclick=openModal;$$('v37-my-button').onclick=openOwnMarks;$$('v37-close').onclick=closeModal;
  $$('v37-overlay').addEventListener('click',e=>{if(e.target.id==='v37-overlay')closeModal()});
  $$('v37-tab-join').onclick=()=>showTab('connect');$$('v37-tab-rank').onclick=()=>showTab('ranking');
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$$('v37-overlay').hidden)closeModal()});
