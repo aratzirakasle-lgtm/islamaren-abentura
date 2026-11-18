@@ -468,9 +468,9 @@ function setupGameMiniRanking(){
   if(!panel.hidden)draw();
  }
  button.addEventListener('click',()=>{const open=panel.hidden||miniMode!=='game';miniMode='game';setOpen(open)});
- $('v37-game-mini-own-open').addEventListener('click',()=>{const open=panel.hidden||miniMode!=='mine';miniMode='mine';setOpen(open)});
- $('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
- $('v37-game-mini-refresh').addEventListener('click',()=>void fetchBoard());
+ $$('v37-game-mini-own-open').addEventListener('click',()=>{const open=panel.hidden||miniMode!=='mine';miniMode='mine';setOpen(open)});
+ $$('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
+ $$('v37-game-mini-refresh').addEventListener('click',()=>void fetchBoard());
  document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!panel.hidden&&!host.hidden){setOpen(false);button.focus();e.stopPropagation();}
  },true);
