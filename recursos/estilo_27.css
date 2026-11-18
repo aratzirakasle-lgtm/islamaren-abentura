@@ -265,3 +265,127 @@
  #v37-overlay.v37-fullscreen-ranking .v37-leader-row .v37-place{font-size:16px}
  #v37-overlay.v37-fullscreen-ranking .v37-footer{padding:2px 8px}
 }
+
+
+/* V37.10 · Botón TOP 10 desplegable en juegos 7–10. */
+#v37-game-mini-ranking[hidden],
+#v37-game-mini-panel[hidden]{display:none!important}
+#v37-game-mini-ranking{
+ position:fixed;
+ left:clamp(7px,1.2vw,18px);
+ bottom:clamp(9px,2vh,18px);
+ z-index:350000;
+ width:fit-content;
+ max-width:calc(100vw - 16px);
+ color:#342310;
+ font-family:Georgia,"Times New Roman",serif;
+ pointer-events:none;
+}
+#v37-game-mini-ranking>*{pointer-events:auto}
+#v37-game-mini-toggle{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:5px;
+ min-height:41px;
+ padding:7px 13px;
+ border:3px solid #e5b45c;
+ border-radius:23px;
+ color:#fff8de;
+ background:linear-gradient(150deg,#0b62a8,#073563);
+ font:900 13px/1.15 Georgia,serif;
+ box-shadow:0 3px 5px #0008;
+ cursor:pointer;
+ touch-action:manipulation;
+}
+#v37-game-mini-toggle:focus-visible,
+#v37-game-mini-close:focus-visible{
+ outline:3px solid #ffda5b;
+ outline-offset:3px;
+}
+#v37-game-mini-panel{
+ position:absolute;
+ left:0;
+ bottom:calc(100% + 8px);
+ width:min(346px,calc(100vw - 16px));
+ max-height:min(590px,calc(100dvh - 125px));
+ display:flex;
+ flex-direction:column;
+ overflow:hidden;
+ border:3px solid #deb15c;
+ border-radius:16px;
+ background:#fff3d1;
+ box-shadow:0 8px 26px #00142ebd;
+}
+.v37-game-mini-header{
+ flex:0 0 auto;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ padding:9px 11px;
+ background:#0a4380;
+ color:#fff6dc;
+}
+.v37-game-mini-header>div{display:grid;gap:2px;min-width:0}
+.v37-game-mini-header small{font:800 10px Arial,sans-serif;letter-spacing:.4px;color:#ffda83}
+#v37-game-mini-title{font:900 17px/1.15 Georgia,serif;overflow-wrap:anywhere}
+#v37-game-mini-close{
+ flex:0 0 34px;
+ height:34px;
+ border:2px solid #e6b75f;
+ border-radius:10px;
+ background:#164f8a;
+ color:white;
+ font:900 20px Arial,sans-serif;
+ cursor:pointer;
+}
+#v37-game-mini-list{
+ min-height:0;
+ overflow-y:auto;
+ overscroll-behavior:contain;
+ padding:7px;
+ display:grid;
+ gap:4px;
+}
+.v37-game-mini-row{
+ display:grid;
+ grid-template-columns:32px minmax(0,1fr) 68px;
+ align-items:center;
+ gap:6px;
+ padding:7px;
+ min-height:35px;
+ border:1px solid #d4b67d;
+ border-radius:8px;
+ background:#fffdf1;
+ color:#3b2513;
+ font:700 13px Georgia,serif;
+}
+.v37-game-mini-row.mine{background:#e3f7db;border-color:#52a65b}
+.v37-game-mini-row strong{overflow-wrap:anywhere}
+.v37-game-mini-row b{text-align:right;color:#08447b;font-variant-numeric:tabular-nums}
+.v37-game-mini-place{text-align:center}
+.v37-game-mini-row:nth-child(1){background:#fff1be;border-color:#c29a4e}
+.v37-game-mini-row:nth-child(2){background:#f3f8fa;border-color:#a1b4bb}
+.v37-game-mini-row:nth-child(3){background:#ffedda;border-color:#c89d72}
+.v37-game-mini-empty{padding:12px 8px;font:700 13px/1.4 Arial,sans-serif;color:#654b2d}
+#v37-game-mini-foot{
+ margin:0;
+ padding:8px 10px;
+ border-top:1px solid #d3ad70;
+ background:#f3e1b9;
+ font:700 11px/1.3 Arial,sans-serif;
+ color:#664822;
+}
+@media(max-width:600px){
+ #v37-game-mini-ranking{left:6px;bottom:6px}
+ #v37-game-mini-toggle{min-height:40px;padding:6px 9px;font-size:12px}
+ #v37-game-mini-panel{width:min(318px,calc(100vw - 12px));max-height:calc(100dvh - 110px)}
+ .v37-game-mini-row{padding:5px;min-height:30px;font-size:12px}
+ #v37-game-mini-title{font-size:15px}
+}
+@media(max-height:620px){
+ #v37-game-mini-panel{max-height:calc(100dvh - 85px)}
+ #v37-game-mini-list{gap:2px;padding:4px}
+ .v37-game-mini-row{min-height:28px;padding:4px 6px}
+}
