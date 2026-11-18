@@ -358,7 +358,100 @@ function makeUI(){
  },true);
  configWarning();drawJoin();drawDock();
 }
-function init(){makeUI();installStorage();trackGameClicks();installRightRankStyle();installStudentRankingPrivacyStyle();setInterval(renderRightRankings,950);
+
+/* V37.10 · TOP 10 plegable dentro de los juegos 7, 8, 9 y 10. */
+function setupGameMiniRanking(){
+ if($('v37-game-mini-ranking'))return;
+ const host=document.createElement('div');
+ host.id='v37-game-mini-ranking';host.hidden=true;
+ host.innerHTML='<button type="button" id="v37-game-mini-toggle" aria-expanded="false" aria-controls="v37-game-mini-panel" aria-label="Joko honetako TOP 10 sailkapena zabaldu">🏆 TOP 10 <span aria-hidden="true">▴</span></button>'+
+  '<section id="v37-game-mini-panel" hidden role="region" aria-label="Joko honetako TOP 10 sailkapena">'+
+  '<header class="v37-game-mini-header"><div><small>SAILKAPENA ZUZENEAN</small>'+
+  '<strong id="v37-game-mini-title">🏆 TOP 10</strong></div>'+
+  '<button type="button" id="v37-game-mini-close" aria-label="Itxi sailkapena">✕</button></header>'+
+  '<div id="v37-game-mini-list" role="list"></div><p id="v37-game-mini-foot"></p></section>';
+ document.body.appendChild(host);
+ const button=$('v37-game-mini-toggle'),panel=$('v37-game-mini-panel');
+ const list=$('v37-game-mini-list'),foot=$('v37-game-mini-foot'),title=$('v37-game-mini-title');
+ const games=[
+  ['od-v33','ondarea'],['art30-root','artea'],
+  ['ag24-root','merkataritza'],['city20-root','hiria']
+ ];
+ let currentGame='',lastHTML='';
+ function visible(root){
+  if(!root||!root.isConnected||root.hidden||!root.getClientRects().length)return false;
+  const st=getComputedStyle(root);
+  return st.display!=='none'&&st.visibility!=='hidden';
+ }
+ function findGame(){
+  for(const [id,game] of games)if(visible($(id)))return game;
+  return '';
+ }
+ function setOpen(open){
+  panel.hidden=!open;
+  button.setAttribute('aria-expanded',String(open));
+  button.setAttribute('aria-label',open?'Itxi joko honetako TOP 10 sailkapena':'Joko honetako TOP 10 sailkapena zabaldu');
+  button.querySelector('span').textContent=open?'▾':'▴';
+  if(open)draw();
+ }
+ function draw(){
+  const game=currentGame;if(!game||panel.hidden)return;
+  const name=GAMES.find(x=>x[0]===game)?.[1]||game;
+  title.textContent='🏆 '+name;
+  if(!session){
+   if(lastHTML!=='login'){list.innerHTML='<p class="v37-game-mini-empty">Ikasgelako TOP 10a ikusteko, sartu lehenik zure gelako saioan.</p>';lastHTML='login';}
+   foot.textContent='Ikasgela · Konektatu hasierako pantailan';
+   return;
+  }
+  if(!roomSnapshot||!Array.isArray(roomSnapshot.students)){
+   if(lastHTML!=='loading'){list.innerHTML='<p class="v37-game-mini-empty">Sailkapena kargatzen…</p>';lastHTML='loading';}
+   foot.textContent='☁ '+session.room;
+   return;
+  }
+  // Completed marks only; never reinterpret a missing score as zero.
+  const leaders=roomSnapshot.students.filter(s=>s?.scores?.[game]!==null&&
+   s?.scores?.[game]!==undefined&&Number.isFinite(Number(s.scores[game])))
+    .map(s=>({name:String(s.nickname||''),score:Number(s.scores[game])}))
+    .filter(s=>s.name.trim()!=='')
+    .sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name,'eu')).slice(0,10);
+  const myName=session.nickname.normalize('NFC').toLocaleLowerCase('eu');
+  const rows=leaders.map((s,i)=>'<div class="v37-game-mini-row'+
+   (s.name.normalize('NFC').toLocaleLowerCase('eu')===myName?' mine':'')+
+   '" role="listitem"><span class="v37-game-mini-place">'+
+   (['🥇','🥈','🥉'][i]||(i+1)+'.')+'</span><strong>'+E(s.name)+
+   '</strong><b>'+format(s.score)+'</b></div>').join('');
+  const html=rows||'<p class="v37-game-mini-empty">Oraindik ez dago amaitutako markarik joko honetan.</p>';
+  if(html!==lastHTML){list.innerHTML=html;lastHTML=html;}
+  const ownRank=Number(roomSnapshot?.own_ranks?.[game]);
+  const suffix=Number.isInteger(ownRank)&&ownRank>10?' · Zure postua: '+ownRank+'.':'';
+  foot.textContent='☁ '+session.room+' · Hodeian gordetako markak'+suffix;
+ }
+ function sync(){
+  const game=findGame();
+  const mainOpen=!$('v37-overlay')?.hidden;
+  if(!game||mainOpen){
+   if(!host.hidden){host.hidden=true;setOpen(false);}
+   if(!game)currentGame='';
+   return;
+  }
+  if(game!==currentGame){
+   currentGame=game;lastHTML='';setOpen(false);
+  }
+  if(host.hidden)host.hidden=false;
+  if(!panel.hidden)draw();
+ }
+ button.addEventListener('click',()=>setOpen(panel.hidden));
+ $('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&!panel.hidden&&!host.hidden){setOpen(false);button.focus();e.stopPropagation();}
+ },true);
+ document.addEventListener('pointerdown',e=>{
+  if(!host.hidden&&!panel.hidden&&!host.contains(e.target))setOpen(false);
+ },true);
+ window.setInterval(sync,800);sync();
+}
+
+function init(){makeUI();installStorage();trackGameClicks();installRightRankStyle();installStudentRankingPrivacyStyle();setupGameMiniRanking();setInterval(renderRightRankings,950);
  if(cfgOK){
   const sessions=readSessions(),qs=new URLSearchParams(location.search).get('klase');
   const found=qs?sessions[qs.toUpperCase()]:Object.values(sessions)[0];
