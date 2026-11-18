@@ -389,3 +389,42 @@
  #v37-game-mini-list{gap:2px;padding:4px}
  .v37-game-mini-row{min-height:28px;padding:4px 6px}
 }
+
+
+/* V37.12 · Acceso permanente a las puntuaciones propias y capa sobre minijuegos. */
+#v37-cloud-dock{z-index:410000}
+#v37-overlay{z-index:430000}
+#v37-game-mini-ranking{z-index:420000}
+#v37-game-mini-ranking #v37-game-mini-own-open{
+ display:inline-flex;align-items:center;justify-content:center;
+ margin:0 0 0 5px;min-height:41px;padding:6px 11px;
+ border:3px solid #efc678;border-radius:22px;
+ background:linear-gradient(150deg,#16604a,#0b4337);
+ box-shadow:0 3px 5px #0008;color:#fff8de;
+ font:900 12px/1.15 Georgia,serif;cursor:pointer;
+ touch-action:manipulation;
+}
+#v37-game-mini-ranking #v37-game-mini-own-open:focus-visible,
+#v37-game-mini-refresh:focus-visible,
+#v37-my-button:focus-visible{outline:3px solid #ffdd6c;outline-offset:2px}
+#v37-game-mini-refresh{
+ margin:6px 9px 9px;min-height:36px;padding:6px 12px;
+ border:2px solid #b69049;border-radius:10px;
+ background:#0d4f7d;color:white;font:800 12px Georgia,serif;cursor:pointer;
+}
+#v37-my-button{
+ border:2px solid #dca63c;border-radius:24px;
+ background:linear-gradient(145deg,#136447,#073c30);
+ color:#fff5d9;box-shadow:0 3px 9px #0008;
+ padding:7px 11px;min-height:40px;
+ font:800 12px Georgia,serif;cursor:pointer;
+}
+#v37-my-button[hidden]{display:none!important}
+@media(max-width:600px){
+ #v37-game-mini-ranking{left:6px;bottom:6px}
+ #v37-game-mini-ranking #v37-game-mini-own-open{
+  font-size:11px;min-height:40px;padding:6px 7px;margin-left:3px;
+ }
+ #v37-game-mini-toggle{font-size:11px;padding:6px 8px}
+ #v37-my-button{font-size:11px;padding:6px 8px;min-height:38px}
+}
