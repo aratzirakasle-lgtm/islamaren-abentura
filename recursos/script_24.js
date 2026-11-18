@@ -361,7 +361,7 @@ function makeUI(){
 
 /* V37.10 · TOP 10 plegable dentro de los juegos 7, 8, 9 y 10. */
 function setupGameMiniRanking(){
- if($('v37-game-mini-ranking'))return;
+ if($$('v37-game-mini-ranking'))return;
  const host=document.createElement('div');
  host.id='v37-game-mini-ranking';host.hidden=true;
  host.innerHTML='<button type="button" id="v37-game-mini-toggle" aria-expanded="false" aria-controls="v37-game-mini-panel" aria-label="Joko honetako TOP 10 sailkapena zabaldu">🏆 TOP 10 <span aria-hidden="true">▴</span></button>'+
@@ -371,8 +371,8 @@ function setupGameMiniRanking(){
   '<button type="button" id="v37-game-mini-close" aria-label="Itxi sailkapena">✕</button></header>'+
   '<div id="v37-game-mini-list" role="list"></div><p id="v37-game-mini-foot"></p></section>';
  document.body.appendChild(host);
- const button=$('v37-game-mini-toggle'),panel=$('v37-game-mini-panel');
- const list=$('v37-game-mini-list'),foot=$('v37-game-mini-foot'),title=$('v37-game-mini-title');
+ const button=$$('v37-game-mini-toggle'),panel=$$('v37-game-mini-panel');
+ const list=$$('v37-game-mini-list'),foot=$$('v37-game-mini-foot'),title=$$('v37-game-mini-title');
  const games=[
   ['od-v33','ondarea'],['art30-root','artea'],
   ['ag24-root','merkataritza'],['city20-root','hiria']
@@ -384,7 +384,7 @@ function setupGameMiniRanking(){
   return st.display!=='none'&&st.visibility!=='hidden';
  }
  function findGame(){
-  for(const [id,game] of games)if(visible($(id)))return game;
+  for(const [id,game] of games)if(visible($$(id)))return game;
   return '';
  }
  function setOpen(open){
@@ -428,7 +428,7 @@ function setupGameMiniRanking(){
  }
  function sync(){
   const game=findGame();
-  const mainOpen=!$('v37-overlay')?.hidden;
+  const mainOpen=!$$('v37-overlay')?.hidden;
   if(!game||mainOpen){
    if(!host.hidden){host.hidden=true;setOpen(false);}
    if(!game)currentGame='';
@@ -441,7 +441,7 @@ function setupGameMiniRanking(){
   if(!panel.hidden)draw();
  }
  button.addEventListener('click',()=>setOpen(panel.hidden));
- $('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
+ $$('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
  document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!panel.hidden&&!host.hidden){setOpen(false);button.focus();e.stopPropagation();}
  },true);
