@@ -56,7 +56,7 @@ async function rpc(name,params={}){if(!auth)throw Error('Saioa hasi behar da.');
 async function signin(email,password){
  if(!ok)throw Error('Irakasleak Supabase konexioa konfiguratu behar du.');
  const data=await jsonApi(base+'/auth/v1/token?grant_type=password',{email,password});
- auth=data;sessionStorage.setItem('v37_teacher_auth',JSON.stringify(data));
+ auth={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+Number(data.expires_in||3600)};sessionStorage.setItem('v37_teacher_auth',JSON.stringify(auth));
  await loadRooms();$('login-panel').classList.add('hidden');$('app-panel').classList.remove('hidden');$('teacher-account').textContent=email;
  await selectInitialRoom();
  msg('Irakaslearen saioa hasita.');
@@ -66,7 +66,7 @@ async function ensureAuth(){if(!auth)return;
  if(auth.expires_at&&Date.now()/1000<auth.expires_at-70)return;
  if(!auth.refresh_token){signout();return}
  try{let v=await jsonApi(base+'/auth/v1/token?grant_type=refresh_token',{refresh_token:auth.refresh_token});
-  auth=v;sessionStorage.setItem('v37_teacher_auth',JSON.stringify(v));
+  auth={...v,expires_at:v.expires_at||Math.floor(Date.now()/1000)+Number(v.expires_in||3600)};sessionStorage.setItem('v37_teacher_auth',JSON.stringify(auth));
  }catch{signout();msg('Saioa iraungi da; sartu berriro.',true)}
 }
 async function loadRooms(){
