@@ -365,11 +365,12 @@ function setupGameMiniRanking(){
  const host=document.createElement('div');
  host.id='v37-game-mini-ranking';host.hidden=true;
  host.innerHTML='<button type="button" id="v37-game-mini-toggle" aria-expanded="false" aria-controls="v37-game-mini-panel" aria-label="Joko honetako TOP 10 sailkapena zabaldu">🏆 TOP 10 <span aria-hidden="true">▴</span></button>'+
+  '<button type="button" id="v37-game-mini-own-open" aria-controls="v37-game-mini-panel">👤 NIRE NOTAK</button>'+ 
   '<section id="v37-game-mini-panel" hidden role="region" aria-label="Joko honetako TOP 10 sailkapena">'+
   '<header class="v37-game-mini-header"><div><small>SAILKAPENA ZUZENEAN</small>'+
   '<strong id="v37-game-mini-title">🏆 TOP 10</strong></div>'+
   '<button type="button" id="v37-game-mini-close" aria-label="Itxi sailkapena">✕</button></header>'+
-  '<div id="v37-game-mini-list" role="list"></div><p id="v37-game-mini-foot"></p></section>';
+  '<div id="v37-game-mini-list" role="list"></div><p id="v37-game-mini-foot"></p><button type="button" id="v37-game-mini-refresh">↻ Eguneratu</button></section>';
  document.body.appendChild(host);
  const button=$$('v37-game-mini-toggle'),panel=$$('v37-game-mini-panel');
  const list=$$('v37-game-mini-list'),foot=$$('v37-game-mini-foot'),title=$$('v37-game-mini-title');
@@ -377,7 +378,7 @@ function setupGameMiniRanking(){
   ['od-v33','ondarea'],['art30-root','artea'],
   ['ag24-root','merkataritza'],['city20-root','hiria']
  ];
- let currentGame='',lastHTML='';
+ let currentGame='',lastHTML='',miniMode='game';
  function visible(root){
   if(!root||!root.isConnected||root.hidden||!root.getClientRects().length)return false;
   const st=getComputedStyle(root);
@@ -388,6 +389,7 @@ function setupGameMiniRanking(){
   return '';
  }
  function setOpen(open){
+  if(open&&!session){openModal();return;}
   panel.hidden=!open;
   button.setAttribute('aria-expanded',String(open));
   button.setAttribute('aria-label',open?'Itxi joko honetako TOP 10 sailkapena':'Joko honetako TOP 10 sailkapena zabaldu');
@@ -397,7 +399,7 @@ function setupGameMiniRanking(){
  function draw(){
   const game=currentGame;if(!game||panel.hidden)return;
   const name=GAMES.find(x=>x[0]===game)?.[1]||game;
-  title.textContent='🏆 '+name;
+  title.textContent=miniMode==='mine'?'👤 NIRE PUNTUAZIOAK':'🏆 '+name;
   if(!session){
    if(lastHTML!=='login'){list.innerHTML='<p class="v37-game-mini-empty">Ikasgelako TOP 10a ikusteko, sartu lehenik zure gelako saioan.</p>';lastHTML='login';}
    foot.textContent='Ikasgela · Konektatu hasierako pantailan';
@@ -408,6 +410,24 @@ function setupGameMiniRanking(){
    foot.textContent='☁ '+session.room;
    return;
   }
+  /* V37.12. Mis diez notas guardadas en Supabase. */
+  if(miniMode==='mine'){
+   const norm=n=>String(n||'').normalize('NFC').trim().toLocaleLowerCase('eu');
+   const me=roomSnapshot.students.find(s=>norm(s?.nickname)===norm(session.nickname));
+   if(!me){
+    const html='<p class="v37-game-mini-empty">Zure puntuazioak ez dira ageri. Egiaztatu goitizena.</p>';
+    if(html!==lastHTML){list.innerHTML=html;lastHTML=html;}
+    foot.textContent='☁ '+session.room;return;
+   }
+   const html=GAMES.map(([id,name],i)=>{
+    const value=me.scores?.[id];
+    const exists=value!=null&&Number.isFinite(Number(value));
+    return '<div class="v37-game-mini-row" role="listitem"><span class="v37-game-mini-place">'+(i+1)+'.</span><strong>'+E(name)+'</strong><b>'+(exists?format(Number(value)):'—')+'</b></div>';
+   }).join('');
+   if(html!==lastHTML){list.innerHTML=html;lastHTML=html;}
+   foot.textContent='👤 '+session.nickname+' · '+format(me.total||0)+' puntu · '+Number(me.completed||0)+'/10';return;
+  }
+
   // Completed marks only; never reinterpret a missing score as zero.
   const leaders=roomSnapshot.students.filter(s=>s?.scores?.[game]!==null&&
    s?.scores?.[game]!==undefined&&Number.isFinite(Number(s.scores[game])))
@@ -435,13 +455,15 @@ function setupGameMiniRanking(){
    return;
   }
   if(game!==currentGame){
-   currentGame=game;lastHTML='';setOpen(false);
+   currentGame=game;miniMode='game';lastHTML='';setOpen(false);
   }
   if(host.hidden)host.hidden=false;
   if(!panel.hidden)draw();
  }
- button.addEventListener('click',()=>setOpen(panel.hidden));
- $$('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
+ button.addEventListener('click',()=>{const open=panel.hidden||miniMode!=='game';miniMode='game';setOpen(open)});
+ $('v37-game-mini-own-open').addEventListener('click',()=>{const open=panel.hidden||miniMode!=='mine';miniMode='mine';setOpen(open)});
+ $('v37-game-mini-close').addEventListener('click',()=>{setOpen(false);button.focus()});
+ $('v37-game-mini-refresh').addEventListener('click',()=>void fetchBoard());
  document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!panel.hidden&&!host.hidden){setOpen(false);button.focus();e.stopPropagation();}
  },true);
