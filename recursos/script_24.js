@@ -14,6 +14,7 @@ const E=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&g
 let session=null,roomSnapshot=null,activeGame='',seen={},selectedStudent='',selectedGame='',
  retryQueue=[],refreshBusy=false, lastProgress=0,rankVisible=false,confirmedCloudBest={};
 let storageReady=false, nativeGet, nativeSet;
+let lastBoardError='';
 function appStatus(message,kind='info'){
  const e=$$('v37-status');if(e){e.textContent=message;e.dataset.kind=kind;}
 }
@@ -151,7 +152,7 @@ async function joinRoom(code,nickname,fromSaved=false){
  }catch(err){if(fromSaved){clearSession();return}appStatus(err.message||'Konexio-errorea','warn')}
 }
 function drawDock(){const e=$$('v37-button');if(!e)return;e.textContent=session?'🏆 Zuzenean · '+session.nickname:'🏆 Ikasgela';
- const name=$$('v37-room-name');if(name)name.textContent=session?session.room:'Aula conectada';}
+ const name=$('v37-room-name');if(name)name.textContent=session?session.room:'Aula conectada';const myBtn=$('v37-my-button');if(myBtn)myBtn.hidden=!session;}
 function drawJoin(){const e=$$('v37-login');if(!e)return;
  if(session){e.innerHTML=`<div class="v37-connected"><strong>✓ ${E(session.nickname)}</strong><span>${E(session.room)} · Kodea ${E(session.code)}</span><button id="v37-exit" type="button" class="v37-btn small">Saioa aldatu</button></div>`;
   e.querySelector('#v37-exit').onclick=()=>{if(confirm('Aldatu gelako saioa?'))clearSession()};
@@ -162,7 +163,12 @@ function drawJoin(){const e=$$('v37-login');if(!e)return;
  }
 }
 function openModal(){const e=$$('v37-overlay');e.hidden=false;showTab(session?'ranking':'connect');if(session)fetchBoard()}
-function closeModal(){$$('v37-overlay').hidden=true;rankVisible=false}
+function closeModal(){$('v37-overlay').hidden=true;rankVisible=false}
+function openOwnMarks(){
+ openModal();if(!session)return;
+ const expand=()=>{const d=$('v37-board')?.querySelector('details.v37-self-details');if(d){d.open=true;d.scrollIntoView({block:'nearest',behavior:'instant'});}};
+ expand();void fetchBoard().then(expand);
+}
 function showTab(which){
  $$('v37-connect-tab').hidden=which!=='connect';$$('v37-rank-tab').hidden=which!=='ranking';
  $$('v37-tab-join').classList.toggle('active',which==='connect');$$('v37-tab-rank').classList.toggle('active',which==='ranking');
@@ -220,6 +226,7 @@ async function fetchBoard(){if(!session||refreshBusy)return;
    if(!/could not find the function|pgrst202/i.test(String(error?.message||'')))throw error;
    roomSnapshot=await rpc('v37_student_board',{p_token:session.token});
   }
+  lastBoardError='';
   if(roomSnapshot?.room?.generation&&roomSnapshot.room.generation!==session.generation){
    session.generation=roomSnapshot.room.generation;persistSession(session);retryQueue=[];
    activeGame='';appStatus('Irakasleak ikasgela berrabiarazi du. Markak hutsetik.', 'warn');
@@ -229,7 +236,7 @@ async function fetchBoard(){if(!session||refreshBusy)return;
   const mine=(roomSnapshot?.students||[]).find(s=>s.nickname===session.nickname);
   if(mine){const t=$$('v37-total');if(t)t.textContent=format(mine.total)+' puntu';}
   restoreClassMarks();
- }catch(err){appStatus('Sarea: '+(err.message||'ez dago konektatuta'),'warn')}
+ }catch(err){lastBoardError=String(err?.message||'Konexiorik ez');appStatus('Sarea: '+lastBoardError,'warn');if(rankVisible&&!roomSnapshot){const board=$('v37-board');if(board)board.innerHTML='<p class="v37-empty">Ezin izan dira puntuazioak kargatu. Egiaztatu konexioa eta saiatu berriro.</p>';}}
  finally{refreshBusy=false}
 }
 function installRightRankStyle(){
@@ -342,13 +349,13 @@ function trackGameClicks(){
  }
 }
 function makeUI(){
- document.body.insertAdjacentHTML('beforeend',`<div id="v37-cloud-dock" role="region" aria-label="Ikasgela konektatua"><button id="v37-button" type="button">🏆 Ikasgela</button><span id="v37-total"></span></div>
+ document.body.insertAdjacentHTML('beforeend',`<div id="v37-cloud-dock" role="region" aria-label="Ikasgela konektatua"><button id="v37-button" type="button">🏆 Ikasgela</button><button id="v37-my-button" type="button" hidden>👤 NIRE PUNTUAZIOAK</button><span id="v37-total"></span></div>
  <div id="v37-overlay" hidden role="dialog" aria-modal="true" aria-label="Ikasgelako sailkapena"><div class="v37-modal">
  <div class="v37-modal-top"><div><small>ISLAMAREN ABENTURA · V37</small><h2>🏆 Sailkapena zuzenean</h2><p id="v37-room-name">Aula conectada</p></div><button id="v37-close" type="button" aria-label="Itxi">✕</button></div>
  <div class="v37-tabs"><button id="v37-tab-join">Ikasgelako saioa</button><button id="v37-tab-rank">Zuzeneko sailkapena</button></div>
  <div id="v37-status" role="status"></div><section id="v37-connect-tab"><div id="v37-login"></div></section><section id="v37-rank-tab"><div id="v37-board"></div></section>
  <p class="v37-footer">Jokoko errekorrak automatikoki gordetzen dira konektatuta zaudenean. Internetik gabe, tokiko markak erabiliko dira.</p></div></div>`);
- $$('v37-button').onclick=openModal;$$('v37-close').onclick=closeModal;
+ $('v37-button').onclick=openModal;$('v37-my-button').onclick=openOwnMarks;$('v37-close').onclick=closeModal;
  $$('v37-overlay').addEventListener('click',e=>{if(e.target.id==='v37-overlay')closeModal()});
  $$('v37-tab-join').onclick=()=>showTab('connect');$$('v37-tab-rank').onclick=()=>showTab('ranking');
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$$('v37-overlay').hidden)closeModal()});
